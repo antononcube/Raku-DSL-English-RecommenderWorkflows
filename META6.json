@@ -1,0 +1,38 @@
+{
+  "perl": "6.d",
+  "name": "DSL::English::RecommenderWorkflows",
+  "api": "1",
+  "auth": "github:antononcube",
+  "version": "0.8.0",
+  "description": "Recommender workflows building by natural language commands.",
+  "authors": [
+    "Anton Antonov"
+  ],
+  "license": "GPL-3.0-or-later",
+  "provides": {
+    "DSL::English::RecommenderWorkflows": "lib/DSL/English/RecommenderWorkflows.rakumod",
+    "DSL::English::RecommenderWorkflows::Grammar": "lib/DSL/English/RecommenderWorkflows/Grammar.rakumod",
+    "DSL::English::RecommenderWorkflows::Grammar::LSIApplyCommand": "lib/DSL/English/RecommenderWorkflows/Grammar/LSIApplyCommand.rakumod",
+    "DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases": "lib/DSL/English/RecommenderWorkflows/Grammar/RecommenderPhrases.rakumod",
+    "DSL::English::RecommenderWorkflows::Actions::Python::SMRMon": "lib/DSL/English/RecommenderWorkflows/Actions/Python/SMRMon.rakumod",
+    "DSL::English::RecommenderWorkflows::Actions::R::SMRMon": "lib/DSL/English/RecommenderWorkflows/Actions/R/SMRMon.rakumod",
+    "DSL::English::RecommenderWorkflows::Actions::WL::SMRMon": "lib/DSL/English/RecommenderWorkflows/Actions/WL/SMRMon.rakumod"
+  },
+  "depends": [
+    "Text::Levenshtein::Damerau",
+    "DSL::Shared"
+  ],
+  "build-depends": [],
+  "test-depends": [],
+  "resources": [],
+  "tags": [
+    "Recommender",
+    "LSI",
+    "Parser",
+    "Interpreter",
+    "Monad",
+    "Workflow",
+    "Pipeline"
+  ],
+  "source-url": "https://github.com/antononcube/DSL-English-RecommenderWorkflows.git"
+}

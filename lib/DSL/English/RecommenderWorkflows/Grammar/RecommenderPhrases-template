@@ -1,0 +1,120 @@
+use v6;
+
+use DSL::English::RecommenderWorkflows::Grammar::FuzzyMatch;
+use DSL::Shared::Roles::English::CommonParts;
+
+# Recommender specific phrases
+role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases does DSL::Shared::Roles::English::CommonParts {
+
+  token word-spec { \w+ }
+
+  # Proto tokens
+  token recommend-slot { 'recommend' | 'suggest' }
+
+  proto token item-slot { * }
+  token item-slot:sym<item> { 'item' }
+
+  proto token items-slot { * }
+  token items-slot:sym<items> { 'items' }
+
+  proto token consumption-slot { * }
+  token consumption-slot:sym<consumption> { 'consumption' }
+
+  proto token history-slot { * }
+  token history-slot:sym<history> { 'history' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'history' ) }> }
+
+  proto token profile-slot { * }
+  token profile-slot:sym<profile> { 'profile' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'profile' ) }> }
+
+
+  # Regular tokens / rules
+  token aggregate { 'aggregate' }
+  token aggregation { 'aggregation' }
+  token anomalies { 'anomalies' }
+  token anomaly { 'anomaly' }
+  token colnames { 'colnames' }
+  token column { 'column' }
+  token columns { 'columns' }
+  token density  { 'density' }
+  token dimensions { 'dimensions' }
+  token explain { 'explain' }
+  token explanations { 'explanation' | 'explanations' }
+  token function { 'function' }
+  token identifier { 'identifier' }
+  token matrices { 'matrices' }
+  token matrix { 'matrix' }
+  token metadata {'metadata' }
+  token nearest { 'nearest' }
+  token neighbors { 'neighbors' }
+  token outlier { 'outlier' }
+  token outliers { 'outliers' | 'outlier' }
+  token properties { 'properties' }
+  token property { 'property' }
+  token proofs { 'proof' | 'proofs' }
+  token prove { 'prove' }
+  token proximity { 'proximity' }
+  token recommend-directive { <recommend-slot> }
+  token recommendation { 'recommendation' }
+  token recommendations { 'recommendations' }
+  token recommended { 'recommended' }
+  token recommender { 'recommender' }
+  token row { 'row' }
+  token rows { 'rows' }
+  token rownames { 'rownames' }
+  token sparse { 'sparse' }
+  token threshold { 'threshold' }
+
+  rule prove-directive { <prove> | <explain> }
+  rule consumption-history { <consumption-slot>? <history-slot> }
+  rule consumption-profile { <consumption-slot>? 'profile' }
+  rule history-phrase { [ <item-slot> ]? <history-slot> }
+  rule most-relevant { 'most' 'relevant' }
+  rule nearest-neighbors { <nearest> <neighbors> | 'nns' }
+  rule recommendation-matrices { [ <recommendation> | <recommender> ]? <matrices> }
+  rule recommendation-matrix { [ <recommendation> | <recommender> ]? <matrix> }
+  rule recommendation-results { [ <recommendation> | <recommendations> | 'recommendation\'s' ] <results> }
+  rule recommended-items { <recommended> <items-slot> | [ <recommendations> | <recommendation> ]  <.results>?  }
+  rule recommender-object { <recommender> [ <object> | <system> ]? | 'smr' }
+  rule sparse-matrix { <sparse> <matrix> }
+  rule tag-type { 'tag' 'type' }
+  rule tag-types { 'tag' 'types' }
+
+  # LSA specific
+  token analysis { 'analysis' }
+  token document { 'document' }
+  token entries { 'entries' }
+  # token identifier { 'identifier' }
+  token indexing { 'indexing' }
+  token ingest { 'ingest' | 'load' | 'use' | 'get' }
+  token item { 'item' } # For some reason using <item> below gives the error: "Too many positionals passed; expected 1 argument but got 2".
+  token latent { 'latent' }
+  # token matrix { 'matrix' }
+  token semantic { 'semantic' }
+  token term { 'term' }
+  # token threshold { 'threshold' }
+  token weight { 'weight' }
+  token word { 'word' }
+
+  rule doc-term-mat { [ <document> | 'item' ] [ <term> | <word> ] <matrix> }
+  rule lsa-object { <lsa-phrase>? 'object' }
+  rule lsa-phrase { <latent> <semantic> <analysis> | 'lsa' | 'LSA' }
+  rule lsi-phrase { <latent> <semantic> <indexing> | 'lsi' | 'LSI' }
+  rule matrix-entries { [ <doc-term-mat> | <matrix> ]? <entries> }
+  rule the-outliers { <the-determiner> <outliers> }
+
+  # LSI specific
+  token frequency { 'frequency' }
+  # token function { 'function' }
+  token functions { 'function' | 'functions' }
+  token global { 'global' }
+  token local { 'local' }
+  token normalization { 'normalization' }
+  token normalizer { 'normalizer' }
+  token normalizing { 'normalizing' }
+
+  rule global-function-phrase { <global> <term> ?<weight>? <function> }
+  rule local-function-phrase { <local> <term>? <weight>? <function> }
+  rule normalizer-function-phrase { [ <normalizer> | <normalizing> | <normalization> ] <term>? <weight>? <function>? }
+
+
+}
