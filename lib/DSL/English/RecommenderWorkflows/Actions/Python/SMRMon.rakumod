@@ -178,9 +178,15 @@ class DSL::English::RecommenderWorkflows::Actions::Python::SMRMon {
   method properties($/) { make '\"properties\"';}
 
   method smr-filter-matrix($/) { make 'obj = SMRMonFilterMatrix( smrObj = obj, profile = ' ~ $<profile-spec>.made ~ ')';  }
-
+  
   # Pipeline command
-  method pipeline-command($/) { make  $/.values[0].made; }
-  method get-pipeline-value($/) { make 'print( SMRMonEchoValue( smrObj = obj ) )'; }
+  method pipeline-command($/) { make $/.values[0].made; }
+  method take-pipeline-value($/) { make 'QRMonTakeValue()'; }
+  method echo-pipeline-value($/) { make 'QRMonEchoValue()'; }
 
+  method echo-command($/) { make 'QRMonEcho( ' ~ $<echo-message-spec>.made ~ ' )'; }
+  method echo-message-spec($/) { make $/.values[0].made; }
+  method echo-words-list($/) { make '"' ~ $<variable-name>>>.made.join(' ') ~ '"'; }
+  method echo-variable($/) { make $/.Str; }
+  method echo-text($/) { make $/.Str; }
 }
