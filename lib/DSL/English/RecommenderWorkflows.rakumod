@@ -13,21 +13,21 @@ interpretation of English natural speech commands that specify recommender workf
 
 =end pod
 
-unit module RecommenderWorkflows;
+unit module DSL::English::RecommenderWorkflows;
 
-use RecommenderWorkflows::Grammar;
-use RecommenderWorkflows::Actions::Python::SMRMon;
-use RecommenderWorkflows::Actions::R::SMRMon;
-use RecommenderWorkflows::Actions::WL::SMRMon;
+use DSL::English::RecommenderWorkflows::Grammar;
+use DSL::English::RecommenderWorkflows::Actions::Python::SMRMon;
+use DSL::English::RecommenderWorkflows::Actions::R::SMRMon;
+use DSL::English::RecommenderWorkflows::Actions::WL::SMRMon;
 
 my %targetToAction =
-    "Python"           => RecommenderWorkflows::Actions::Python::SMRMon,
-    "Python-SMRMon"    => RecommenderWorkflows::Actions::Python::SMRMon,
-    "R"                => RecommenderWorkflows::Actions::R::SMRMon,
-    "R-SMRMon"         => RecommenderWorkflows::Actions::R::SMRMon,
-    "Mathematica"      => RecommenderWorkflows::Actions::WL::SMRMon,
-    "WL"               => RecommenderWorkflows::Actions::WL::SMRMon,
-    "WL-SMRMon"        => RecommenderWorkflows::Actions::WL::SMRMon;
+    "Python"           => DSL::English::RecommenderWorkflows::Actions::Python::SMRMon,
+    "Python-SMRMon"    => DSL::English::RecommenderWorkflows::Actions::Python::SMRMon,
+    "R"                => DSL::English::RecommenderWorkflows::Actions::R::SMRMon,
+    "R-SMRMon"         => DSL::English::RecommenderWorkflows::Actions::R::SMRMon,
+    "Mathematica"      => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon,
+    "WL"               => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon,
+    "WL-SMRMon"        => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon;
 
 my %targetToSeparator{Str} =
     "R"                => " %>%\n",
@@ -51,7 +51,7 @@ multi ToRecommenderWorkflowCode ( Str $command where not has-semicolon($command)
 
     die 'Unknown target.' unless %targetToAction{$target}:exists;
 
-    my $match = RecommenderWorkflows::Grammar::WorkflowCommand.parse($command, actions => %targetToAction{$target} );
+    my $match = DSL::English::RecommenderWorkflows::Grammar.parse($command, actions => %targetToAction{$target} );
     die 'Cannot parse the given command.' unless $match;
     return $match.made;
 }
