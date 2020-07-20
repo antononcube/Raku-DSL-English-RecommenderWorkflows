@@ -24,23 +24,11 @@ and
 
 **3.** Open a command line program. (E.g. Terminal on Mac OS X.)
 
-**4.** Download or clone this repository,
-[ConversationalAgents at GitHub](https://github.com/antononcube/ConversationalAgents). E.g.
+**4.** Run the commands:
 
 ```
-git clone https://github.com/antononcube/ConversationalAgents.git
-```
-
-**5.** Go to the directory "ConversationalAgents/Packages/Perl6/DSL::English::RecommenderWorkflows". E.g.
-
-```
-cd ConversationalAgents/Packages/Perl6/DSL::English::RecommenderWorkflows
-```
-
-**6.** Execute the command:
- 
-```
-zef install . --force-install --force-test
+zef install https://github.com/antononcube/Raku-DSL-Shared.git
+zef install https://github.com/antononcube/Raku-DSL-English-RecommenderWorkflows.git
 ```
 
 ## Examples
@@ -50,19 +38,19 @@ Open a Raku IDE or type `raku` in the command line program. Try this Raku code:
 ```raku
 use DSL::English::RecommenderWorkflows;
 
-say to_SMRMon_R("recommend by profile action->10, drama->7");
+say ToRecommenderWorkflowCode("recommend by profile action->10, drama->7", "R-SMRMon");
 # SMRMonRecommendByProfile( profile = c( "action"=10, "drama"=7))
 ``` 
     
 Here is a more complicated pipeline specification:
 
 ```raku
-say to_SMRMon_R(
+say ToRecommenderWorkflowCode(
     "create from dfTitanic; 
      apply the LSI functions inverse document frequency, term frequency, and cosine;
      recommend by profile female->3, 30->0.1; 
      extend recommendations with dfTitanic; 
-     show pipeline value" )
+     show pipeline value", "R-SMRMon" )
 ```
 
 The command above should print out R code for the R package `SMRMon-R`, \[AA1\]:
@@ -74,6 +62,14 @@ SMRMonRecommendByProfile( profile = c( "female"=3, "30"=0.1)) %>%
 SMRMonJoinAcross( data = dfTitanic) %>%
 SMRMonEchoValue()
 ```    
+
+## Versions
+
+The original version of this Raku package was developed/hosted at 
+\[ [AA3](https://github.com/antononcube/ConversationalAgents/tree/master/Packages/Perl6/RecommenderWorkflows) \].
+
+A dedicated GitHub repository was made in order to make the installation with Raku's `zef` more direct. 
+(As shown above.)
 
 ## References
 
@@ -87,3 +83,7 @@ SMRMonEchoValue()
 (2018),
 [MathematicaForPrediction at GitHub](https://github.com/antononcube/MathematicaForPrediction).
 
+\[AA3\] Anton Antonov, 
+[Recommender Workflows Raku Package](https://github.com/antononcube/ConversationalAgents/tree/master/Packages/Perl6/RecommenderWorkflows), 
+(2019),
+[ConversationalAgents at GitHub](https://github.com/antononcube/ConversationalAgents).
