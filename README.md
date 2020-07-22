@@ -22,8 +22,8 @@ and
 
 **2.** Make sure you have Zef Module Installer. 
  
-   - Type in `zef` in the command line.
-   - You can install the Zef Module Installer from : https://github.com/ugexe/zef .
+   - Type in `zef --version` in the command line.
+   - Zef Module Installer can be installed from : https://github.com/ugexe/zef .
 
 **3.** Open a command line program. (E.g. Terminal on Mac OS X.)
 
