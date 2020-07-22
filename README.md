@@ -20,7 +20,10 @@ and
 
 **1.** Install Raku (Perl 6) : https://raku.org/downloads . 
 
-**2.** Install Zef Module Installer : https://github.com/ugexe/zef .
+**2.** Make sure you have Zef Module Installer. 
+ 
+   - Type in `zef` in the command line.
+   - You can install the Zef Module Installer from : https://github.com/ugexe/zef .
 
 **3.** Open a command line program. (E.g. Terminal on Mac OS X.)
 
