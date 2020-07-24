@@ -87,8 +87,8 @@ grammar DSL::English::RecommenderWorkflows::Grammar
 
     # Data statistics command
     rule data-statistics-command { <show-data-summary> | <summarize-data> | <items-per-tag> | <tags-per-item> }
-    rule show-data-summary { <display-directive> <data>? 'summary' }
-    rule summarize-data { 'summarize' <.the-determiner>? <data> | <display-directive> <data>? ( 'summary' | 'summaries' ) }
+    rule show-data-summary { <display-directive> <data>? <summary> }
+    rule summarize-data { <summarize-directive> <.the-determiner>? <data> | <display-directive> <data>? ( <summary>| <summaries> ) }
     rule items-per-tag { <number-of> <items-slot> <per-preposition> <tag> }
     rule tags-per-item { <number-of> <tags> <per-preposition> <item-slot> }
 
@@ -123,7 +123,7 @@ grammar DSL::English::RecommenderWorkflows::Grammar
     rule top-recommendations-by-history { <top-recommendations>
                                         [ <.using-preposition> | <.by-preposition> | <.for-preposition> ] <.the-determiner>? <.history-phrase>?
                                         <history-spec> }
-    rule most-relevant-phrase { <most-relevant> | 'top' <most-relevant>? }
+    rule most-relevant-phrase { <most-relevant> | <top-noun> <most-relevant>? }
     rule simple-recommend { <.recommend-directive> | <compute-directive> <recommendations> }
 
     # Recommend by profile
@@ -137,12 +137,12 @@ grammar DSL::English::RecommenderWorkflows::Grammar
                                         <profile-spec> }
 
     # Make profile
-    rule make-profile-command {  <make-profile-command-opening> <.the-determiner>? [ <history-phrase> <.list>? | <items-slot> ] <history-spec> }
+    rule make-profile-command {  <.make-profile-command-opening> <.the-determiner>? [ <.history-phrase> <.list>? | <.items-slot> ] <history-spec> }
     rule make-profile-command-opening { <compute-directive> [ <a-determiner> | <the-determiner> ]? <profile-slot>
                                       [ <using-preposition> | <by-preposition> | <for-preposition> ] }
 
     # Recommendations processing command
-    rule extend-recommendations-command { [ 'extend' | 'join' [ 'across' ]? ] <recommendations>? <.with-preposition> <.the-determiner>? <.data>? <dataset-name> }
+    rule extend-recommendations-command { [ <extend-verb> | 'join' [ 'across' ]? ] <recommendations>? <.with-preposition> <.the-determiner>? <.data>? <dataset-name> }
 
     # Prove command
     rule prove-recommendations-command { <prove-by-metadata> | <prove-by-history> }
