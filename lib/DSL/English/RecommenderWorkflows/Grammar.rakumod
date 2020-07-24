@@ -137,7 +137,7 @@ grammar DSL::English::RecommenderWorkflows::Grammar
                                         <profile-spec> }
 
     # Make profile
-    rule make-profile-command {  <.make-profile-command-opening> <.the-determiner>? [ <.history-phrase> <.list>? | <.items-slot> ] <history-spec> }
+    rule make-profile-command {  <.make-profile-command-opening> <.the-determiner>? [ <.history-phrase> <.list-noun>? | <.items-slot> ] <history-spec> }
     rule make-profile-command-opening { <compute-directive> [ <a-determiner> | <the-determiner> ]? <profile-slot>
                                       [ <using-preposition> | <by-preposition> | <for-preposition> ] }
 
