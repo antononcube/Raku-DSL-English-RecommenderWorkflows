@@ -242,8 +242,8 @@ class DSL::English::RecommenderWorkflows::Actions::R::SMRMon {
 
   # Pipeline command
   method pipeline-command($/) { make  $/.values[0].made; }
-  method take-pipeline-value($/) { make 'QRMonTakeValue()'; }
-  method echo-pipeline-value($/) { make 'QRMonEchoValue()'; }
+  method take-pipeline-value($/) { make 'SMRMonTakeValue()'; }
+  method echo-pipeline-value($/) { make 'SMRMonEchoValue()'; }
 
   method echo-command($/) { make 'SMRMonEcho( ' ~ $<echo-message-spec>.made ~ ' )'; }
   method echo-message-spec($/) { make $/.values[0].made; }

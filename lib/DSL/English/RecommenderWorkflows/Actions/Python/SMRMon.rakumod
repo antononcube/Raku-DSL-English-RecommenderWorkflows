@@ -181,10 +181,10 @@ class DSL::English::RecommenderWorkflows::Actions::Python::SMRMon {
   
   # Pipeline command
   method pipeline-command($/) { make $/.values[0].made; }
-  method take-pipeline-value($/) { make 'QRMonTakeValue()'; }
-  method echo-pipeline-value($/) { make 'QRMonEchoValue()'; }
+  method take-pipeline-value($/) { make 'SMRMonTakeValue()'; }
+  method echo-pipeline-value($/) { make 'SMRMonEchoValue()'; }
 
-  method echo-command($/) { make 'QRMonEcho( ' ~ $<echo-message-spec>.made ~ ' )'; }
+  method echo-command($/) { make 'SMRMonEcho( ' ~ $<echo-message-spec>.made ~ ' )'; }
   method echo-message-spec($/) { make $/.values[0].made; }
   method echo-words-list($/) { make '"' ~ $<variable-name>>>.made.join(' ') ~ '"'; }
   method echo-variable($/) { make $/.Str; }
