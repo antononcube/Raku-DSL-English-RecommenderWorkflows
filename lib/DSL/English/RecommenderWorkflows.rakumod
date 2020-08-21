@@ -45,13 +45,13 @@ sub has-semicolon (Str $word) {
 }
 
 #-----------------------------------------------------------
-proto ToRecommenderWorkflowCode(Str $command, Str $target = "R-SMRMon" ) is export {*}
+proto ToRecommenderWorkflowCode(Str $command, Str $target = 'R-SMRMon' ) is export {*}
 
-multi ToRecommenderWorkflowCode ( Str $command where not has-semicolon($command), Str $target = "R-SMRMon" ) {
+multi ToRecommenderWorkflowCode ( Str $command where not has-semicolon($command), Str $target = 'R-SMRMon' ) {
 
     die 'Unknown target.' unless %targetToAction{$target}:exists;
 
-    my $match = DSL::English::RecommenderWorkflows::Grammar.parse($command, actions => %targetToAction{$target} );
+    my $match = DSL::English::RecommenderWorkflows::Grammar.parse($command.trim, actions => %targetToAction{$target} );
     die 'Cannot parse the given command.' unless $match;
     return $match.made;
 }
