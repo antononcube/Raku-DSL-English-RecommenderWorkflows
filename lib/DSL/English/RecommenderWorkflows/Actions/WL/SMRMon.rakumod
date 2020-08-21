@@ -66,6 +66,7 @@ class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon {
   method scored-tag-id($/) { make $<tag-id>.made ~ '->' ~ $<number-value>.made ; }
   method scored-tag-ids-list($/) { make '<|' ~ $<scored-tag-id>>>.made.join(', ') ~ '|>'; }
   method tag-type-id($/) { make '\"' ~ $/.Str ~ '\"'; }
+  method tag-type-ids-list($/) { make '{' ~ $<tag-type-id>>>.made.join(', ') ~ '}'; }
 
   # Data load commands
   method data-load-command($/) { make $/.values[0].made; }
@@ -241,6 +242,11 @@ class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon {
   method proximity-anomalies-aggr-func-spec($/) { make '"AggregationFunction" ->' ~ $<variable-name>.made; }
   method proximity-anomalies-outlier-identifier-spec($/) { make '"OutlierIdentifier" -> ' ~ $<variable-name>.made; }
   method proximity-anomalies-property-spec($/) { make '"Property" -> "' ~ $<variable-name>.made ~ '"'; }
+
+  # Make metadata recommender command
+  method make-metadata-recommender-command($/) { make $/.values[0].made; }
+  method make-metadata-recommender-simple($/) { make 'SMRMonMakeTagTypeRecommender[ "TagTypeTo" -> ' ~ $<tag-type-id>.made ~ ' ]'; }
+  method make-metadata-recommender-full($/) { make 'SMRMonMakeTagTypeRecommender[ "TagTypeTo" -> ' ~ $<tag-type-id>.made ~ ', "TagTypes" -> ' ~ $<tag-type-ids-list>.made ~ ' ]'; }
 
   # Pipeline command
   method pipeline-command($/) { make  $/.values[0].made; }

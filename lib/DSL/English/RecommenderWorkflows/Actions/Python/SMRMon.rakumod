@@ -69,6 +69,7 @@ class DSL::English::RecommenderWorkflows::Actions::Python::SMRMon {
   method scored-tag-id($/) { make $<tag-id>.made ~ '=' ~ $<number-value>.made ; }
   method scored-tag-ids-list($/) { make '{' ~ $<scored-tag-id>>>.made.join(', ') ~ '}'; }
   method tag-type-id($/) { make '\"' ~ $/.Str ~ '\"'; }
+  method tag-type-ids-list($/) { make '[' ~ $<tag-type-id>>>.made.join(', ') ~ ']'; }
 
   # Data load commands
   method data-load-command($/) { make $/.values[0].made; }
@@ -178,7 +179,12 @@ class DSL::English::RecommenderWorkflows::Actions::Python::SMRMon {
   method properties($/) { make '\"properties\"';}
 
   method smr-filter-matrix($/) { make 'obj = SMRMonFilterMatrix( smrObj = obj, profile = ' ~ $<profile-spec>.made ~ ')';  }
-  
+
+  # Make metadata recommender command
+  method make-metadata-recommender-command($/) { make $/.values[0].made; }
+  method make-metadata-recommender-simple($/) { make 'obj = SMRMonMakeTagTypeRecommender( obj, tagTypeTo = ' ~ $<tag-type-id>.made ~ ' )'; }
+  method make-metadata-recommender-full($/) { make 'obj = SMRMonMakeTagTypeRecommender( obj, tagTypeTo = ' ~ $<tag-type-id>.made ~ ', tagTypes = ' ~ $<tag-type-ids-list>.made ~ ' )'; }
+
   # Pipeline command
   method pipeline-command($/) { make $/.values[0].made; }
   method take-pipeline-value($/) { make 'SMRMonTakeValue()'; }
