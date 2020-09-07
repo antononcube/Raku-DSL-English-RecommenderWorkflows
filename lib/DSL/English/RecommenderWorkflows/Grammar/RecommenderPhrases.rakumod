@@ -42,6 +42,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token identifier { 'identifier' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'identifier') }> }
     token matrices { 'matrices' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'matrices') }> }
     token matrix { 'matrix' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'matrix') }> }
+    token matrixes { 'matrixes' }
     token metadata { 'metadata' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'metadata') }> }
     token nearest { 'nearest' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'nearest') }> }
     token neighbors { 'neighbors' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'neighbors') }> }
@@ -60,12 +61,13 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token row { 'row' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'row') }> }
     token rows { 'rows' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'rows') }> }
     token rownames { 'rownames' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'rownames') }> }
-    token sparse { 'sparse' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'sparse') }> }
     token threshold { 'threshold' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'threshold') }> }
+
 
     rule prove-directive { <prove> | <explain> }
     rule consumption-history { <consumption-slot>? <history-slot> }
     rule consumption-profile { <consumption-slot>? 'profile' }
+    rule cross-tabulate-phrase { 'cross' [ 'tabulate' | 'tabulation' ] }
     rule history-phrase { [ <item-slot> ]? <history-slot> }
     rule most-relevant { 'most' 'relevant' }
     rule nearest-neighbors { <nearest> <neighbors> | 'nns' }
@@ -74,7 +76,8 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     rule recommendation-results { [ <recommendation> | <recommendations> | 'recommendation\'s' ] <results> }
     rule recommended-items { <recommended> <items-slot> | [ <recommendations> | <recommendation> ]  <.results>?  }
     rule recommender-object { <recommender> [ <object> | <system> ]? | 'smr' }
-    rule sparse-matrix { <sparse> <matrix> }
+    rule sparse-matrix { <sparse-adjective> <matrix> }
+    rule sub-matrices-phrase { 'sub-matrices' | <sub-prefix> <matrices> | <sub-prefix> <matrixes> }
     rule tag-type { 'tag' 'type' }
     rule tag-types { 'tag' 'types' }
 

@@ -43,6 +43,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases does DSL::S
   token identifier { 'identifier' }
   token matrices { 'matrices' }
   token matrix { 'matrix' }
+  token matrixes { 'matrixes' }
   token metadata {'metadata' }
   token nearest { 'nearest' }
   token neighbors { 'neighbors' }
@@ -61,12 +62,12 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases does DSL::S
   token row { 'row' }
   token rows { 'rows' }
   token rownames { 'rownames' }
-  token sparse { 'sparse' }
   token threshold { 'threshold' }
 
   rule prove-directive { <prove> | <explain> }
   rule consumption-history { <consumption-slot>? <history-slot> }
   rule consumption-profile { <consumption-slot>? 'profile' }
+  rule cross-tabulate-phrase { 'cross' [ 'tabulate' | 'tabulation' ] }
   rule history-phrase { [ <item-slot> ]? <history-slot> }
   rule most-relevant { 'most' 'relevant' }
   rule nearest-neighbors { <nearest> <neighbors> | 'nns' }
@@ -75,7 +76,8 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases does DSL::S
   rule recommendation-results { [ <recommendation> | <recommendations> | 'recommendation\'s' ] <results> }
   rule recommended-items { <recommended> <items-slot> | [ <recommendations> | <recommendation> ]  <.results>?  }
   rule recommender-object { <recommender> [ <object> | <system> ]? | 'smr' }
-  rule sparse-matrix { <sparse> <matrix> }
+  rule sparse-matrix { <sparse-adjective> <matrix> }
+  rule sub-matrices-phrase { 'sub-matrices' | <sub-prefix> <matrices> | <sub-prefix> <matrixes> }
   rule tag-type { 'tag' 'type' }
   rule tag-types { 'tag' 'types' }
 

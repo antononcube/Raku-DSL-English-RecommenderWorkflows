@@ -70,20 +70,20 @@ grammar DSL::English::RecommenderWorkflows::Grammar
     rule data-load-command { <load-data> | <use-recommender> }
     rule data-location-spec { <dataset-name> }
     rule load-data { <.load-data-directive> <data-location-spec> }
-    rule use-recommender { [<.use-verb> | <.using-preposition>] <.the-determiner>? <.recommender-object> <variable-name> }
+    rule use-recommender { [<.use-verb> | <.using-preposition>] <.the-determiner>? <.recommender-object>? <variable-name> }
 
     # Create command
     rule create-command { <create-by-matrices> | <create-by-dataset> | <create-simple> }
     rule create-preamble-phrase { <generate-directive> [ <.a-determiner> | <.the-determiner> ]? <recommender-object> }
     rule simple-way-phrase { <in-preposition> <a-determiner> <simple> <way-noun> | <directly-adverb> | <simply-adverb> }
-    rule create-simple { <create-preamble-phrase> <simple-way-phrase>? | <simple> <recommender-object> [ 'creation' | 'making' ] }
+    rule create-simple { <create-preamble-phrase> <simple-way-phrase>? | <simple> <recommender-object> [ <creation-noun> | <making-noun> ] }
     rule create-by-dataset { [ <create-preamble-phrase> | <generate-directive> ] [ <.with-preposition> | <.from-preposition> ] <.the-determiner>? <dataset-noun>? <dataset-name> }
     rule create-by-matrices { [ <create-preamble-phrase> | <generate-directive> ] [ <.with-preposition> | <.from-preposition> ] <.the-determiner>? <matrices> <creation-matrices-spec> }
-    rule creation-matrices-spec { <variable-name> | <variable-names-list> }
+    rule creation-matrices-spec { <variable-name> | <variable-names-list> | <wl-expr> }
 
     # Data transformation command
     rule data-transformation-command { <cross-tabulate-command> }
-    rule cross-tabulate-command { 'cross' 'tabulate' <.data>? }
+    rule cross-tabulate-command { <cross-tabulate-phrase> <.data>? }
 
     # Data statistics command
     rule data-statistics-command { <show-data-summary> | <summarize-data> | <items-per-tag> | <tags-per-item> }
@@ -95,17 +95,17 @@ grammar DSL::English::RecommenderWorkflows::Grammar
     # (Scored) items lists
     token score-association-symbol { '=' | '->' | '→' }
     token score-association-separator { <.ws>? <score-association-symbol> <.ws>? }
-    regex item-id { ([ \w | '-' | '_' | '.' | ':' | \d ]+) <!{ $0 eq 'and' }> }
+    regex item-id { <mixed-quoted-keyword-variable-name> | <mixed-quoted-variable-name> }
     rule item-ids-list { <item-id>+ % <list-separator> }
     regex scored-item-id { <item-id> <.score-association-separator> <number-value> }
     rule scored-item-ids-list { <scored-item-id>+ % <list-separator> }
 
     # (Scored) tags lists
-    regex tag-id { ([ \w | '-' | '_' | '.' | ':' | \d ]+) <!{ $0 eq 'and' }> }
+    regex tag-id { <mixed-quoted-keyword-variable-name> | <mixed-quoted-variable-name> }
     rule tag-ids-list { <tag-id>+ % <list-separator> }
     regex scored-tag-id { <tag-id> <.score-association-separator> <number-value> }
     rule scored-tag-ids-list { <scored-tag-id>+ % <list-separator> }
-    token tag-type-id { ([ \w | '-' | '_' | '.' | ':' | \d ]+) <!{ $0 eq 'and' }> }
+    token tag-type-id { <mixed-quoted-keyword-variable-name> | <mixed-quoted-variable-name> }
     rule tag-type-ids-list { <tag-type-id>+ % <list-separator> }
 
     # History spec
@@ -182,8 +182,8 @@ grammar DSL::English::RecommenderWorkflows::Grammar
 
     rule smr-context-property-spec { <smr-tag-types> | <smr-item-column-name> | <smr-sub-matrices> | <smr-recommendation-matrix> | <properties> }
     rule smr-tag-types { <tag-types> }
-    rule smr-item-column-name { <item-slot> <column> 'name' | 'itemColumnName' }
-    rule smr-sub-matrices { [ 'sparse' ]? [ 'contingency' ]? [ 'sub-matrices' | [ 'sub' ]? <matrices> ] }
+    rule smr-item-column-name { <item-slot> <column> <name-noun> | 'itemColumnName' }
+    rule smr-sub-matrices { <sparse-adjective>? <contingency-noun>? <sub-matrices-phrase> }
     rule smr-recommendation-matrix { <recommendation-matrix> }
 
     rule smr-matrix-property-spec-openning { <recommendation-matrix> | <sparse-matrix> | <matrix> }
