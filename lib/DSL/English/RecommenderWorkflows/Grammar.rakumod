@@ -142,7 +142,9 @@ grammar DSL::English::RecommenderWorkflows::Grammar
                                       [ <using-preposition> | <by-preposition> | <for-preposition> ] }
 
     # Recommendations processing command
-    rule extend-recommendations-command { [ <extend-verb> | 'join' [ 'across' ]? ] <recommendations>? <.with-preposition> <.the-determiner>? <.data>? <dataset-name> }
+    rule extend-recommendations-command { <extend-recommendations-simple-command> }
+    rule extend-recommendations-simple-command { <.extend-recommendations-phrase> <.with-preposition> <.the-determiner>? <.data>? <dataset-name> [ <.by-preposition> <extension-data-id-column-spec> ]?  }
+    rule extension-data-id-column-spec { <.the-determiner>? [ <.identifier-noun> | <.id-noun> ]? <.column-noun>? <mixed-quoted-variable-name> }
 
     # Prove command
     rule prove-recommendations-command { <prove-by-metadata> | <prove-by-history> }

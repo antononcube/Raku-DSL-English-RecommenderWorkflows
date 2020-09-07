@@ -155,7 +155,15 @@ class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon
   method make-profile-command($/) { make 'SMRMonProfile[' ~ $<history-spec>.made ~ ']'; }
 
   # Process recommendations command
-  method extend-recommendations-command($/) { make 'SMRMonJoinAcross[' ~ $<dataset-name>.made ~ ']' }
+  method extend-recommendations-command($/) { make $/.values[0].made; }
+  method extend-recommendations-simple-command($/) {
+    if $<extension-data-id-column-spec> {
+      make 'SMRMonJoinAcross[' ~ $<dataset-name>.made ~ ', ' ~ $<extension-data-id-column-spec>.made ~ ' ]';
+    } else {
+      make 'SMRMonJoinAcross[' ~ $<dataset-name>.made ~ ']';
+    }
+  }
+  method extension-data-id-column-spec($/) { make $/.values[0].made; }
 
   # Prove recommendations command
   method prove-recommendations-command($/) { make $/.values[0].made; }

@@ -68,6 +68,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     rule consumption-history { <consumption-slot>? <history-slot> }
     rule consumption-profile { <consumption-slot>? 'profile' }
     rule cross-tabulate-phrase { 'cross' [ 'tabulate' | 'tabulation' ] }
+    rule extend-recommendations-phrase { [ <extend-verb> | 'join' [ 'across' ]? ] <recommendations>? }
     rule history-phrase { [ <item-slot> ]? <history-slot> }
     rule most-relevant { 'most' 'relevant' }
     rule nearest-neighbors { <nearest> <neighbors> | 'nns' }

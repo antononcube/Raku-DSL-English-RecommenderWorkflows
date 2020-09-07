@@ -133,7 +133,15 @@ class DSL::English::RecommenderWorkflows::Actions::Python::SMRMon
   method make-profile-command($/) { make 'obj = SMRMonProfile( smrObj = obj, history = ' ~ $<history-spec>.made ~ ')'; }
 
   # Process recommendations command
-  method extend-recommendations-command($/) { make 'obj = SMRMonJoinAcross( smrObj = obj, data = ' ~ $<dataset-name>.made ~ ')' }
+  method extend-recommendations-command($/) { make $/.values[0].made; }
+  method extend-recommendations-simple-command($/) {
+    if $<extension-data-id-column-spec> {
+      make 'obj = SMRMonJoinAcross( smrObj = obj, data = ' ~ $<dataset-name>.made ~ ', by = ' ~ $<extension-data-id-column-spec>.made ~ ' )';
+    } else {
+      make 'obj = SMRMonJoinAcross( smrObj = obj, data = ' ~ $<dataset-name>.made ~ ' )';
+    }
+  }
+  method extension-data-id-column-spec($/) { make $/.values[0].made; }
 
   # Classifications command
   method classify-command($/) { make $/.values[0].made; }
