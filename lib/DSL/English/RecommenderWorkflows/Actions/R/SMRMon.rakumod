@@ -41,8 +41,10 @@
 use v6;
 
 use DSL::English::RecommenderWorkflows::Grammar;
+use DSL::Shared::Actions::R::CommonStructures;
 
-class DSL::English::RecommenderWorkflows::Actions::R::SMRMon {
+class DSL::English::RecommenderWorkflows::Actions::R::SMRMon
+        is DSL::Shared::Actions::R::CommonStructures {
 
   # Top
   method TOP($/) { make $/.values[0].made; }
@@ -55,17 +57,17 @@ class DSL::English::RecommenderWorkflows::Actions::R::SMRMon {
   method number-value($/) { make $/.Str; }
 
   # (Scored) item lists
-  method item-id($/) { make '\"' ~ $/.Str ~ '\"'; }
+  method item-id($/) { make $/.values[0].made; }
   method item-ids-list($/) { make 'c(' ~ $<item-id>>>.made.join(', ') ~ ')'; }
   method scored-item-id($/) { make $<item-id>.made ~ '=' ~ $<number-value>.made; }
   method scored-item-ids-list($/) { make 'c(' ~ $<scored-item-id>>>.made.join(', ') ~ ')'; }
 
   # (Scored) tag lists
-  method tag-id($/) { make '\"' ~ $/.Str ~ '\"'; }
+  method tag-id($/) { make $/.values[0].made; }
   method tag-ids-list($/) { make 'c(' ~ $<tag-id>>>.made.join(', ') ~ ')'; }
   method scored-tag-id($/) { make $<tag-id>.made ~ '=' ~ $<number-value>.made; }
   method scored-tag-ids-list($/) { make 'c(' ~ $<scored-tag-id>>>.made.join(', ') ~ ')'; }
-  method tag-type-id($/) { make '\"' ~ $/.Str ~ '\"'; }
+  method tag-type-id($/) { make $/.values[0].made; }
   method tag-type-ids-list($/) { make 'c(' ~ $<tag-type-id>>>.made.join(', ') ~ ')'; }
 
   # Data load commands
