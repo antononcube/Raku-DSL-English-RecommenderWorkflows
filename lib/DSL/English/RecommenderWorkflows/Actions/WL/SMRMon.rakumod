@@ -41,10 +41,10 @@
 use v6;
 
 use DSL::English::RecommenderWorkflows::Grammar;
-use DSL::Shared::Actions::WL::CommonStructures;
+use DSL::Shared::Actions::English::WL::PipelineCommand;
 
 class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon
-        is DSL::Shared::Actions::WL::CommonStructures {
+        is DSL::Shared::Actions::English::WL::PipelineCommand {
 
   # Top
   method TOP($/) { make $/.values[0].made; }
@@ -258,14 +258,17 @@ class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon
   method make-metadata-recommender-simple($/) { make 'SMRMonMakeTagTypeRecommender[ "TagTypeTo" -> ' ~ $<tag-type-id>.made ~ ' ]'; }
   method make-metadata-recommender-full($/) { make 'SMRMonMakeTagTypeRecommender[ "TagTypeTo" -> ' ~ $<tag-type-id>.made ~ ', "TagTypes" -> ' ~ $<tag-type-ids-list>.made ~ ' ]'; }
 
-  # Pipeline command
-  method pipeline-command($/) { make  $/.values[0].made; }
+  # Pipeline command overwrites
+  ## Value
   method take-pipeline-value($/) { make 'SMRMonTakeValue[]'; }
   method echo-pipeline-value($/) { make 'SMRMonEchoValue[]'; }
+  method echo-pipeline-funciton-value($/) { make 'SMRMonEchoFunctionValue[ ' ~ $<pipeline-function-spec>.made ~ ' ]'; }
 
+  ## Context
+  method take-pipeline-context($/) { make 'SMRMonTakeContext[]'; }
+  method echo-pipeline-context($/) { make 'SMRMonEchoContext[]'; }
+  method echo-pipeline-function-context($/) { make 'SMRMonEchoFunctionContext[ ' ~ $<pipeline-function-spec>.made ~ ' ]'; }
+
+  ## Echo messages
   method echo-command($/) { make 'SMRMonEcho[ ' ~ $<echo-message-spec>.made ~ ' ]'; }
-  method echo-message-spec($/) { make $/.values[0].made; }
-  method echo-words-list($/) { make '"' ~ $<variable-name>>>.made.join(' ') ~ '"'; }
-  method echo-variable($/) { make $/.Str; }
-  method echo-text($/) { make $/.Str; }
 }

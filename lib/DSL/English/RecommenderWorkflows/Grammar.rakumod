@@ -45,7 +45,6 @@ use DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases;
 
 grammar DSL::English::RecommenderWorkflows::Grammar
         does DSL::English::RecommenderWorkflows::Grammar::LSIApplyCommand
-        does DSL::Shared::Roles::English::PipelineCommand
         does DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
         does DSL::Shared::Roles::ErrorHandling {
     # TOP

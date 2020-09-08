@@ -44,10 +44,10 @@
 use v6;
 
 use DSL::English::RecommenderWorkflows::Grammar;
-use DSL::Shared::Actions::Python::CommonStructures;
+use DSL::Shared::Actions::English::Python::PipelineCommand;
 
 class DSL::English::RecommenderWorkflows::Actions::Python::SMRMon
-        is DSL::Shared::Actions::Python::CommonStructures {
+        is DSL::Shared::Actions::English::Python::PipelineCommand {
 
   # Top
   method TOP($/) { make $/.values[0].made; }
@@ -196,13 +196,5 @@ class DSL::English::RecommenderWorkflows::Actions::Python::SMRMon
   method make-metadata-recommender-full($/) { make 'obj = SMRMonMakeTagTypeRecommender( obj, tagTypeTo = ' ~ $<tag-type-id>.made ~ ', tagTypes = ' ~ $<tag-type-ids-list>.made ~ ' )'; }
 
   # Pipeline command
-  method pipeline-command($/) { make $/.values[0].made; }
-  method take-pipeline-value($/) { make 'SMRMonTakeValue()'; }
-  method echo-pipeline-value($/) { make 'SMRMonEchoValue()'; }
-
-  method echo-command($/) { make 'SMRMonEcho( ' ~ $<echo-message-spec>.made ~ ' )'; }
-  method echo-message-spec($/) { make $/.values[0].made; }
-  method echo-words-list($/) { make '"' ~ $<variable-name>>>.made.join(' ') ~ '"'; }
-  method echo-variable($/) { make $/.Str; }
-  method echo-text($/) { make $/.Str; }
+  ## None
 }
