@@ -50,24 +50,20 @@ class DSL::English::RecommenderWorkflows::Actions::R::SMRMon
   method TOP($/) { make $/.values[0].made; }
 
   # General
-  method variable-name($/) { make $/.Str; }
-  method list-separator($/) { make ','; }
   method variable-names-list($/) { make 'c(' ~ $<variable-name>>>.made.join(', ') ~ ')'; }
-  method integer-value($/) { make $/.Str; }
-  method number-value($/) { make $/.Str; }
 
   # (Scored) item lists
-  method item-id($/) { make $/.values[0].made; }
+  method item-id($/) { make '"' ~ $/.values[0].made.subst(:g, '"', '') ~ '"'; }
   method item-ids-list($/) { make 'c(' ~ $<item-id>>>.made.join(', ') ~ ')'; }
   method scored-item-id($/) { make $<item-id>.made ~ '=' ~ $<number-value>.made; }
   method scored-item-ids-list($/) { make 'c(' ~ $<scored-item-id>>>.made.join(', ') ~ ')'; }
 
   # (Scored) tag lists
-  method tag-id($/) { make $/.values[0].made; }
+  method tag-id($/) { make '"' ~ $/.values[0].made.subst(:g, '"', '') ~ '"'; }
   method tag-ids-list($/) { make 'c(' ~ $<tag-id>>>.made.join(', ') ~ ')'; }
   method scored-tag-id($/) { make $<tag-id>.made ~ '=' ~ $<number-value>.made; }
   method scored-tag-ids-list($/) { make 'c(' ~ $<scored-tag-id>>>.made.join(', ') ~ ')'; }
-  method tag-type-id($/) { make $/.values[0].made; }
+  method tag-type-id($/) { make '"' ~ $/.values[0].made.subst(:g, '"', '') ~ '"'; }
   method tag-type-ids-list($/) { make 'c(' ~ $<tag-type-id>>>.made.join(', ') ~ ')'; }
 
   # Data load commands
