@@ -15,6 +15,8 @@ interpretation of English natural speech commands that specify recommender workf
 
 unit module DSL::English::RecommenderWorkflows;
 
+use DSL::Shared::Utilities::MetaSpecifications;
+
 use DSL::English::RecommenderWorkflows::Grammar;
 use DSL::English::RecommenderWorkflows::Actions::Python::SMRMon;
 use DSL::English::RecommenderWorkflows::Actions::R::SMRMon;
@@ -58,15 +60,21 @@ multi ToRecommenderWorkflowCode ( Str $command where not has-semicolon($command)
 
 multi ToRecommenderWorkflowCode ( Str $command where has-semicolon($command), Str $target = 'R-SMRMon' ) {
 
-    die 'Unknown target.' unless %targetToAction{$target}:exists;
+    my $specTarget = get-dsl-spec( $command, 'target');
+
+    $specTarget = !$specTarget ?? $target !! $specTarget.value;
+
+    die 'Unknown target.' unless %targetToAction{$specTarget}:exists;
 
     my @commandLines = $command.trim.split(/ ';' \s* /);
 
     @commandLines = grep { $_.Str.chars > 0 }, @commandLines;
 
-    my @cmdLines = map { ToRecommenderWorkflowCode($_, $target) }, @commandLines;
+    my @cmdLines = map { ToRecommenderWorkflowCode($_, $specTarget) }, @commandLines;
 
-    return @cmdLines.join( %targetToSeparator{$target} ).trim;
+    @cmdLines = grep { $_.^name eq 'Str' }, @cmdLines;
+
+    return @cmdLines.join( %targetToSeparator{$specTarget} ).trim;
 }
 
 #-----------------------------------------------------------

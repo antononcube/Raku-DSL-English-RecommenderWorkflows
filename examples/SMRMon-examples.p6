@@ -11,9 +11,19 @@ use DSL::English::RecommenderWorkflows::Grammar;
 #
 #say "\n=======\n";
 
-say to_SMRMon_R('
-     use recommender smrObj2;
-     make metadata recommender for tag type passengerClass over passengerAge and passengerSex' );
+#say ToRecommenderWorkflowCode('
+#use smrObj2;
+#make metadata recommender for tag type passengerClass over passengerAge and passengerSex;
+#recommend by profile male;
+#join across with dfTitanic by id column "id"',
+#        'R-SMRMon');
+
+say ToRecommenderWorkflowCode('
+DSL TARGET WL-SMRMon;
+use smrObj;
+recommend by profile Word:quantile, Symbol:nonlinearmodelfit; join across with dsNotebooksdata;
+echo pipeline value',
+        'R-SMRMon');
 
 say "\n=======\n";
 
@@ -31,7 +41,7 @@ say "\n=======\n";
 #     echo value;
 #     prove recommended items id.123, id.99 by metadata' );
 
-say "\n=======\n";
+# say "\n=======\n";
 
 #say to_SMRMon_R('
 #     use recommender smrObj2;
@@ -39,24 +49,24 @@ say "\n=======\n";
 #     echo value;
 #     display proof follows;
 #     prove recommended items id.123, id.99 with the profile tag.1, tag.23' );
-
-say "\n=======\n";
-
-my $commands = '
-create from dfTitanic;
-recomend with history id.5=10, id.7=3;
-join across recommendations with the data frame dfTitanic;
-echo pipeline value';
-
-say to_SMRMon_R( $commands );
-
-say "\n=======\n";
-
-say to_SMRMon_Python( $commands );
-
-say "\n=======\n";
-
-say to_SMRMon_WL( $commands );
+#
+#say "\n=======\n";
+#
+#my $commands = '
+#create from dfTitanic;
+#recomend with history id.5=10, id.7=3;
+#join across recommendations with the data frame dfTitanic;
+#echo pipeline value';
+#
+#say to_SMRMon_R( $commands );
+#
+#say "\n=======\n";
+#
+#say to_SMRMon_Python( $commands );
+#
+#say "\n=======\n";
+#
+#say to_SMRMon_WL( $commands );
 
 #say to_SMRMon_R('
 #     use recommender smrObj2;
