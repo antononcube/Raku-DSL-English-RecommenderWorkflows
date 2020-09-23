@@ -69,7 +69,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     rule consumption-history { <consumption-slot>? <history-slot> }
     rule consumption-profile { <consumption-slot>? 'profile' }
     rule cross-tabulate-phrase { 'cross' [ 'tabulate' | 'tabulation' ] }
-    rule extend-recommendations-phrase { [ <extend-verb> | 'join' [ 'across' ]? ] <recommendations>? }
+    rule extend-recommendations-phrase { [ <extend-verb> | 'join' 'across'? ] <recommendations>? }
     rule history-phrase { [ <item-slot> ]? <history-slot> }
     rule most-relevant { 'most' 'relevant' }
     rule nearest-neighbors { <nearest> <neighbors> | 'nns' }
@@ -77,11 +77,11 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     rule recommendation-matrix { [ <recommendation> | <recommender> ]? <matrix> }
     rule recommendation-results { [ <recommendation> | <recommendations> | 'recommendation\'s' ] <results> }
     rule recommended-items { <recommended> <items-slot> | [ <recommendations> | <recommendation> ]  <.results>?  }
-    rule recommender-object { <recommender> [ <object> | <system> ]? | 'smr' }
+    rule recommender-object-phrase { <recommender> [ <object> | <system> ]? | 'smr' }
     rule sparse-matrix { <sparse-adjective> <matrix> }
     rule sub-matrices-phrase { 'sub-matrices' | <sub-prefix> <matrices> | <sub-prefix> <matrixes> }
-    rule tag-type { 'tag' 'type' }
-    rule tag-types { 'tag' 'types' }
+    rule tag-type-phrase { 'tag' 'type' }
+    rule tag-types-phrase { 'tag' 'types' }
 
     # LSA specific
     token analysis { 'analysis' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'analysis') }> }
@@ -118,6 +118,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token normalizing { 'normalizing' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'normalizing') }> }
 
     rule global-function-phrase { <global> <term> ?<weight>? <function> }
+    rule join-type-phrase { <join-verb>? <type-noun> }
     rule local-function-phrase { <local> <term>? <weight>? <function> }
     rule normalizer-function-phrase { [ <normalizer> | <normalizing> | <normalization> ] <term>? <weight>? <function>? }
 }

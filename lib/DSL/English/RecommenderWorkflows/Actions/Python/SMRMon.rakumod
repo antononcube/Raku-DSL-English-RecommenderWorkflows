@@ -191,6 +191,35 @@ class DSL::English::RecommenderWorkflows::Actions::Python::SMRMon
   method make-metadata-recommender-simple($/) { make 'obj = SMRMonMakeTagTypeRecommender( obj, tagTypeTo = ' ~ $<tag-type-id>.made ~ ' )'; }
   method make-metadata-recommender-full($/) { make 'obj = SMRMonMakeTagTypeRecommender( obj, tagTypeTo = ' ~ $<tag-type-id>.made ~ ', tagTypes = ' ~ $<tag-type-ids-list>.made ~ ' )'; }
 
-  # Pipeline command
-  ## None
+  # Recommender algebra command
+  method recommender-algebra-command($/) { make $/.values[0].made; }
+  method annex-matrix-command($/) {
+    if $<tagtype> {
+      make 'obj = SMRMonAnnexSubMatrix( newSubMat = ' ~ $<mat>.made ~ ', newTagType = ' ~ $<tagtype>.made ~ ' )';
+    } else {
+      make 'obj = SMRMonAnnexSubMatrix( newSubMat = ' ~ $<mat>.made ~ ', newTagType = "NewType" )';
+    }
+  }
+  method join-recommenders-command($/) {
+    if $<jointype> {
+      make 'obj = SMRJoin( smr2 = ' ~ $<smr>.made ~ ', joinType = '  ~ $<jointype>.made ~ ' )';
+    } else {
+      make 'obj = SMRJoin( smr2 = ' ~ $<smr>.made ~ ' )';
+    }
+  }
+  method remove-tag-types-commands($/) { make 'obj = SMRRemoveTagTypes( removeTagTypes = ' ~ $/.values[0].made ~ ' )'; }
+
+  # Pipeline command overwrites
+  ## Value
+  method take-pipeline-value($/) { make 'SMRMonTakeValue()'; }
+  method echo-pipeline-value($/) { make 'SMRMonEchoValue()'; }
+  method echo-pipeline-funciton-value($/) { make 'SMRMonEchoFunctionValue( ' ~ $<pipeline-function-spec>.made ~ ' )'; }
+
+  ## Context
+  method take-pipeline-context($/) { make 'SMRMonTakeContext()'; }
+  method echo-pipeline-context($/) { make 'SMRMonEchoContext()'; }
+  method echo-pipeline-function-context($/) { make 'SMRMonEchoFunctionContext( ' ~ $<pipeline-function-spec>.made ~ ' )'; }
+
+  ## Echo messages
+  method echo-command($/) { make 'SMRMonEcho( ' ~ $<echo-message-spec>.made ~ ' )'; }
 }

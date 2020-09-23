@@ -254,6 +254,24 @@ class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon
   method make-metadata-recommender-simple($/) { make 'SMRMonMakeTagTypeRecommender[ "TagTypeTo" -> ' ~ $<tag-type-id>.made ~ ' ]'; }
   method make-metadata-recommender-full($/) { make 'SMRMonMakeTagTypeRecommender[ "TagTypeTo" -> ' ~ $<tag-type-id>.made ~ ', "TagTypes" -> ' ~ $<tag-type-ids-list>.made ~ ' ]'; }
 
+  # Recommender algebra command
+  method recommender-algebra-command($/) { make $/.values[0].made; }
+  method annex-matrix-command($/) {
+    if $<tagtype> {
+      make 'SMRMonAnnexSubMatrix[ <|' ~ $<tagtype>.made ~ ' -> ' ~ $<mat>.made ~ '|> ]';
+    } else {
+      make 'SMRMonAnnexSubMatrices[ <| "NewType" -> ' ~ $<mat>.made ~ ' |> ]';
+    }
+  }
+  method join-recommenders-command($/) {
+    if $<jointype> {
+      make 'SMRMonJoin[ ' ~ $<smr>.made ~ ', '  ~ $<jointype>.made ~ ' ]';
+    } else {
+      make 'SMRMonJoin[ ' ~ $<smr>.made ~ ' ]';
+    }
+  }
+  method remove-tag-types-commands($/) { make 'SMRMonRemoveTagTypes[ ' ~ $/.values[0].made ~ ' ]'; }
+
   # Pipeline command overwrites
   ## Value
   method take-pipeline-value($/) { make 'SMRMonTakeValue[]'; }

@@ -50,6 +50,7 @@ grammar DSL::English::RecommenderWorkflows::Grammar
     # TOP
     rule TOP {
         <pipeline-command> |
+        <recommender-algebra-command> |
         <data-load-command> |
         <create-command> |
         <data-transformation-command> |
@@ -69,13 +70,13 @@ grammar DSL::English::RecommenderWorkflows::Grammar
     rule data-load-command { <load-data> | <use-recommender> }
     rule data-location-spec { <dataset-name> }
     rule load-data { <.load-data-directive> <data-location-spec> }
-    rule use-recommender { [<.use-verb> | <.using-preposition>] <.the-determiner>? <.recommender-object>? <variable-name> }
+    rule use-recommender { [<.use-verb> | <.using-preposition>] <.the-determiner>? <.recommender-object-phrase>? <variable-name> }
 
     # Create command
     rule create-command { <create-by-matrices> | <create-by-dataset> | <create-simple> }
-    rule create-preamble-phrase { <generate-directive> [ <.a-determiner> | <.the-determiner> ]? <recommender-object> }
+    rule create-preamble-phrase { <generate-directive> [ <.a-determiner> | <.the-determiner> ]? <recommender-object-phrase> }
     rule simple-way-phrase { <in-preposition> <a-determiner> <simple> <way-noun> | <directly-adverb> | <simply-adverb> }
-    rule create-simple { <create-preamble-phrase> <simple-way-phrase>? | <simple> <recommender-object> [ <creation-noun> | <making-noun> ] }
+    rule create-simple { <create-preamble-phrase> <simple-way-phrase>? | <simple> <recommender-object-phrase> [ <creation-noun> | <making-noun> ] }
     rule create-by-dataset { [ <create-preamble-phrase> | <generate-directive> ] [ <.with-preposition> | <.from-preposition> ] <.the-determiner>? <dataset-noun>? <dataset-name> }
     rule create-by-matrices { [ <create-preamble-phrase> | <generate-directive> ] [ <.with-preposition> | <.from-preposition> ] <.the-determiner>? <matrices> <creation-matrices-spec> }
     rule creation-matrices-spec { <variable-name> | <variable-names-list> | <wl-expr> }
@@ -92,11 +93,11 @@ grammar DSL::English::RecommenderWorkflows::Grammar
     rule tags-per-item { <number-of> <tags> <per-preposition> <item-slot> }
 
     # (Scored) items lists
-    token score-association-symbol { '=' | '->' | '→' }
-    token score-association-separator { <.ws>? <score-association-symbol> <.ws>? }
-    regex item-id { <mixed-quoted-keyword-variable-name> | <mixed-quoted-variable-name> }
+    token score-association-symbol { '=' | '->' | '→' | ':' }
+    token score-association-separator { \h* <score-association-symbol> \h* }
+    token item-id { <mixed-quoted-keyword-variable-name> | <mixed-quoted-variable-name> }
     rule item-ids-list { <item-id>+ % <list-separator> }
-    regex scored-item-id { <item-id> <.score-association-separator> <number-value> }
+    token scored-item-id { <item-id> <.score-association-separator> <number-value> }
     rule scored-item-ids-list { <scored-item-id>+ % <list-separator> }
 
     # (Scored) tags lists
@@ -108,10 +109,10 @@ grammar DSL::English::RecommenderWorkflows::Grammar
     rule tag-type-ids-list { <tag-type-id>+ % <list-separator> }
 
     # History spec
-    rule history-spec { <item-ids-list> | <scored-item-ids-list> }
+    rule history-spec { <scored-item-ids-list> | <item-ids-list> }
 
     # Profile spec
-    rule profile-spec { <tag-ids-list> | <scored-tag-ids-list> }
+    rule profile-spec { <scored-tag-ids-list> | <tag-ids-list>  }
 
     # Recommend by history
     rule recommend-by-history-command { <recommend-by-history> | <top-recommendations-by-history> | <top-recommendations> | <simple-recommend> }
@@ -162,9 +163,9 @@ grammar DSL::English::RecommenderWorkflows::Grammar
     rule classify-command { <classify-by-profile> | <classify-by-profile-rev> }
     rule ntop-nns { [ 'top' ]? <integer-value> [ 'top' ]? <.nearest-neighbors> }
     rule classify-by-profile { <.classify> <.the-determiner>? <.profile-slot>? <profile-spec>
-                             <.to-preposition> <.tag-type>? <tag-type-id>
+                             <.to-preposition> <.tag-type-phrase>? <tag-type-id>
                              [ <.using-preposition> <ntop-nns> ]? }
-    rule classify-by-profile-rev { <.classify> [ <.for-preposition> | <.to-preposition>] <.the-determiner>? <.tag-type>? <tag-type-id>
+    rule classify-by-profile-rev { <.classify> [ <.for-preposition> | <.to-preposition>] <.the-determiner>? <.tag-type-phrase>? <tag-type-id>
                                  [ <.by-preposition> | <.for-preposition> | <.using-preposition> ]? <.the-determiner>? <.profile-slot>?
                                  <profile-spec>
                                  [ <.and-conjunction>? <.using-preposition>? <ntop-nns> ]? }
@@ -182,7 +183,7 @@ grammar DSL::English::RecommenderWorkflows::Grammar
     token smr-property-id { ([ \w | '-' | '_' | '.' | ':' | \d ]+) <!{ $0 eq 'and' || $0 eq 'pipeline' }> }
 
     rule smr-context-property-spec { <smr-tag-types> | <smr-item-column-name> | <smr-sub-matrices> | <smr-recommendation-matrix> | <properties> }
-    rule smr-tag-types { <tag-types> }
+    rule smr-tag-types { <tag-types-phrase> }
     rule smr-item-column-name { <item-slot> <column> <name-noun> | 'itemColumnName' }
     rule smr-sub-matrices { <sparse-adjective>? <contingency-noun>? <sub-matrices-phrase> }
     rule smr-recommendation-matrix { <recommendation-matrix> }
@@ -190,7 +191,7 @@ grammar DSL::English::RecommenderWorkflows::Grammar
     rule smr-matrix-property-spec-openning { <recommendation-matrix> | <sparse-matrix> | <matrix> }
     rule smr-matrix-property-spec { <.smr-matrix-property-spec-openning>? <smr-matrix-property> }
 
-    rule smr-sub-matrix-property-spec-openning { 'sub-matrix' | 'sub' <matrix> | <tag-type> }
+    rule smr-sub-matrix-property-spec-openning { 'sub-matrix' | 'sub' <matrix> | <tag-type-phrase> }
     rule smr-sub-matrix-property-spec { <.smr-sub-matrix-property-spec-openning>? <tag-type-id> <smr-matrix-property> }
 
     rule smr-matrix-property { <columns> | <rows> | <dimensions> | <density> | <number-of-columns> | <number-of-rows> | <smr-property-id> | <properties> }
@@ -217,8 +218,18 @@ grammar DSL::English::RecommenderWorkflows::Grammar
 
     # Metadata recommender making command
     rule make-metadata-recommender-command { <make-metadata-recommender-full> | <make-metadata-recommender-simple> }
-    rule make-metadata-recommender-preamble { <create-directive> <a-determiner>? [ <metadata> | <tag-type> ] <recommender> }
-    rule make-metadata-recommender-simple { <.make-metadata-recommender-preamble> <.for-preposition> <.the-determiner>? <.tag-type>? <tag-type-id> }
+    rule make-metadata-recommender-preamble { <create-directive> <a-determiner>? [ <metadata> | <tag-type-phrase> ] <recommender> }
+    rule make-metadata-recommender-simple { <.make-metadata-recommender-preamble> <.for-preposition> <.the-determiner>? <.tag-type-phrase>? <tag-type-id> }
     rule make-metadata-recommender-full {
-        <.make-metadata-recommender-preamble> <.for-preposition> <.the-determiner>? <.tag-type>? <tag-type-id> <.over-preposition> <.the-determiner>? <.tag-types>? <tag-type-ids-list> }
+        <.make-metadata-recommender-preamble> <.for-preposition> <.the-determiner>? <.tag-type-phrase>? <tag-type-id> <.over-preposition> <.the-determiner>? <.tag-types-phrase>? <tag-type-ids-list> }
+
+    # Recommender algebra command
+    rule recommender-algebra-command { <annex-matrix-command> | <join-recommenders-command> | <remove-tag-types-commands> }
+    rule annex-matrix-command { <.annex-directive> <.the-determiner>? <.matrix-noun> <mat=.variable-name-or-wl-expr> [ <.with-preposition> <.tag-type-phrase> <tagtype=.mixed-quoted-variable-name-or-wl-expr> ]? }
+    rule join-recommenders-openning-phrase {
+        <.join-directive> <.the-determiner>? <.recommender-object-phrase> <.with-preposition> <.the-determiner>? <.recommender-object-phrase>? |
+        <.join-directive> <.the-determiner>? <.recommender-object-phrase>? <.with-preposition> <.the-determiner>? <.recommender-object-phrase> }
+    rule join-recommenders-command { <.join-recommenders-openning-phrase> <smr=.variable-name-or-wl-expr> [ <.using-preposition> <.join-type-phrase> <jointype=.mixed-quoted-variable-name-or-wl-expr> ]? }
+    rule remove-tag-types-commands { <.delete-directive> <.the-determiner>? <.tag-types-phrase> [ <tag-type-ids-list> | <wl-expr> ] }
 }
+

@@ -18,12 +18,21 @@ use DSL::English::RecommenderWorkflows::Grammar;
 #join across with dfTitanic by id column "id"',
 #        'R-SMRMon');
 
+#say ToRecommenderWorkflowCode('
+#DSL TARGET WL-SMRMon;
+#use smrObj;
+#recommend by profile Word:quantile, Symbol:nonlinearmodelfit; join across with dsNotebooksdata;
+#echo pipeline value',
+#        'R-SMRMon');
+
 say ToRecommenderWorkflowCode('
 DSL TARGET WL-SMRMon;
-use smrObj;
-recommend by profile Word:quantile, Symbol:nonlinearmodelfit; join across with dsNotebooksdata;
-echo pipeline value',
-        'R-SMRMon');
+create from dfTitanic;
+recommend by profile hr.12=3 and rr.12->4;
+join with recommender smrObj2 with join type "left";
+annex the matrix `smats[[1]]` using tag type "Gen2";
+remove tag types "Gen1", Gen3;
+');
 
 say "\n=======\n";
 

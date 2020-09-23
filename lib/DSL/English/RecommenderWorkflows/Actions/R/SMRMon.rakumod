@@ -246,6 +246,24 @@ class DSL::English::RecommenderWorkflows::Actions::R::SMRMon
   method make-metadata-recommender-simple($/) { make 'SMRMonMakeTagTypeRecommender( tagTypeTo = ' ~ $<tag-type-id>.made ~ ' )'; }
   method make-metadata-recommender-full($/) { make 'SMRMonMakeTagTypeRecommender( tagTypeTo = ' ~ $<tag-type-id>.made ~ ', tagTypes = ' ~ $<tag-type-ids-list>.made ~ ' )'; }
 
+  # Recommender algebra command
+  method recommender-algebra-command($/) { make $/.values[0].made; }
+  method annex-matrix-command($/) {
+    if $<tagtype> {
+      make 'SMRMonAnnexSubMatrix( newSubMat = ' ~ $<mat>.made ~ ', newTagType = ' ~ $<tagtype>.made ~ ' )';
+    } else {
+      make 'SMRMonAnnexSubMatrix( newSubMat = ' ~ $<mat>.made ~ ', newTagType = "NewType" )';
+    }
+  }
+  method join-recommenders-command($/) {
+    if $<jointype> {
+      make 'SMRJoin( smr2 = ' ~ $<smr>.made ~ ', joinType = '  ~ $<jointype>.made ~ ' )';
+    } else {
+      make 'SMRJoin( smr2 = ' ~ $<smr>.made ~ ' )';
+    }
+  }
+  method remove-tag-types-commands($/) { make 'SMRRemoveTagTypes( removeTagTypes = ' ~ $/.values[0].made ~ ' )'; }
+
   # Pipeline command overwrites
   ## Value
   method take-pipeline-value($/) { make 'SMRMonTakeValue()'; }
@@ -254,7 +272,7 @@ class DSL::English::RecommenderWorkflows::Actions::R::SMRMon
 
   ## Context
   method take-pipeline-context($/) { make 'SMRMonTakeContext()'; }
-  method echo-pipeline-context($/) { make 'SMRMonEchoContext'; }
+  method echo-pipeline-context($/) { make 'SMRMonEchoContext()'; }
   method echo-pipeline-function-context($/) { make 'SMRMonEchoFunctionContext( ' ~ $<pipeline-function-spec>.made ~ ' )'; }
 
   ## Echo messages
