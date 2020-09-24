@@ -273,6 +273,9 @@ class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon
   method remove-tag-types-commands($/) { make 'SMRMonRemoveTagTypes[ ' ~ $/.values[0].made ~ ' ]'; }
 
   # Pipeline command overwrites
+  ## Object
+  method assign-pipeline-object-to($/) { make 'SMRMonAssignTo[ ' ~ $/.values[0].made ~ ' ]'; }
+
   ## Value
   method take-pipeline-value($/) { make 'SMRMonTakeValue[]'; }
   method echo-pipeline-value($/) { make 'SMRMonEchoValue[]'; }
