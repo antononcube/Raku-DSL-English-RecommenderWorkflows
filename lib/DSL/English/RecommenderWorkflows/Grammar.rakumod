@@ -35,11 +35,8 @@
 =end comment
 
 use v6;
-unit module DSL::English::RecommenderWorkflows::Grammar;
 
 use DSL::Shared::Roles::ErrorHandling;
-use DSL::Shared::Roles::English::CommonParts;
-use DSL::Shared::Roles::English::PipelineCommand;
 use DSL::English::RecommenderWorkflows::Grammar::LSIApplyCommand;
 use DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases;
 
