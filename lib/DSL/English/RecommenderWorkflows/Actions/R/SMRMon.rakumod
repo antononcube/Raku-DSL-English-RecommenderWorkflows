@@ -269,6 +269,7 @@ class DSL::English::RecommenderWorkflows::Actions::R::SMRMon
   method assign-pipeline-object-to($/) { make 'function(x) { assign( x = "' ~ $/.values[0].made ~ '", value = x ); x }'; }
 
   ## Value
+  method assign-pipeline-value-to($/) { make 'function(x) { assign( x = "' ~ $/.values[0].made ~ '", value = SMRMonTakeValue(x) ); x }'; }
   method take-pipeline-value($/) { make 'SMRMonTakeValue()'; }
   method echo-pipeline-value($/) { make 'SMRMonEchoValue()'; }
   method echo-pipeline-funciton-value($/) { make 'SMRMonEchoFunctionValue( ' ~ $<pipeline-function-spec>.made ~ ' )'; }
