@@ -127,9 +127,9 @@ grammar DSL::English::RecommenderWorkflows::Grammar
     rule recommend-by-profile-command { <recommend-by-profile> | <top-profile-recommendations> | <top-recommendations-by-profile> }
     rule recommend-by-profile { <.recommend-directive>
                               [ <.using-preposition> | <.by-preposition> | <.for-preposition> ] <.the-determiner>? <.profile-slot>
-                              <profile-spec> }
+                              <.for-preposition>? <profile-spec> }
     rule top-profile-recommendations { <compute-directive> <.the-determiner>? <.most-relevant-phrase>? <integer-value>? <.profile-slot> <.recommendations> }
-    rule top-recommendations-by-profile { <top-recommendations>
+    rule top-recommendations-by-profile { <.top-recommendations>
                                         [ <.using-preposition> | <.by-preposition> | <.for-preposition> ] <.the-determiner>? <.profile-slot>
                                         <profile-spec> }
 
@@ -222,7 +222,7 @@ grammar DSL::English::RecommenderWorkflows::Grammar
 
     # Recommender algebra command
     rule recommender-algebra-command { <annex-matrix-command> | <join-recommenders-command> | <remove-tag-types-commands> }
-    rule annex-matrix-command { <.annex-directive> <.the-determiner>? <.matrix-noun> <mat=.variable-name-or-wl-expr> [ <.with-preposition> <.tag-type-phrase> <tagtype=.mixed-quoted-variable-name-or-wl-expr> ]? }
+    rule annex-matrix-command { <.annex-directive> <.the-determiner>? [ <.sub-matrix-phrase> | <.matrix> ] <mat=.variable-name-or-wl-expr> [ [ <.with-preposition> <.tag-type-phrase> | <.as-preposition> ] <tagtype=.mixed-quoted-variable-name-or-wl-expr> ]? }
     rule join-recommenders-openning-phrase {
         <.join-directive> <.the-determiner>? <.recommender-object-phrase> <.with-preposition> <.the-determiner>? <.recommender-object-phrase>? |
         <.join-directive> <.the-determiner>? <.recommender-object-phrase>? <.with-preposition> <.the-determiner>? <.recommender-object-phrase> }
