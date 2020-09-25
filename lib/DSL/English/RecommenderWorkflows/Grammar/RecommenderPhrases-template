@@ -80,6 +80,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
   rule recommender-object-phrase { <recommender> [ <object> | <system> ]? | 'smr' }
   rule sparse-matrix { <sparse-adjective> <matrix> }
   rule sub-matrices-phrase { 'sub-matrices' | <sub-prefix> <matrices> | <sub-prefix> <matrixes> }
+  rule sub-matrix-phrase { 'sub-matrix' | <sub-prefix> <matrix> }
   rule tag-type { 'tag' 'type' }
   rule tag-types { 'tag' 'types' }
 
