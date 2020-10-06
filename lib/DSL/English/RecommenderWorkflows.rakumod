@@ -15,7 +15,7 @@ interpretation of English natural speech commands that specify recommender workf
 
 unit module DSL::English::RecommenderWorkflows;
 
-use DSL::Shared::Utilities::MetaSpecifications;
+use DSL::Shared::Utilities::MetaSpecsProcessing;
 
 use DSL::English::RecommenderWorkflows::Grammar;
 use DSL::English::RecommenderWorkflows::Actions::Python::SMRMon;
