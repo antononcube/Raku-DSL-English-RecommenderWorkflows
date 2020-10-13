@@ -131,8 +131,8 @@ class DSL::English::RecommenderWorkflows::Actions::Python::SMRMon
   # Process recommendations command
   method extend-recommendations-command($/) { make $/.values[0].made; }
   method extend-recommendations-simple-command($/) {
-    if $<mixed-quoted-variable-name-or-wl-expr> {
-      make 'obj = SMRMonJoinAcross( smrObj = obj, data = ' ~ $<dataset-name>.made ~ ', by = ' ~ $<mixed-quoted-variable-name-or-wl-expr>.made ~ ' )';
+    if $<extension-data-id-column-spec> {
+      make 'obj = SMRMonJoinAcross( smrObj = obj, data = ' ~ $<dataset-name>.made ~ ', by = ' ~ $<extension-data-id-column-spec>.made ~ ' )';
     } else {
       make 'obj = SMRMonJoinAcross( smrObj = obj, data = ' ~ $<dataset-name>.made ~ ' )';
     }
