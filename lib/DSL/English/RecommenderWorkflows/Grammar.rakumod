@@ -158,11 +158,11 @@ grammar DSL::English::RecommenderWorkflows::Grammar
 
     # Classifications command
     rule classify-command { <classify-by-profile> | <classify-by-profile-rev> }
-    rule ntop-nns { [ 'top' ]? <integer-value> [ 'top' ]? <.nearest-neighbors> }
-    rule classify-by-profile { <.classify> <.the-determiner>? <.profile-slot>? <profile-spec>
+    rule ntop-nns { <.top-noun>? <integer-value> <.top-noun>? <.nearest-neighbors> }
+    rule classify-by-profile { <.classify-verb> [ <.by-preposition> | <.the-determiner> ]? <.profile-slot>? <profile-spec>
                              <.to-preposition> <.tag-type-phrase>? <tag-type-id>
                              [ <.using-preposition> <ntop-nns> ]? }
-    rule classify-by-profile-rev { <.classify> [ <.for-preposition> | <.to-preposition>] <.the-determiner>? <.tag-type-phrase>? <tag-type-id>
+    rule classify-by-profile-rev { <.classify-verb> [ <.for-preposition> | <.to-preposition>] <.the-determiner>? <.tag-type-phrase>? <tag-type-id>
                                  [ <.by-preposition> | <.for-preposition> | <.using-preposition> ]? <.the-determiner>? <.profile-slot>?
                                  <profile-spec>
                                  [ <.and-conjunction>? <.using-preposition>? <ntop-nns> ]? }
@@ -188,14 +188,14 @@ grammar DSL::English::RecommenderWorkflows::Grammar
     rule smr-matrix-property-spec-openning { <recommendation-matrix> | <sparse-matrix> | <matrix> }
     rule smr-matrix-property-spec { <.smr-matrix-property-spec-openning>? <smr-matrix-property> }
 
-    rule smr-sub-matrix-property-spec-openning { 'sub-matrix' | 'sub' <matrix> | <tag-type-phrase> }
+    rule smr-sub-matrix-property-spec-openning { 'sub-matrix' | <sub-prefix> <matrix> | <tag-type-phrase> }
     rule smr-sub-matrix-property-spec { <.smr-sub-matrix-property-spec-openning>? <tag-type-id> <smr-matrix-property> }
 
     rule smr-matrix-property { <columns> | <rows> | <dimensions> | <density> | <number-of-columns> | <number-of-rows> | <smr-property-id> | <properties> }
     rule number-of-columns { <number-of> <columns> }
     rule number-of-rows { <number-of> <rows> }
 
-    rule smr-filter-matrix { [ 'filter' | 'reduce' ] <.the-determiner>? <.smr-matrix-property-spec-openning>
+    rule smr-filter-matrix { [ <filter-verb> | <reduce-verb> ] <.the-determiner>? <.smr-matrix-property-spec-openning>
                            [ <.using-preposition> | <.with-preposition> | <.by-preposition> ] <.the-determiner>? <profile-slot>?
                            <profile-spec> }
 
