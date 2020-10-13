@@ -168,21 +168,21 @@ class DSL::English::RecommenderWorkflows::Actions::Python::SMRMon
   method smr-recommender-query($/) { make $<smr-property-spec>.made; }
   method smr-property-spec($/) { make $/.values[0].made; }
   method smr-context-property-spec($/) { make 'obj = SMRMonGetProperty( smrObj = ob, ' ~ $/.values[0].made ~ '); print( SMRMonEchoValue( smrObj = obj ) )'; }
-  method smr-recommendation-matrix($/) { make '\"sparseMatrix\"'; }
-  method smr-tag-types($/) { make '\"tagTypes\"'; }
-  method smr-item-column-name($/) { make '\"itemColumnName\"'; }
-  method smr-sub-matrices($/) { make '\"subMatrices\"'; }
+  method smr-recommendation-matrix($/) { make '"sparseMatrix"'; }
+  method smr-tag-types($/) { make '"tagTypes"'; }
+  method smr-item-column-name($/) { make '"itemColumnName"'; }
+  method smr-sub-matrices($/) { make '"subMatrices"'; }
   method smr-matrix-property-spec($/) { make 'obj = SMRMonGetMatrixProperty( smrObj = obj, ' ~ $<smr-matrix-property>.made ~ ', tagType = NULL ); print( SMRMonEchoValue( smrObj = obj ) )'; }
   method smr-sub-matrix-property-spec($/) { make 'obj = SMRMonGetMatrixProperty( smrObj = obj, ' ~ $<smr-matrix-property>.made ~ ', tagType = ' ~ $<tag-type-id>.made ~ ' ); print( SMRMonEchoValue( smrObj = obj ) )'; }
   method smr-matrix-property($/) { make $/.values[0].made(); }
-  method smr-property-id($/) { make '\"' ~ $/.Str ~ '\"'; }
-  method number-of-columns($/) { make '\"numberOfColumns\"'; }
-  method number-of-rows($/) { make '\"numberOfRows\"'; }
-  method rows($/) { make '\"rows\"'; }
-  method columns($/) { make '\"columns\"'; }
-  method dimensions($/) { make '\"dimensions\"'; }
-  method density($/) { make '\"density\"'; }
-  method properties($/) { make '\"properties\"';}
+  method smr-property-id($/) { make '"' ~ $/.Str ~ '"'; }
+  method number-of-columns($/) { make '"numberOfColumns"'; }
+  method number-of-rows($/) { make '"numberOfRows"'; }
+  method rows($/) { make '"rows"'; }
+  method columns($/) { make '"columns"'; }
+  method dimensions($/) { make '"dimensions"'; }
+  method density($/) { make '"density"'; }
+  method properties($/) { make '"properties"';}
 
   method smr-filter-matrix($/) { make 'obj = SMRMonFilterMatrix( smrObj = obj, profile = ' ~ $<profile-spec>.made ~ ')';  }
 

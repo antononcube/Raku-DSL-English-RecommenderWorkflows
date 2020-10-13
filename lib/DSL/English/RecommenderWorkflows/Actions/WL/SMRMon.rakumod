@@ -114,9 +114,9 @@ class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon
   method recommend-by-history($/) { make 'SMRMonRecommend[' ~ $<history-spec>.made ~ ']'; }
   method top-recommendations($/) {
     if $<integer-value> {
-      make 'SMRMonGetTopRecommendations[ \"Specification\" -> None, \"NumberOfRecommendations\" -> ' ~ $<integer-value>.made ~ ']';
+      make 'SMRMonGetTopRecommendations[ "Specification" -> None, "NumberOfRecommendations" -> ' ~ $<integer-value>.made ~ ']';
     } else {
-      make 'SMRMonGetTopRecommendations[ \"Specification\" -> None ]';
+      make 'SMRMonGetTopRecommendations[ "Specification" -> None ]';
     }
   }
   method top-recommendations-by-history($/) {
@@ -133,9 +133,9 @@ class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon
   method recommend-by-profile($/) { make 'SMRMonRecommendByProfile[' ~ $<profile-spec>.made ~ ']'; }
   method top-profile-recommendations($/) {
     if $<integer-value> {
-      make 'SMRMonGetTopRecommendations[ \"Specification\" -> None, \"NumberOfRecommendations\" -> ' ~ $<integer-value>.made ~ ']';
+      make 'SMRMonGetTopRecommendations[ "Specification" -> None, "NumberOfRecommendations" -> ' ~ $<integer-value>.made ~ ']';
     } else {
-      make 'SMRMonGetTopRecommendations[ \"Specification\" -> None ]';
+      make 'SMRMonGetTopRecommendations[ "Specification" -> None ]';
     }
   }
   method top-recommendations-by-profile($/) {
@@ -168,25 +168,25 @@ class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon
 
   method prove-by-metadata($/) {
     if ( $<profile-spec> && $<proof-item-spec> ) {
-      make 'SMRMonProveByMetadata[ \"Profile\" -> ' ~ $<profile-spec>.made ~ ', \"Items\" -> ' ~ $<proof-item-spec>.made ~ ']';
+      make 'SMRMonProveByMetadata[ "Profile" -> ' ~ $<profile-spec>.made ~ ', "Items" -> ' ~ $<proof-item-spec>.made ~ ']';
     } elsif ( $<profile-spec> ) {
-      make 'SMRMonProveByMetadata[ \"Profile\" -> ' ~ $<profile-spec>.made ~ ', \"Items\" -> Automatic ]';
+      make 'SMRMonProveByMetadata[ "Profile" -> ' ~ $<profile-spec>.made ~ ', "Items" -> Automatic ]';
     } elsif ( $<proof-item-spec> ) {
-      make 'SMRMonProveByMetadata[ \"Profile\" -> Automatic, \"Items\" -> ' ~ $<proof-item-spec>.made ~ ']';
+      make 'SMRMonProveByMetadata[ "Profile" -> Automatic, "Items" -> ' ~ $<proof-item-spec>.made ~ ']';
     } else {
-      make 'SMRMonProveByMetadata[ \"Profile\" -> Automatic, \"Items\" -> Automatic ]';
+      make 'SMRMonProveByMetadata[ "Profile" -> Automatic, "Items" -> Automatic ]';
     }
   }
 
   method prove-by-history($/) {
     if ( $<history-spec> && $<proof-item-spec> ) {
-      make 'SMRMonProveByHistory[ \"History\" -> ' ~ $<history-spec>.made ~ ', \"Items\" -> ' ~ $<proof-item-spec>.made ~ ']';
+      make 'SMRMonProveByHistory[ "History" -> ' ~ $<history-spec>.made ~ ', "Items" -> ' ~ $<proof-item-spec>.made ~ ']';
     } elsif ( $<profile-spec> ) {
-      make 'SMRMonProveByHistory[ \"History\" -> ' ~ $<history-spec>.made ~ ', \"Items\" -> Automatic ]';
+      make 'SMRMonProveByHistory[ "History" -> ' ~ $<history-spec>.made ~ ', "Items" -> Automatic ]';
     } elsif ( $<proof-item-spec> ) {
-      make 'SMRMonProveByHistory[ \"History\" -> Automatic, \"Items\" -> ' ~ $<proof-item-spec>.made ~ ']';
+      make 'SMRMonProveByHistory[ "History" -> Automatic, "Items" -> ' ~ $<proof-item-spec>.made ~ ']';
     } else {
-      make 'SMRMonProveByHistory[ \"History\" -> Automatic, \"Items\" -> Automatic ]';
+      make 'SMRMonProveByHistory[ "History" -> Automatic, "Items" -> Automatic ]';
     }
   }
 
@@ -194,16 +194,16 @@ class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon
   method classify-command($/) { make $/.values[0].made; }
   method classify-by-profile($/) {
     if $<ntop-nns> {
-      make 'SMRMonClassifyByProfile[ \"TagType\" -> ' ~ $<tag-type-id>.made ~ ', \"Profile\" -> ' ~ $<profile-spec>.made ~ ', \"NumberOfNearestNeighbors\" -> ' ~ $<ntop-nns>.made ~ ']';
+      make 'SMRMonClassifyByProfile[ "TagType" -> ' ~ $<tag-type-id>.made ~ ', "Profile" -> ' ~ $<profile-spec>.made ~ ', "NumberOfNearestNeighbors" -> ' ~ $<ntop-nns>.made ~ ']';
     } else {
-      make 'SMRMonClassifyByProfile[ \"TagType\" -> ' ~ $<tag-type-id>.made ~ ', \"Profile\" -> ' ~ $<profile-spec>.made ~ ']';
+      make 'SMRMonClassifyByProfile[ "TagType" -> ' ~ $<tag-type-id>.made ~ ', "Profile" -> ' ~ $<profile-spec>.made ~ ']';
     }
   }
   method classify-by-profile-rev($/) {
     if $<ntop-nns> {
-      make 'SMRMonClassify[ \"TagType\" -> ' ~ $<tag-type-id>.made ~ ', \"Profile\" -> ' ~ $<profile-spec>.made ~ ', \"NumberOfNearestNeighbors\" = ' ~ $<ntop-nns>.made ~ ']';
+      make 'SMRMonClassify[ "TagType" -> ' ~ $<tag-type-id>.made ~ ', "Profile" -> ' ~ $<profile-spec>.made ~ ', "NumberOfNearestNeighbors" = ' ~ $<ntop-nns>.made ~ ']';
     } else {
-      make 'SMRMonClassify[ \"TagType\" -> ' ~ $<tag-type-id>.made ~ ', \"Profile\" -> ' ~ $<profile-spec>.made ~ ']';
+      make 'SMRMonClassify[ "TagType" -> ' ~ $<tag-type-id>.made ~ ', "Profile" -> ' ~ $<profile-spec>.made ~ ']';
     }
   }
   method ntop-nns($/) { make $<integer-value>.Str; }
@@ -220,21 +220,21 @@ class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon
   method smr-recommender-query($/) { make $<smr-property-spec>.made; }
   method smr-property-spec($/) { make $/.values[0].made; }
   method smr-context-property-spec($/) { make 'SMRMonGetProperty[' ~ $/.values[0].made ~ '] ==> SMRMonEchoValue[]'; }
-  method smr-recommendation-matrix($/) { make '\"sparseMatrix\"'; }
-  method smr-tag-types($/) { make '\"tagTypes\"'; }
-  method smr-item-column-name($/) { make '\"itemColumnName\"'; }
-  method smr-sub-matrices($/) { make '\"subMatrices\"'; }
+  method smr-recommendation-matrix($/) { make '"sparseMatrix"'; }
+  method smr-tag-types($/) { make '"tagTypes"'; }
+  method smr-item-column-name($/) { make '"itemColumnName"'; }
+  method smr-sub-matrices($/) { make '"subMatrices"'; }
   method smr-matrix-property-spec($/) { make 'SMRMonGetMatrixProperty[' ~ $<smr-matrix-property>.made ~ ', tagType = NULL ] ==> SMRMonEchoValue[]'; }
   method smr-sub-matrix-property-spec($/) { make 'SMRMonGetMatrixProperty[' ~ $<smr-matrix-property>.made ~ ', tagType = ' ~ $<tag-type-id>.made ~ ' ] ==> SMRMonEchoValue[]'; }
   method smr-matrix-property($/) { make $/.values[0].made(); }
-  method smr-property-id($/) { make '\"' ~ $/.Str ~ '\"'; }
-  method number-of-columns($/) { make '\"numberOfColumns\"'; }
-  method number-of-rows($/) { make '\"numberOfRows\"'; }
-  method rows($/) { make '\"rows\"'; }
-  method columns($/) { make '\"columns\"'; }
-  method dimensions($/) { make '\"dimensions\"'; }
-  method density($/) { make '\"density\"'; }
-  method properties($/) { make '\"properties\"';}
+  method smr-property-id($/) { make '"' ~ $/.Str ~ '"'; }
+  method number-of-columns($/) { make '"numberOfColumns"'; }
+  method number-of-rows($/) { make '"numberOfRows"'; }
+  method rows($/) { make '"rows"'; }
+  method columns($/) { make '"columns"'; }
+  method dimensions($/) { make '"dimensions"'; }
+  method density($/) { make '"density"'; }
+  method properties($/) { make '"properties"';}
 
   method smr-filter-matrix($/) { make 'SMRMonFilterMatrix[' ~ $<profile-spec>.made ~ ']';  }
 
