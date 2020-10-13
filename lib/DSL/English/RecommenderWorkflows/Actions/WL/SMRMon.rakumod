@@ -153,8 +153,8 @@ class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon
   # Process recommendations command
   method extend-recommendations-command($/) { make $/.values[0].made; }
   method extend-recommendations-simple-command($/) {
-    if $<extension-data-id-column-spec> {
-      make 'SMRMonJoinAcross[' ~ $<dataset-name>.made ~ ', ' ~ $<extension-data-id-column-spec>.made ~ ' ]';
+    if $<mixed-quoted-variable-name-or-wl-expr> {
+      make 'SMRMonJoinAcross[' ~ $<dataset-name>.made ~ ', ' ~ $<mixed-quoted-variable-name-or-wl-expr>.made ~ ' ]';
     } else {
       make 'SMRMonJoinAcross[' ~ $<dataset-name>.made ~ ']';
     }

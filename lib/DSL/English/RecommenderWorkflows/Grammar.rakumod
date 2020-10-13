@@ -141,7 +141,7 @@ grammar DSL::English::RecommenderWorkflows::Grammar
     # Recommendations processing command
     rule extend-recommendations-command { <extend-recommendations-simple-command> }
     rule extend-recommendations-simple-command { <.extend-recommendations-phrase> <.with-preposition> <.the-determiner>? <.data>? <dataset-name> [ [ <.by-preposition> | <.on-preposition> ] <extension-data-id-column-spec> ]?  }
-    rule extension-data-id-column-spec { <.the-determiner>? [ <.identifier-noun> | <.id-noun> ]? <.column-noun>? <mixed-quoted-variable-name> }
+    rule extension-data-id-column-spec { <.the-determiner>? [ <.identifier-noun> | <.id-noun> ]? <.column-noun>? <mixed-quoted-variable-name-or-wl-expr> }
 
     # Prove command
     rule prove-recommendations-command { <prove-by-metadata> | <prove-by-history> }
