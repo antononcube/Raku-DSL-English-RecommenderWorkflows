@@ -3,7 +3,7 @@ use lib 'lib';
 use DSL::English::RecommenderWorkflows::Grammar;
 use Test;
 
-plan 17;
+plan 18;
 
 # Shortcut
 my $pSMRMONCOMMAND = DSL::English::RecommenderWorkflows::Grammar;
@@ -44,7 +44,7 @@ ok $pSMRMONCOMMAND.parse('prove by history the recommendation id.123'),
 
 
 #-----------------------------------------------------------
-# Recommendations processing commands
+# Extend recommendations
 #-----------------------------------------------------------
 
 ok $pSMRMONCOMMAND.parse('extend recommendations with dataset ds1'),
@@ -52,6 +52,9 @@ ok $pSMRMONCOMMAND.parse('extend recommendations with dataset ds1'),
 
 ok $pSMRMONCOMMAND.parse('extend recommendations with the dataset ds1 by "passenger"'),
         'extend recommendations with the dataset ds1 by "passenger"';
+
+ok $pSMRMONCOMMAND.parse('extend recommendations with the dataset ds1 by `PAS1`'),
+        'extend recommendations with the dataset ds1 by `PAS1`';
 
 ok $pSMRMONCOMMAND.parse('extend recommendations with the dataset ds1 by column passenger'),
         'extend recommendations with the dataset ds1 by column passenger';
@@ -64,6 +67,11 @@ ok $pSMRMONCOMMAND.parse('join recommendations with the dataset ds1 using the id
 
 ok $pSMRMONCOMMAND.parse('join recommendations with the dataset ds1 using the identifier column passenger'),
         'join recommendations with the dataset ds1 using the identifier column passenger';
+
+
+#-----------------------------------------------------------
+# Filter recommendations
+#-----------------------------------------------------------
 
 ok $pSMRMONCOMMAND.parse('filter recommendations with tag1 and tag2'),
         'filter recommendations with tag1 and tag2';
