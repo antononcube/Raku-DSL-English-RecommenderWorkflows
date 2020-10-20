@@ -77,7 +77,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
   rule recommendation-matrix { [ <recommendation> | <recommender> ]? <matrix> }
   rule recommendation-results { [ <recommendation> | <recommendations> | 'recommendation\'s' ] <results> }
   rule recommended-items { <recommended> <items-slot> | [ <recommendations> | <recommendation> ]  <.results>?  }
-  rule recommender-object-phrase { <recommender> [ <object> | <system> ]? | 'smr' }
+  rule recommender-object-phrase { <recommender> [ <object-noun> | <system> ]? | 'smr' }
   rule sparse-matrix { <sparse-adjective> <matrix> }
   rule sub-matrices-phrase { 'sub-matrices' | <sub-prefix> <matrices> | <sub-prefix> <matrixes> }
   rule sub-matrix-phrase { 'sub-matrix' | <sub-prefix> <matrix> }
