@@ -64,7 +64,7 @@ grammar DSL::English::RecommenderWorkflows::Grammar
         <make-metadata-recommender-command> }
 
     # Load data
-    rule data-load-command { <load-data> | <use-recommender> }
+    rule data-load-command { <use-recommender> | <load-data> }
     rule data-location-spec { <dataset-name> }
     rule load-data { <.load-data-directive> <data-location-spec> }
     rule use-recommender { [<.use-verb> | <.using-preposition>] <.the-determiner>? <.recommender-object-phrase>? <variable-name> }
@@ -174,7 +174,7 @@ grammar DSL::English::RecommenderWorkflows::Grammar
     # SMR query command
     rule smr-query-command { <smr-recommender-matrix-query>  | <smr-recommender-query> | <smr-filter-matrix> }
     rule smr-recommender-matrix-query { <display-directive> <.the-determiner>? <.smr-matrix-property-spec-openning> <smr-matrix-property-spec> }
-    rule smr-recommender-query { <display-directive> <.the-determiner>? <.recommender>? <smr-property-spec> }
+    rule smr-recommender-query { <display-directive> <.the-determiner>? <.recommender-noun>? <smr-property-spec> }
     rule smr-property-spec { <smr-context-property-spec> | <smr-matrix-property-spec> | <smr-sub-matrix-property-spec> }
 
     token smr-property-id { ([ \w | '-' | '_' | '.' | ':' | \d ]+) <!{ $0 eq 'and' || $0 eq 'pipeline' }> }
@@ -215,7 +215,7 @@ grammar DSL::English::RecommenderWorkflows::Grammar
 
     # Metadata recommender making command
     rule make-metadata-recommender-command { <make-metadata-recommender-full> | <make-metadata-recommender-simple> }
-    rule make-metadata-recommender-preamble { <create-directive> <a-determiner>? [ <metadata> | <tag-type-phrase> ] <recommender> }
+    rule make-metadata-recommender-preamble { <create-directive> <a-determiner>? [ <metadata> | <tag-type-phrase> ] <recommender-noun> }
     rule make-metadata-recommender-simple { <.make-metadata-recommender-preamble> <.for-preposition> <.the-determiner>? <.tag-type-phrase>? <tag-type-id> }
     rule make-metadata-recommender-full {
         <.make-metadata-recommender-preamble> <.for-preposition> <.the-determiner>? <.tag-type-phrase>? <tag-type-id> <.over-preposition> <.the-determiner>? <.tag-types-phrase>? <tag-type-ids-list> }
