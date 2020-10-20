@@ -58,7 +58,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token recommendation { 'recommendation' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'recommendation') }> }
     token recommendations { 'recommendations' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'recommendations') }> }
     token recommended { 'recommended' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'recommended') }> }
-    token recommender { 'recommender' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'recommender') }> }
+    token recommender-noun { 'recommender' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'recommender') }> }
     token row { 'row' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'row') }> }
     token rows { 'rows' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'rows') }> }
     token rownames { 'rownames' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'rownames') }> }
@@ -73,11 +73,11 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     rule history-phrase { [ <item-slot> ]? <history-slot> }
     rule most-relevant { 'most' 'relevant' }
     rule nearest-neighbors { <nearest> <neighbors> | 'nns' }
-    rule recommendation-matrices { [ <recommendation> | <recommender> ]? <matrices> }
-    rule recommendation-matrix { [ <recommendation> | <recommender> ]? <matrix> }
+    rule recommendation-matrices { [ <recommendation> | <recommender-noun> ]? <matrices> }
+    rule recommendation-matrix { [ <recommendation> | <recommender-noun> ]? <matrix> }
     rule recommendation-results { [ <recommendation> | <recommendations> | 'recommendation\'s' ] <results> }
     rule recommended-items { <recommended> <items-slot> | [ <recommendations> | <recommendation> ]  <.results>?  }
-    rule recommender-object-phrase { <recommender> [ <object-noun> | <system> ]? | 'smr' }
+    rule recommender-object-phrase { <recommender-noun> [ <object-noun> | <system-noun> ]? | 'smr' <object-noun>? }
     rule sparse-matrix { <sparse-adjective> <matrix> }
     rule sub-matrices-phrase { 'sub-matrices' | <sub-prefix> <matrices> | <sub-prefix> <matrixes> }
     rule sub-matrix-phrase { 'sub-matrix' | <sub-prefix> <matrix> }
