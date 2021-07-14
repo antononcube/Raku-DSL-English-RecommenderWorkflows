@@ -25,20 +25,26 @@ use DSL::English::RecommenderWorkflows::Actions::WL::SMRMon;
 my %targetToAction =
     "Python"           => DSL::English::RecommenderWorkflows::Actions::Python::SMRMon,
     "Python-SMRMon"    => DSL::English::RecommenderWorkflows::Actions::Python::SMRMon,
+    "Python::SMRMon"   => DSL::English::RecommenderWorkflows::Actions::Python::SMRMon,
     "R"                => DSL::English::RecommenderWorkflows::Actions::R::SMRMon,
     "R-SMRMon"         => DSL::English::RecommenderWorkflows::Actions::R::SMRMon,
+    "R::SMRMon"        => DSL::English::RecommenderWorkflows::Actions::R::SMRMon,
     "Mathematica"      => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon,
     "WL"               => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon,
-    "WL-SMRMon"        => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon;
+    "WL-SMRMon"        => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon,
+    "WL::SMRMon"       => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon;
 
 my %targetToSeparator{Str} =
     "R"                => " %>%\n",
     "R-SMRMon"         => " %>%\n",
+    "R::SMRMon"        => " %>%\n",
     "Mathematica"      => " ==>\n",
     "Python"           => "\n",
     "Python-SMRMon"    => "\n",
+    "Python::SMRMon"   => "\n",
     "WL"               => " ==>\n",
-    "WL-SMRMon"        => " ==>\n";
+    "WL-SMRMon"        => " ==>\n",
+    "WL::SMRMon"       => " ==>\n";
 
 
 #-----------------------------------------------------------
