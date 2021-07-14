@@ -44,8 +44,15 @@ grammar DSL::English::RecommenderWorkflows::Grammar
         does DSL::English::RecommenderWorkflows::Grammar::LSIApplyCommand
         does DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
         does DSL::Shared::Roles::ErrorHandling {
+
     # TOP
-    rule TOP {
+    rule TOP { <workflow-command> }
+
+    # Workflow commands list
+    rule workflow-commands-list { [ [ <.ws>? <workflow-command> <.ws>? ]+ % <.list-of-commands-separator> ] <.list-of-commands-separator>? }
+
+    # Workflow command
+    rule workflow-command {
         <pipeline-command> |
         <recommender-algebra-command> |
         <data-load-command> |
