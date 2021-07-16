@@ -272,7 +272,7 @@ class DSL::English::RecommenderWorkflows::Actions::R::SMRMon
 
   # Pipeline command overwrites
   ## Object
-  method assign-pipeline-object-to($/) { make '(function(x) { assign( x = "' ~ $/.values[0].made ~ '", value = x ); x })'; }
+  method assign-pipeline-object-to($/) { make '(function(x) { assign( x = "' ~ $/.values[0].made ~ '", value = x, envir = .GlobalEnv ); x })'; }
 
   ## Value
   method assign-pipeline-value-to($/) { make '(function(x) { assign( x = "' ~ $/.values[0].made ~ '", value = SMRMonTakeValue(x), envir = .GlobalEnv ); x })'; }
