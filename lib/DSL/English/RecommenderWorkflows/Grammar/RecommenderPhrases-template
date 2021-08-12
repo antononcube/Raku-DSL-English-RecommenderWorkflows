@@ -83,6 +83,8 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
   rule sub-matrix-phrase { 'sub-matrix' | <sub-prefix> <matrix> }
   rule tag-type { 'tag' 'type' }
   rule tag-types { 'tag' 'types' }
+  rule what-are-phrase { <what-pronoun> [ <are-verb> | <is-verb> ] }
+
 
   # LSA specific
   token analysis { 'analysis' }

@@ -3,7 +3,7 @@ use lib 'lib';
 use DSL::English::RecommenderWorkflows::Grammar;
 use Test;
 
-plan 7;
+plan 8;
 
 # Shortcut
 my $pSMRMONCOMMAND = DSL::English::RecommenderWorkflows::Grammar;
@@ -24,6 +24,9 @@ ok $pSMRMONCOMMAND.parse('compute profile for the item gog'),
 
 ok $pSMRMONCOMMAND.parse('compute recommendations'),
         'compute recommendations';
+
+ok $pSMRMONCOMMAND.parse('compute the recommendations'),
+        'compute the recommendations';
 
 ok $pSMRMONCOMMAND.parse('find profile for the history K-2108=3, K-2179=2, M-2292=1'),
         'find profile for the history K-2108=3, K-2179=2, M-2292=1';

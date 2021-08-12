@@ -123,7 +123,7 @@ grammar DSL::English::RecommenderWorkflows::Grammar
     rule recommend-by-history { <.recommend-directive>
                               [ <.using-preposition> | <.by-preposition> | <.for-preposition> ] <.the-determiner>? <.history-phrase>?
                               <history-spec> }
-    rule top-recommendations { <compute-directive> <.the-determiner>? <.most-relevant-phrase>? <integer-value>? <.recommendations> }
+    rule top-recommendations { [ <compute-directive> |  <what-are-phrase> ]? <.the-determiner>? <.most-relevant-phrase>? <integer-value>? <.most-relevant-phrase>? <.recommendations> }
     rule top-recommendations-by-history { <top-recommendations>
                                         [ <.using-preposition> | <.by-preposition> | <.for-preposition> ] <.the-determiner>? <.history-phrase>?
                                         <history-spec> }
@@ -135,7 +135,7 @@ grammar DSL::English::RecommenderWorkflows::Grammar
     rule recommend-by-profile { <.recommend-directive>
                               [ <.using-preposition> | <.by-preposition> | <.for-preposition> ] <.the-determiner>? <.profile-slot>
                               <.for-preposition>? <profile-spec> }
-    rule top-profile-recommendations { <compute-directive> <.the-determiner>? <.most-relevant-phrase>? <integer-value>? <.profile-slot> <.recommendations> }
+    rule top-profile-recommendations { [ <compute-directive> | <what-are-phrase> ]? <.the-determiner>? <.most-relevant-phrase>? <integer-value>? <.most-relevant-phrase>? <.profile-slot> <.recommendations> }
     rule top-recommendations-by-profile { <.top-recommendations>
                                         [ <.using-preposition> | <.by-preposition> | <.for-preposition> ] <.the-determiner>? <.profile-slot>
                                         <profile-spec> }

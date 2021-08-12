@@ -3,18 +3,20 @@ use lib '.';
 use DSL::English::RecommenderWorkflows;
 use DSL::English::RecommenderWorkflows::Grammar;
 
+use JSON::Marshal;
+
 # Shortcuts
 #-----------------------------------------------------------
 my $pCOMMAND = DSL::English::RecommenderWorkflows::Grammar;
 
-sub smr-parse( Str:D $command, Str:D :$rule = 'TOP' ) {
-        $pCOMMAND.parse($command, :$rule);
+sub smr-parse(Str:D $command, Str:D :$rule = 'TOP') {
+    $pCOMMAND.parse($command, :$rule);
 }
 
-sub smr-interpret( Str:D $command,
-                   Str:D:$rule = 'TOP',
-                   :$actions = DSL::English::RecommenderWorkflows::Actions::WL::SMRMon.new) {
-        $pCOMMAND.parse( $command, :$rule, :$actions ).made;
+sub smr-interpret(Str:D $command,
+                  Str:D:$rule = 'TOP',
+                  :$actions = DSL::English::RecommenderWorkflows::Actions::WL::SMRMon.new) {
+    $pCOMMAND.parse($command, :$rule, :$actions).made;
 }
 
 #----------------------------------------------------------
@@ -59,6 +61,11 @@ join across with dfMint by column ID;
 echo pipeline value;
 ');
 
+@commands = ('
+use recommender smrObj;
+recommend by profile Groceries;
+');
+
 my @targets = ('WL-SMRMon', 'R-SMRMon', 'Python-SMRMon');
 
 #for @commands -> $c {
@@ -72,9 +79,19 @@ my @targets = ('WL-SMRMon', 'R-SMRMon', 'Python-SMRMon');
 #    }
 #}
 
-#say smr-parse( @commands[0], rule => "workflow-commands-list" );
+my $pres = smr-parse(@commands[0], rule => "workflow-commands-list");
 
-say smr-interpret(
-        @commands[0],
-        rule => "workflow-commands-list",
-        actions => DSL::English::RecommenderWorkflows::Actions::R::SMRMon.new );
+say $pres;
+
+#my $res = smr-interpret(
+#        @commands[0],
+#        rule => "workflow-commands-list",
+#        actions => DSL::English::RecommenderWorkflows::Actions::R::SMRMon.new);
+#
+#say $res.raku;
+#
+#say $res.raku;
+
+#my $res2 = $res.
+
+#say marshal(%res);
