@@ -45,43 +45,40 @@ sub smr-interpret(Str:D $command,
 #assign pipeline value to smrObjNew;
 #');
 
-#my @commands = (
-#'create from dfTitanic;
-#recommend by profile hr.12=3 and rr.12->4;
-#classify to TagType1 the profile hr:12, hr:7;
-#classify by profile hr:12, hr:7 to tag type TagType2;
-#extend recommendations with dfData by "IDVAR";
-#echo value
+my @commands = (
+'create from dfTitanic;
+recommend by profile hr.12=3 and rr.12->4;
+recommend by history item.1=1 and item.2=0.3;
+classify to TagType1 the profile hr:12, hr:7;
+classify by profile hr:12, hr:7 to tag type TagType2;
+extend recommendations with dfData by "IDVAR";
+echo value;
+assign pipeline value to XXDF1;
+');
+
+#my @commands = ('
+#use recommender smrObj;
+#recommend by profile Groceries;
+#join across with dfMint by column ID;
+#echo pipeline value;
 #');
 
-my @commands = ('
-use recommender smrObj;
-recommend by profile Groceries;
-join across with dfMint by column ID;
-echo pipeline value;
-');
+my @targets = <WL-SMRMon R-SMRMon Python-SMRMon Raku-SBR>;
 
-@commands = ('
-use recommender smrObj;
-recommend by profile Groceries;
-');
+for @commands -> $c {
+    say "\n", '=' x 20;
+    say $c.trim;
+    for @targets -> $t {
+        say '-' x 20;
+        say $t.trim;
+        say '-' x 20;
+        say ToRecommenderWorkflowCode($c, $t);
+    }
+}
 
-my @targets = ('WL-SMRMon', 'R-SMRMon', 'Python-SMRMon');
-
-#for @commands -> $c {
-#    say "\n", '=' x 20;
-#    say $c.trim;
-#    for @targets -> $t {
-#        say '-' x 20;
-#        say $t.trim;
-#        say '-' x 20;
-#        say ToRecommenderWorkflowCode($c, $t);
-#    }
-#}
-
-my $pres = smr-parse(@commands[0], rule => "workflow-commands-list");
-
-say $pres;
+#my $pres = smr-parse(@commands[0], rule => "workflow-commands-list");
+#
+#say $pres;
 
 #my $res = smr-interpret(
 #        @commands[0],

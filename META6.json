@@ -16,6 +16,7 @@
     "DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases": "lib/DSL/English/RecommenderWorkflows/Grammar/RecommenderPhrases.rakumod",
     "DSL::English::RecommenderWorkflows::Actions::Python::SMRMon": "lib/DSL/English/RecommenderWorkflows/Actions/Python/SMRMon.rakumod",
     "DSL::English::RecommenderWorkflows::Actions::R::SMRMon": "lib/DSL/English/RecommenderWorkflows/Actions/R/SMRMon.rakumod",
+    "DSL::English::RecommenderWorkflows::Actions::Raku::SBR": "lib/DSL/English/RecommenderWorkflows/Actions/Raku/SBR.rakumod",
     "DSL::English::RecommenderWorkflows::Actions::WL::SMRMon": "lib/DSL/English/RecommenderWorkflows/Actions/WL/SMRMon.rakumod"
   },
   "depends": [

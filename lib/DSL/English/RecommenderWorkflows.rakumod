@@ -20,6 +20,7 @@ use DSL::Shared::Utilities::MetaSpecsProcessing;
 use DSL::English::RecommenderWorkflows::Grammar;
 use DSL::English::RecommenderWorkflows::Actions::Python::SMRMon;
 use DSL::English::RecommenderWorkflows::Actions::R::SMRMon;
+use DSL::English::RecommenderWorkflows::Actions::Raku::SBR;
 use DSL::English::RecommenderWorkflows::Actions::WL::SMRMon;
 
 my %targetToAction =
@@ -29,6 +30,9 @@ my %targetToAction =
     "R"                => DSL::English::RecommenderWorkflows::Actions::R::SMRMon,
     "R-SMRMon"         => DSL::English::RecommenderWorkflows::Actions::R::SMRMon,
     "R::SMRMon"        => DSL::English::RecommenderWorkflows::Actions::R::SMRMon,
+    "Raku"             => DSL::English::RecommenderWorkflows::Actions::Raku::SBR,
+    "Raku-SBR"         => DSL::English::RecommenderWorkflows::Actions::Raku::SBR,
+    "Raku::SBR"        => DSL::English::RecommenderWorkflows::Actions::Raku::SBR,
     "Mathematica"      => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon,
     "WL"               => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon,
     "WL-SMRMon"        => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon,
@@ -42,6 +46,9 @@ my %targetToSeparator{Str} =
     "Python"           => "\n",
     "Python-SMRMon"    => "\n",
     "Python::SMRMon"   => "\n",
+    "Raku"             => ";\n",
+    "Raku-SBR"         => ";\n",
+    "Raku::SBR"        => ";\n",
     "WL"               => " ==>\n",
     "WL-SMRMon"        => " ==>\n",
     "WL::SMRMon"       => " ==>\n";
