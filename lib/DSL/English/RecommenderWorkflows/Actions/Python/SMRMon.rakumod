@@ -228,4 +228,9 @@ class DSL::English::RecommenderWorkflows::Actions::Python::SMRMon
 
   ## Echo messages
   method echo-command($/) { make 'SMRMonEcho( ' ~ $<echo-message-spec>.made ~ ' )'; }
+
+  ## Setup code
+  method setup-code-command($/) {
+    make "print(\"Not implemented\")\n";
+  }
 }

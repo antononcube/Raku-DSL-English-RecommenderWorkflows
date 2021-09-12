@@ -295,4 +295,11 @@ class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon
 
   ## Echo messages
   method echo-command($/) { make 'SMRMonEcho[ ' ~ $<echo-message-spec>.made ~ ' ]'; }
+
+  ## Setup code
+  method setup-code-command($/) {
+    make q:to/SETUPEND/
+    Import["https://raw.githubusercontent.com/antononcube/MathematicaForPrediction/master/MonadicProgramming/MonadicSparseMatrixRecommender.m"];
+    SETUPEND
+  }
 }

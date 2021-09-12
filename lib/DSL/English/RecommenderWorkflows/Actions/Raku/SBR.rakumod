@@ -287,4 +287,12 @@ class DSL::English::RecommenderWorkflows::Actions::Raku::SBR
 
   ## Echo messages
   method echo-command($/) { make 'say ' ~ $<echo-message-spec>.made; }
+
+  ## Setup code
+  method setup-code-command($/) {
+    make q:to/SETUPEND/
+    use ML::StreamsBlendingRecommender;
+    use ML::StreamsBlendingRecommender::CoreSBR;
+    SETUPEND
+  }
 }

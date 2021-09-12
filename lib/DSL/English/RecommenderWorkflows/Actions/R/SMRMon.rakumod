@@ -287,4 +287,15 @@ class DSL::English::RecommenderWorkflows::Actions::R::SMRMon
 
   ## Echo messages
   method echo-command($/) { make 'SMRMonEcho( ' ~ $<echo-message-spec>.made ~ ' )'; }
+
+  ## Setup code
+  method setup-code-command($/) {
+    make q:to/SETUPEND/
+      #devtools::install_github(repo = "antononcube/R-packages", subdir = "SparseMatrixRecommender")
+      #devtools::install_github(repo = "antononcube/R-packages", subdir = "SMRMon-R")
+      library(magrittr)
+      library(SparseMatrixRecommender)
+      library(SMRMon)
+      SETUPEND
+  }
 }
