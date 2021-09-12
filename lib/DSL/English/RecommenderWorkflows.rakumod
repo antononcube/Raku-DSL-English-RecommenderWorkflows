@@ -42,16 +42,16 @@ my %targetToSeparator{Str} =
     "R"                => " %>%\n",
     "R-SMRMon"         => " %>%\n",
     "R::SMRMon"        => " %>%\n",
-    "Mathematica"      => " ==>\n",
+    "Mathematica"      => " \\[DoubleLongRightArrow]\n",
     "Python"           => "\n",
     "Python-SMRMon"    => "\n",
     "Python::SMRMon"   => "\n",
     "Raku"             => ";\n",
     "Raku-SBR"         => ";\n",
     "Raku::SBR"        => ";\n",
-    "WL"               => " ==>\n",
-    "WL-SMRMon"        => " ==>\n",
-    "WL::SMRMon"       => " ==>\n";
+    "WL"               => " \\[DoubleLongRightArrow]\n",
+    "WL-SMRMon"        => " \\[DoubleLongRightArrow]\n",
+    "WL::SMRMon"       => " \\[DoubleLongRightArrow]\n";
 
 
 #-----------------------------------------------------------
