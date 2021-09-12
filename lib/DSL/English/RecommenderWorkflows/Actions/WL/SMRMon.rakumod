@@ -50,7 +50,7 @@ class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon
   method TOP($/) { make $/.values[0].made; }
 
   # workflow-command-list
-  method workflow-commands-list($/) { make $/.values>>.made.join(" ==>\n"); }
+  method workflow-commands-list($/) { make $/.values>>.made.join(" \\[DoubleLongRightArrow]\n"); }
 
   # workflow-command
   method workflow-command($/) { make $/.values[0].made; }
