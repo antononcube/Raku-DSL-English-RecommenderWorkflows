@@ -1,21 +1,21 @@
 =begin pod
 
-=head1 RecommenderWorkflows
+=head1 DSL::English::RecommenderWorkflows
 
-C<RecommenderWorkflows> package has grammar classes and action classes for the parsing and
+C<DSL::English::RecommenderWorkflows> package has grammar classes and action classes for the parsing and
 interpretation of English natural speech commands that specify recommender workflows.
 
 =head1 Synopsis
 
-    use RecommenderWorkflows;
-    my $rcode = to_SMRMon_R("recommend for history r1->1, r2->2, and r3->5; explain the first recommendation");
-    my $wlcode = to_SMRMon_WL("recommend for history r1->1, r2->2, and r3->5; explain the first recommendation");
+    use DSL::English::RecommenderWorkflows;
+    my $gcode = ToRecommenderWorkflowCode("recommend for history r1->1, r2->2, and r3->5; explain the first recommendation");
+    my $rlcode = to_SMRMon_R("recommend for history r1->1, r2->2, and r3->5; explain the first recommendation");
 
 =end pod
 
 unit module DSL::English::RecommenderWorkflows;
 
-use DSL::Shared::Utilities::MetaSpecsProcessing;
+use DSL::Shared::Utilities::CommandProcessing;
 
 use DSL::English::RecommenderWorkflows::Grammar;
 use DSL::English::RecommenderWorkflows::Actions::Python::SMRMon;
@@ -23,7 +23,7 @@ use DSL::English::RecommenderWorkflows::Actions::R::SMRMon;
 use DSL::English::RecommenderWorkflows::Actions::Raku::SBR;
 use DSL::English::RecommenderWorkflows::Actions::WL::SMRMon;
 
-my %targetToAction =
+my %targetToAction{Str} =
     "Python"           => DSL::English::RecommenderWorkflows::Actions::Python::SMRMon,
     "Python-SMRMon"    => DSL::English::RecommenderWorkflows::Actions::Python::SMRMon,
     "Python::SMRMon"   => DSL::English::RecommenderWorkflows::Actions::Python::SMRMon,
@@ -38,7 +38,7 @@ my %targetToAction =
     "WL-SMRMon"        => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon,
     "WL::SMRMon"       => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon;
 
-my %targetToSeparator{Str} =
+my Str %targetToSeparator{Str} =
     "R"                => " %>%\n",
     "R-SMRMon"         => " %>%\n",
     "R::SMRMon"        => " %>%\n",
@@ -62,34 +62,14 @@ sub has-semicolon (Str $word) {
 #-----------------------------------------------------------
 proto ToRecommenderWorkflowCode(Str $command, Str $target = 'R-SMRMon' ) is export {*}
 
-multi ToRecommenderWorkflowCode ( Str $command where not has-semicolon($command), Str $target = 'R-SMRMon' ) {
+multi ToRecommenderWorkflowCode ( Str $command, Str $target = 'R-SMRMon' ) {
 
-    die 'Unknown target.' unless %targetToAction{$target}:exists;
+    DSL::Shared::Utilities::CommandProcessing::ToWorkflowCode( $command,
+                                                               grammar => DSL::English::RecommenderWorkflows::Grammar,
+                                                               :%targetToAction,
+                                                               :%targetToSeparator,
+                                                               :$target )
 
-    my $match = DSL::English::RecommenderWorkflows::Grammar.parse($command.trim, actions => %targetToAction{$target} );
-    die 'Cannot parse the given command.' unless $match;
-    return $match.made;
-}
-
-multi ToRecommenderWorkflowCode ( Str $command where has-semicolon($command), Str $target = 'R-SMRMon' ) {
-
-    my $specTarget = get-dsl-spec( $command, 'target');
-
-    $specTarget = $specTarget ?? $specTarget<DSLTARGET> !! $target;
-
-    die 'Unknown target.' unless %targetToAction{$specTarget}:exists;
-
-    my @commandLines = $command.trim.split(/ ';' \s* /);
-
-    @commandLines = grep { $_.Str.chars > 0 }, @commandLines;
-
-    my @cmdLines = map { ToRecommenderWorkflowCode($_, $specTarget) }, @commandLines;
-
-    @cmdLines = grep { $_.^name eq 'Str' }, @cmdLines;
-
-    my Str $res = @cmdLines.join( %targetToSeparator{$specTarget} ).trim;
-
-    return $res.subst( / ^^ \h* <{ '\'' ~ %targetToSeparator{$specTarget}.trim ~ '\'' }> \h* /, ''):g
 }
 
 #-----------------------------------------------------------
