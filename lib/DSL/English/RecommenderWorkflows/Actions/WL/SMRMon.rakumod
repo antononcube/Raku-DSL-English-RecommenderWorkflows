@@ -46,11 +46,14 @@ use DSL::Shared::Actions::English::WL::PipelineCommand;
 class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon
         is DSL::Shared::Actions::English::WL::PipelineCommand {
 
+  # Separator
+  method separator() { " \\[DoubleLongRightArrow]\n" }
+
   # Top
   method TOP($/) { make $/.values[0].made; }
 
   # workflow-command-list
-  method workflow-commands-list($/) { make $/.values>>.made.join(" \\[DoubleLongRightArrow]\n"); }
+  method workflow-commands-list($/) { make $/.values>>.made.join( self.separator() ); }
 
   # workflow-command
   method workflow-command($/) { make $/.values[0].made; }
@@ -225,13 +228,13 @@ class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon
 
   method smr-recommender-query($/) { make $<smr-property-spec>.made; }
   method smr-property-spec($/) { make $/.values[0].made; }
-  method smr-context-property-spec($/) { make 'SMRMonGetProperty[' ~ $/.values[0].made ~ '] ==> SMRMonEchoValue[]'; }
+  method smr-context-property-spec($/) { make 'SMRMonGetProperty[' ~ $/.values[0].made ~ '] ' ~ self.separator().trim ~ ' SMRMonEchoValue[]'; }
   method smr-recommendation-matrix($/) { make '"sparseMatrix"'; }
   method smr-tag-types($/) { make '"tagTypes"'; }
   method smr-item-column-name($/) { make '"itemColumnName"'; }
   method smr-sub-matrices($/) { make '"subMatrices"'; }
-  method smr-matrix-property-spec($/) { make 'SMRMonGetMatrixProperty[' ~ $<smr-matrix-property>.made ~ ', tagType = NULL ] ==> SMRMonEchoValue[]'; }
-  method smr-sub-matrix-property-spec($/) { make 'SMRMonGetMatrixProperty[' ~ $<smr-matrix-property>.made ~ ', tagType = ' ~ $<tag-type-id>.made ~ ' ] ==> SMRMonEchoValue[]'; }
+  method smr-matrix-property-spec($/) { make 'SMRMonGetMatrixProperty[' ~ $<smr-matrix-property>.made ~ ', tagType = NULL ] ' ~ self.separator().trim ~ ' SMRMonEchoValue[]'; }
+  method smr-sub-matrix-property-spec($/) { make 'SMRMonGetMatrixProperty[' ~ $<smr-matrix-property>.made ~ ', tagType = ' ~ $<tag-type-id>.made ~ ' ] ' ~ self.separator().trim ~ ' SMRMonEchoValue[]'; }
   method smr-matrix-property($/) { make $/.values[0].made(); }
   method smr-property-id($/) { make '"' ~ $/.Str ~ '"'; }
   method number-of-columns($/) { make '"numberOfColumns"'; }
@@ -251,9 +254,9 @@ class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon
   method proximity-anomalies-spec-list($/) { make $<proximity-anomalies-spec>>>.made.join(', '); }
   method proximity-anomalies-spec($/) { make $/.values[0].made; }
   method proximity-anomalies-nns-spec($/) { make '"NumberOfNearestNeighbors" ->' ~ $<integer-value>.made; }
-  method proximity-anomalies-aggr-func-spec($/) { make '"AggregationFunction" ->' ~ $<variable-name>.made; }
-  method proximity-anomalies-outlier-identifier-spec($/) { make '"OutlierIdentifier" -> ' ~ $<variable-name>.made; }
-  method proximity-anomalies-property-spec($/) { make '"Property" -> "' ~ $<variable-name>.made ~ '"'; }
+  method proximity-anomalies-aggr-func-spec($/) { make '"AggregationFunction" ->' ~ $<variable-name>.made;}
+  method proximity-anomalies-outlier-identifier-spec($/) { make '"OutlierIdentifier" -> ' ~ $<variable-name>.made;}
+  method proximity-anomalies-property-spec($/) { make '"Property" -> "' ~ $<variable-name>.made ~ '"';}
 
   # Make metadata recommender command
   method make-metadata-recommender-command($/) { make $/.values[0].made; }
@@ -298,7 +301,7 @@ class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon
 
   ## Setup code
   method setup-code-command($/) {
-    make q:to/SETUPEND/
+    make 'SETUPCODE' => q:to/SETUPEND/
     Import["https://raw.githubusercontent.com/antononcube/MathematicaForPrediction/master/MonadicProgramming/MonadicSparseMatrixRecommender.m"];
     SETUPEND
   }

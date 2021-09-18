@@ -49,11 +49,14 @@ use DSL::Shared::Actions::English::Python::PipelineCommand;
 class DSL::English::RecommenderWorkflows::Actions::Python::SMRMon
         is DSL::Shared::Actions::English::Python::PipelineCommand {
 
+  # Separator
+  method separator() { "\n" }
+
   # Top
   method TOP($/) { make $/.values[0].made; }
 
   # workflow-command-list
-  method workflow-commands-list($/) { make $/.values>>.made.join("\n"); }
+  method workflow-commands-list($/) { make $/.values>>.made.join( self.separator() ); }
 
   # workflow-command
   method workflow-command($/) { make $/.values[0].made; }
@@ -231,6 +234,6 @@ class DSL::English::RecommenderWorkflows::Actions::Python::SMRMon
 
   ## Setup code
   method setup-code-command($/) {
-    make "print(\"Not implemented\")\n";
+    make 'SETUPCODE' => "print(\"Not implemented\")\n";
   }
 }

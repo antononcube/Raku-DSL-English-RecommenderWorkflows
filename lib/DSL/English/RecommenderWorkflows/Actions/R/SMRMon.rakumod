@@ -46,11 +46,14 @@ use DSL::Shared::Actions::English::R::PipelineCommand;
 class DSL::English::RecommenderWorkflows::Actions::R::SMRMon
         is DSL::Shared::Actions::English::R::PipelineCommand {
 
+  # Separator
+  method separator() { " %>%\n" }
+
   # Top
   method TOP($/) { make $/.values[0].made; }
 
   # workflow-command-list
-  method workflow-commands-list($/) { make $/.values>>.made.join(" %>%\n"); }
+  method workflow-commands-list($/) { make $/.values>>.made.join( self.separator() ); }
 
   # workflow-command
   method workflow-command($/) { make $/.values[0].made; }
@@ -226,13 +229,13 @@ class DSL::English::RecommenderWorkflows::Actions::R::SMRMon
   method smr-recommender-matrix-query($/) { make $<smr-matrix-property-spec>.made; }
 
   method smr-property-spec($/) { make $/.values[0].made; }
-  method smr-context-property-spec($/) { make 'SMRMonGetProperty(' ~ $/.values[0].made ~ ') %>% SMRMonEchoValue()'; }
+  method smr-context-property-spec($/) { make 'SMRMonGetProperty(' ~ $/.values[0].made ~ ') ' ~ self.separator().trim ~ ' SMRMonEchoValue()'; }
   method smr-recommendation-matrix($/) { make '"sparseMatrix"'; }
   method smr-tag-types($/) { make '"tagTypes"'; }
   method smr-item-column-name($/) { make '"itemColumnName"'; }
   method smr-sub-matrices($/) { make '"subMatrices"'; }
-  method smr-matrix-property-spec($/) { make 'SMRMonGetMatrixProperty(' ~ $<smr-matrix-property>.made ~ ', tagType = NULL ) %>% SMRMonEchoValue()'; }
-  method smr-sub-matrix-property-spec($/) { make 'SMRMonGetMatrixProperty(' ~ $<smr-matrix-property>.made ~ ', tagType = ' ~ $<tag-type-id>.made ~ ' ) %>% SMRMonEchoValue()'; }
+  method smr-matrix-property-spec($/) { make 'SMRMonGetMatrixProperty(' ~ $<smr-matrix-property>.made ~ ', tagType = NULL ) ' ~ self.separator().trim ~ ' SMRMonEchoValue()'; }
+  method smr-sub-matrix-property-spec($/) { make 'SMRMonGetMatrixProperty(' ~ $<smr-matrix-property>.made ~ ', tagType = ' ~ $<tag-type-id>.made ~ ' ) ' ~ self.separator().trim ~ ' SMRMonEchoValue()'; }
   method smr-matrix-property($/) { make $/.values[0].made(); }
   method smr-property-id($/) { make '"' ~ $/.Str ~ '"'; }
   method number-of-columns($/) { make '"numberOfColumns"'; }
@@ -290,7 +293,7 @@ class DSL::English::RecommenderWorkflows::Actions::R::SMRMon
 
   ## Setup code
   method setup-code-command($/) {
-    make q:to/SETUPEND/
+    make 'SETUPCODE' => q:to/SETUPEND/
       #devtools::install_github(repo = "antononcube/R-packages", subdir = "SparseMatrixRecommender")
       #devtools::install_github(repo = "antononcube/R-packages", subdir = "SMRMon-R")
       library(magrittr)
