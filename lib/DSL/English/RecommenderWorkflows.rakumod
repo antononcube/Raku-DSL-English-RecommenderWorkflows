@@ -53,22 +53,17 @@ my Str %targetToSeparator{Str} =
     "WL-SMRMon"        => " \\[DoubleLongRightArrow]\n",
     "WL::SMRMon"       => " \\[DoubleLongRightArrow]\n";
 
-
 #-----------------------------------------------------------
-sub has-semicolon (Str $word) {
-    return defined index $word, ';';
-}
+proto ToRecommenderWorkflowCode(Str $command, Str $target = 'R-SMRMon', | ) is export {*}
 
-#-----------------------------------------------------------
-proto ToRecommenderWorkflowCode(Str $command, Str $target = 'R-SMRMon' ) is export {*}
-
-multi ToRecommenderWorkflowCode ( Str $command, Str $target = 'R-SMRMon' ) {
+multi ToRecommenderWorkflowCode ( Str $command, Str $target = 'R-SMRMon', *%args ) {
 
     DSL::Shared::Utilities::CommandProcessing::ToWorkflowCode( $command,
                                                                grammar => DSL::English::RecommenderWorkflows::Grammar,
                                                                :%targetToAction,
                                                                :%targetToSeparator,
-                                                               :$target )
+                                                               :$target,
+                                                               |%args )
 
 }
 
