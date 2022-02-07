@@ -1,7 +1,7 @@
 =begin comment
 #==============================================================================
 #
-#   SMRMon-WL actions in Raku Perl 6
+#   WL-SMRMon actions in Raku Perl 6
 #   Copyright (C) 2019  Anton Antonov
 #
 #   This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,7 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #   Written by Anton Antonov,
-#   antononcube @ gmai l . c om,
+#   ʇǝu˙oǝʇsod@ǝqnɔuouoʇuɐ
 #   Windermere, Florida, USA.
 #
 #==============================================================================
