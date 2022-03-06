@@ -26,32 +26,30 @@ use DSL::English::RecommenderWorkflows::Actions::WL::SMRMon;
 my %targetToAction{Str} =
     "Python"           => DSL::English::RecommenderWorkflows::Actions::Python::SMRMon,
     "Python-SMRMon"    => DSL::English::RecommenderWorkflows::Actions::Python::SMRMon,
-    "Python::SMRMon"   => DSL::English::RecommenderWorkflows::Actions::Python::SMRMon,
     "R"                => DSL::English::RecommenderWorkflows::Actions::R::SMRMon,
     "R-SMRMon"         => DSL::English::RecommenderWorkflows::Actions::R::SMRMon,
-    "R::SMRMon"        => DSL::English::RecommenderWorkflows::Actions::R::SMRMon,
     "Raku"             => DSL::English::RecommenderWorkflows::Actions::Raku::SBR,
     "Raku-SBR"         => DSL::English::RecommenderWorkflows::Actions::Raku::SBR,
-    "Raku::SBR"        => DSL::English::RecommenderWorkflows::Actions::Raku::SBR,
     "Mathematica"      => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon,
     "WL"               => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon,
-    "WL-SMRMon"        => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon,
-    "WL::SMRMon"       => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon;
+    "WL-SMRMon"        => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon;
+
+my %targetToAction2{Str} = %targetToAction.grep({ $_.key.contains('-') }).map({ $_.key.subst('-', '::') => $_.value }).Hash;
+%targetToAction = |%targetToAction , |%targetToAction2;
 
 my Str %targetToSeparator{Str} =
     "R"                => " %>%\n",
     "R-SMRMon"         => " %>%\n",
-    "R::SMRMon"        => " %>%\n",
     "Mathematica"      => " \\[DoubleLongRightArrow]\n",
-    "Python"           => "\n",
-    "Python-SMRMon"    => "\n",
-    "Python::SMRMon"   => "\n",
+    "Python"           => "",
+    "Python-SMRMon"    => "",
     "Raku"             => ";\n",
     "Raku-SBR"         => ";\n",
-    "Raku::SBR"        => ";\n",
     "WL"               => " \\[DoubleLongRightArrow]\n",
-    "WL-SMRMon"        => " \\[DoubleLongRightArrow]\n",
-    "WL::SMRMon"       => " \\[DoubleLongRightArrow]\n";
+    "WL-SMRMon"        => " \\[DoubleLongRightArrow]\n";
+
+my Str %targetToSeparator2{Str} = %targetToSeparator.grep({ $_.key.contains('-') }).map({ $_.key.subst('-', '::') => $_.value }).Hash;
+%targetToSeparator = |%targetToSeparator , |%targetToSeparator2;
 
 #-----------------------------------------------------------
 proto ToRecommenderWorkflowCode(Str $command, Str $target = 'R-SMRMon', | ) is export {*}
