@@ -20,6 +20,7 @@ use DSL::Shared::Utilities::CommandProcessing;
 use DSL::English::RecommenderWorkflows::Grammar;
 use DSL::English::RecommenderWorkflows::Actions::Python::SMRMon;
 use DSL::English::RecommenderWorkflows::Actions::R::SMRMon;
+use DSL::English::RecommenderWorkflows::Actions::R::tidyverse;
 use DSL::English::RecommenderWorkflows::Actions::Raku::SBR;
 use DSL::English::RecommenderWorkflows::Actions::WL::SMRMon;
 
@@ -28,6 +29,7 @@ my %targetToAction{Str} =
     "Python-SMRMon"    => DSL::English::RecommenderWorkflows::Actions::Python::SMRMon,
     "R"                => DSL::English::RecommenderWorkflows::Actions::R::SMRMon,
     "R-SMRMon"         => DSL::English::RecommenderWorkflows::Actions::R::SMRMon,
+    "R-tidyverse"      => DSL::English::RecommenderWorkflows::Actions::R::tidyverse,
     "Raku"             => DSL::English::RecommenderWorkflows::Actions::Raku::SBR,
     "Raku-SBR"         => DSL::English::RecommenderWorkflows::Actions::Raku::SBR,
     "Mathematica"      => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon,
@@ -40,6 +42,7 @@ my %targetToAction2{Str} = %targetToAction.grep({ $_.key.contains('-') }).map({ 
 my Str %targetToSeparator{Str} =
     "R"                => " %>%\n",
     "R-SMRMon"         => " %>%\n",
+    "R-tidyverse"      => " %>%\n",
     "Mathematica"      => " \\[DoubleLongRightArrow]\n",
     "Python"           => "",
     "Python-SMRMon"    => "",
