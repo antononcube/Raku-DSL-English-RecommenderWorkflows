@@ -9,119 +9,109 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
 
   token word-spec { \w+ }
 
-  # Proto tokens
-  token recommend-slot { 'recommend' | 'suggest' }
-
-  proto token item-slot { * }
-  token item-slot:sym<item> { 'item' }
-
-  proto token items-slot { * }
-  token items-slot:sym<items> { 'items' }
-
-  proto token consumption-slot { * }
-  token consumption-slot:sym<consumption> { 'consumption' }
-
-  proto token history-slot { * }
-  token history-slot:sym<history> { 'history' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'history' ) }> }
-
-  proto token profile-slot { * }
-  token profile-slot:sym<profile> { 'profile' | ([\w]+) <?{ is-fuzzy-match( $0.Str, 'profile' ) }> }
-
-
   # Regular tokens / rules
-  token aggregate { 'aggregate' }
-  token aggregation { 'aggregation' }
-  token anomalies { 'anomalies' }
-  token anomaly { 'anomaly' }
-  token colnames { 'colnames' }
-  token column { 'column' }
-  token columns { 'columns' }
-  token density  { 'density' }
-  token dimensions { 'dimensions' }
-  token explain { 'explain' }
-  token explanations { 'explanation' | 'explanations' }
-  token function { 'function' }
-  token identifier { 'identifier' }
-  token matrices { 'matrices' }
-  token matrix { 'matrix' }
-  token matrixes { 'matrixes' }
-  token metadata {'metadata' }
-  token nearest { 'nearest' }
-  token neighbors { 'neighbors' }
-  token outlier { 'outlier' }
-  token outliers { 'outliers' | 'outlier' }
-  token properties { 'properties' }
-  token property { 'property' }
-  token proofs { 'proof' | 'proofs' }
-  token prove { 'prove' }
-  token proximity { 'proximity' }
-  token recommend-directive { <recommend-slot> }
-  token recommendation { 'recommendation' }
-  token recommendations { 'recommendations' }
-  token recommended { 'recommended' }
-  token recommender { 'recommender' }
-  token row { 'row' }
-  token rows { 'rows' }
-  token rownames { 'rownames' }
-  token threshold { 'threshold' }
+  token aggregate-verb { 'aggregate' }
+  token aggregation-noun { 'aggregation' }
+  token anomalies-noun { 'anomalies' }
+  token anomaly-noun { 'anomaly' }
+  token colnames-noun { 'colnames' }
+  token column-noun { 'column' }
+  token columns-noun { 'columns' }
+  token consumption-noun { 'consumption' }
+  token density-noun { 'density' }
+  token dimensions-noun { 'dimensions' }
+  token explain-verb { 'explain' }
+  token explanations-noun { 'explanation' | 'explanations' }
+  token function-noun { 'function' }
+  token history-noun { 'history' }
+  token item-noun { 'item' }
+  token items-noun { 'items' }
+  token matrices-noun { 'matrices' }
+  token matrix-noun { 'matrix' }
+  token matrixes-noun { 'matrixes' }
+  token metadata-noun {'metadata' }
+  token most-determiner { 'most' }
+  token nearest-adjective { 'nearest' }
+  token neighbors-noun { 'neighbors' }
+  token outlier-noun { 'outlier' }
+  token outliers-noun { 'outliers' | 'outlier' }
+  token profile-noun { 'profile' }
+  token proofs-noun { 'proof' | 'proofs' }
+  token properties-noun { 'properties' }
+  token property-noun { 'property' }
+  token prove-verb { 'prove' }
+  token proximity-noun { 'proximity' }
+  token recommend-directive { <recommend-verb> }
+  token recommend-verb { 'recommend' | 'suggest' }
+  token recommendation-noun { 'recommendation' }
+  token recommendations-noun { 'recommendations' }
+  token recommended-adjective { 'recommended' }
+  token recommender-noun { 'recommender' }
+  token relevant-adjective { 'relevant' }
+  token row-noun { 'row' }
+  token rownames-noun { 'rownames' }
+  token rows-noun { 'rows' }
+  token tag-adjective { <tag-noun> }
+  token tag-noun { 'tag' }
+  token threshold-noun { 'threshold' }
+  token type-noun { 'type' }
+  token types-noun { 'types' }
+  token sub-matrix-noun { 'sub' \h+ '-' \h+ <matrix-noun> }
+  token sub-matrices-noun { 'sub' \h+ '-' \h+ <matrices-noun> }
 
-  rule prove-directive { <prove> | <explain> }
-  rule consumption-history { <consumption-slot>? <history-slot> }
-  rule consumption-profile { <consumption-slot>? 'profile' }
+  rule prove-directive { <prove-verb> | <explain-verb> }
+  rule consumption-history { <consumption-slot>? <history-noun> }
+  rule consumption-profile { <consumption-slot>? <profile-noun> }
   rule cross-tabulate-phrase { 'cross' [ 'tabulate' | 'tabulation' ] }
-  rule extend-recommendations-phrase { [ <extend-verb> | 'join' 'across'? ] <recommendations>? }
-  rule history-phrase { [ <item-slot> ]? <history-slot> }
-  rule most-relevant { 'most' 'relevant' }
-  rule nearest-neighbors { <nearest> <neighbors> | 'nns' }
-  rule recommendation-matrices { [ <recommendation> | <recommender-noun> ]? <matrices> }
-  rule recommendation-matrix { [ <recommendation> | <recommender-noun> ]? <matrix> }
-  rule recommendation-results { [ <recommendation> | <recommendations> | 'recommendation\'s' ] <results> }
-  rule recommended-items { <recommended> <items-slot> | [ <recommendations> | <recommendation> ]  <.results>?  }
+  rule extend-recommendations-phrase { [ <extend-verb> | <join-verb> 'across'? ] <recommendations-noun>? }
+  rule history-phrase { [ <item-noun> ]? <history-noun> }
+  rule most-relevant { <most-determiner> <relevant-adjective> }
+  rule nearest-neighbors { <nearest-adjective> <neighbors-noun> | 'nns' }
+  rule recommendation-matrices { [ <recommendation-noun> | <recommender-noun> ]? <matrices-noun> }
+  rule recommendation-matrix { [ <recommendation-noun> | <recommender-noun> ]? <matrix-noun> }
+  rule recommendation-results { [ <recommendation-noun> | <recommendations-noun> | 'recommendation\'s' ] <results> }
+  rule recommended-items { <recommended-adjective> <items-slot> | [ <recommendations-noun> | <recommendation-noun> ]  <.results>?  }
   rule recommender-object-phrase { <recommender-noun> [ <object-noun> | <system-noun> ]? | 'smr' }
-  rule sparse-matrix { <sparse-adjective> <matrix> }
-  rule sub-matrices-phrase { 'sub-matrices' | <sub-prefix> <matrices> | <sub-prefix> <matrixes> }
-  rule sub-matrix-phrase { 'sub-matrix' | <sub-prefix> <matrix> }
-  rule tag-type { 'tag' 'type' }
-  rule tag-types { 'tag' 'types' }
+  rule sparse-matrix { <sparse-adjective> <matrix-noun> }
+  rule sub-matrices-phrase { <sub-matrices-noun> | <sub-prefix> <matrices-noun> | <sub-prefix> <matrixes-noun> }
+  rule sub-matrix-phrase { <sub-matrix-noun> | <sub-prefix> <matrix-noun> }
+  rule tag-type-phrase { [ <tag-noun> | <tag-adjective> ] <type-noun> }
+  rule tag-types-phrase { [ <tag-noun> | <tag-adjective> ] <types-noun> }
   rule what-are-phrase { <what-pronoun> [ <are-verb> | <is-verb> ] }
 
 
   # LSA specific
-  token analysis { 'analysis' }
-  token document { 'document' }
-  token entries { 'entries' }
-  # token identifier { 'identifier' }
-  token indexing { 'indexing' }
-  token ingest { 'ingest' | 'load' | 'use' | 'get' }
-  token item { 'item' } # For some reason using <item> below gives the error: "Too many positionals passed; expected 1 argument but got 2".
-  token latent { 'latent' }
-  # token matrix { 'matrix' }
-  token semantic { 'semantic' }
-  token term { 'term' }
-  # token threshold { 'threshold' }
-  token weight { 'weight' }
-  token word { 'word' }
+  token analysis-noun { 'analysis' }
+  token document-noun { 'document' }
+  token entries-noun { 'entries' }
+  token indexing-noun { 'indexing' }
+  token ingest-verb { 'ingest' | 'load' | 'use' | 'get' }
+  token latent-adjective { 'latent' }
+  token semantic-adjective { 'semantic' }
+  token term-noun { 'term' }
+  token weight-noun { 'weight' }
+  token word-noun { 'word' }
 
-  rule doc-term-mat { [ <document> | 'item' ] [ <term> | <word> ] <matrix> }
-  rule lsa-object { <lsa-phrase>? 'object' }
-  rule lsa-phrase { <latent> <semantic> <analysis> | 'lsa' | 'LSA' }
-  rule lsi-phrase { <latent> <semantic> <indexing> | 'lsi' | 'LSI' }
-  rule matrix-entries { [ <doc-term-mat> | <matrix> ]? <entries> }
+  rule doc-term-mat { [ <document-noun> | <item-noun> ] [ <term-noun> | <word-noun> ] <matrix-noun> }
+  rule lsa-object { <lsa-phrase>? <object-noun> }
+  rule lsa-phrase { <latent-adjective> <semantic-adjective> <analysis-noun> | 'lsa' | 'LSA' }
+  rule lsi-phrase { <latent-adjective> <semantic-adjective> <indexing-noun> | 'lsi' | 'LSI' }
+  rule matrix-entries { [ <doc-term-mat> | <matrix-noun> ]? <entries-noun> }
   rule the-outliers { <the-determiner> <outliers> }
 
   # LSI specific
-  token frequency { 'frequency' }
-  # token function { 'function' }
-  token functions { 'function' | 'functions' }
-  token global { 'global' }
-  token local { 'local' }
-  token normalization { 'normalization' }
-  token normalizer { 'normalizer' }
-  token normalizing { 'normalizing' }
+  token frequency-noun { 'frequency' }
+  token functions-noun { 'function' | 'functions' }
+  token global-adjective { 'global' }
+  token inverse-adjective { 'inverse' }
+  token local-adjective { 'local' }
+  token normalization-noun { 'normalization' }
+  token normalizer-noun { 'normalizer' }
+  token normalizing-noun { 'normalizing' }
 
-  rule global-function-phrase { <global> <term> ?<weight>? <function> }
+  rule global-function-phrase { <global-adjective> <term-noun> ?<weight-noun>? <function-noun> }
   rule join-type-phrase { <join-verb>? <type-noun> }
-  rule local-function-phrase { <local> <term>? <weight>? <function> }
-  rule normalizer-function-phrase { [ <normalizer> | <normalizing> | <normalization> ] <term>? <weight>? <function>? }
+  rule local-function-phrase { <local-adjective> <term-noun>? <weight-noun>? <function-noun> }
+  rule normalizer-function-phrase { [ <normalizer-noun> | <normalizing-noun> | <normalization-noun> ] <term-noun>? <weight-noun>? <function-noun>? }
 
 }
