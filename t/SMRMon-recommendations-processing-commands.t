@@ -1,5 +1,5 @@
 use v6;
-use lib 'lib';
+
 use DSL::English::RecommenderWorkflows::Grammar;
 use Test;
 

@@ -1,5 +1,5 @@
 use v6;
-use lib 'lib';
+
 use DSL::English::RecommenderWorkflows::Grammar;
 use Test;
 
@@ -34,7 +34,7 @@ ok $pSMRMONCOMMAND.parse('find profile for the history K-2108=3, K-2179=2, M-229
 ok $pSMRMONCOMMAND.parse('compute the profile for the history K-2108=3, K-2179=2, M-2292=1'),
         'compute the profile for the history K-2108=3, K-2179=2, M-2292=1';
 
-ok $pSMRMONCOMMAND.parse('make profile with the history id.1 : 1 and id.12 : 9 '),
+nok $pSMRMONCOMMAND.parse('make profile with the history id.1 : 1 and id.12 : 9 '),
         'make profile with the history id.1 : 1 and id.12 : 9 ';
 
 
