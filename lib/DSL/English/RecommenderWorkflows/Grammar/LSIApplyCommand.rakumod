@@ -15,7 +15,7 @@ role DSL::English::RecommenderWorkflows::Grammar::LSIApplyCommand {
 
     rule lsi-funcs-simple-list { <lsi-global-func> <lsi-local-func> <lsi-normalizer-func> }
 
-    rule lsi-apply-verb { <apply-verb> 'to'? | <transform-verb> | <use-verb> }
+    rule lsi-apply-verb { <apply-verb> <to-preposition>? | <transform-verb> | <use-verb> }
     rule lsi-apply-phrase { <lsi-apply-verb> <the-determiner>? [ <matrix-noun> | <matrix-entries> ]? <the-determiner>? <lsi-phrase>? <functions-noun>? }
 
     rule lsi-funcs-list { <lsi-func>+ % <list-separator> }
