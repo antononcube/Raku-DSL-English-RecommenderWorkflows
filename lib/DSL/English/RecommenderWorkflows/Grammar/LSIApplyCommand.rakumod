@@ -4,13 +4,13 @@ use v6;
 
 # This grammar role does rely on the role CommonParts --
 # it is expected to be included in the "large" LSAMon or SMRMon grammars.
-# The primary motivation is to reuse.
-
-#use LatentSemanticAnalysisWorkflows::Grammar::CommonParts;
+# The primary motivation is to reuse the LSA grammars, but also have SMR
+# grammars to be self-sufficient.
+# See LatentSemanticAnalysisWorkflows::Grammar::CommonParts;
 
 # LSI functions application commands.
 role DSL::English::RecommenderWorkflows::Grammar::LSIApplyCommand {
-    # does LatentSemanticAnalysisWorkflows::Grammar::CommonParts {
+
     regex lsi-apply-command { <.lsi-apply-phrase> [ <lsi-funcs-list> | <lsi-funcs-simple-list> ] }
 
     rule lsi-funcs-simple-list { <lsi-global-func> <lsi-local-func> <lsi-normalizer-func> }
