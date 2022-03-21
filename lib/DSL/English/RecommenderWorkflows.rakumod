@@ -59,13 +59,22 @@ proto ToRecommenderWorkflowCode(Str $command, Str $target = 'R-SMRMon', | ) is e
 
 multi ToRecommenderWorkflowCode ( Str $command, Str $target = 'R-SMRMon', *%args ) {
 
+    my $lang = %args<language>:exists ?? %args<language> !! 'English';
+    $lang = $lang.wordcase;
+
+    my $gname = "DSL::{$lang}::RecommenderWorkflows::Grammar";
+
+    try require ::($gname);
+    if ::($gname) ~~ Failure { die "Failed to load the grammar $gname." }
+
+    my Grammar $grammar = ::($gname);
+
     DSL::Shared::Utilities::CommandProcessing::ToWorkflowCode( $command,
-                                                               grammar => DSL::English::RecommenderWorkflows::Grammar,
+                                                               :$grammar,
                                                                :%targetToAction,
                                                                :%targetToSeparator,
                                                                :$target,
                                                                |%args )
-
 }
 
 #-----------------------------------------------------------
