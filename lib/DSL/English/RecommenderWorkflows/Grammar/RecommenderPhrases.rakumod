@@ -5,7 +5,7 @@ use DSL::Shared::Roles::English::PipelineCommand;
 
 # Recommender specific phrases
 role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
-        does DSL::Shared::Roles::English::PipelineCommand {
+                does DSL::Shared::Roles::English::PipelineCommand {
 
 
     proto token word-spec {*}
@@ -28,29 +28,17 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     proto token colnames-noun {*}
     token colnames-noun:sym<English> { :i 'colnames' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'colnames', 2) }> }
 
-    proto token column-noun {*}
-    token column-noun:sym<English> { :i 'column' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'column', 2) }> }
-
-    proto token columns-noun {*}
-    token columns-noun:sym<English> { :i 'columns' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'columns', 2) }> }
-
     proto token consumption-noun {*}
     token consumption-noun:sym<English> { :i 'consumption' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'consumption', 2) }> }
 
     proto token density-noun {*}
     token density-noun:sym<English> { :i 'density' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'density', 2) }> }
 
-    proto token dimensions-noun {*}
-    token dimensions-noun:sym<English> { :i 'dimensions' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'dimensions', 2) }> }
-
     proto token explain-verb {*}
     token explain-verb:sym<English> { :i 'explain' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'explain', 2) }> }
 
     proto token explanations-noun {*}
     token explanations-noun:sym<English> { :i 'explanation' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'explanation', 2) }> | 'explanations' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'explanations', 2) }> }
-
-    proto token function-noun {*}
-    token function-noun:sym<English> { :i 'function' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'function', 2) }> }
 
     proto token history-noun {*}
     token history-noun:sym<English> { :i 'history' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'history', 2) }> }
@@ -61,26 +49,11 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     proto token items-noun {*}
     token items-noun:sym<English> { :i 'items' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'items', 2) }> }
 
-    proto token matrices-noun {*}
-    token matrices-noun:sym<English> { :i 'matrices' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'matrices', 2) }> }
-
-    proto token matrix-noun {*}
-    token matrix-noun:sym<English> { :i 'matrix' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'matrix', 2) }> }
-
-    proto token matrixes-noun {*}
-    token matrixes-noun:sym<English> { :i 'matrixes' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'matrixes', 2) }> }
-
     proto token metadata-noun {*}
     token metadata-noun:sym<English> { :i 'metadata' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'metadata', 2) }> }
 
     proto token most-determiner {*}
     token most-determiner:sym<English> { :i 'most' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'most', 2) }> }
-
-    proto token nearest-adjective {*}
-    token nearest-adjective:sym<English> { :i 'nearest' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'nearest', 2) }> }
-
-    proto token neighbors-noun {*}
-    token neighbors-noun:sym<English> { :i 'neighbors' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'neighbors', 2) }> }
 
     proto token outlier-noun {*}
     token outlier-noun:sym<English> { :i 'outlier' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'outlier', 2) }> }
@@ -127,14 +100,8 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     proto token relevant-adjective {*}
     token relevant-adjective:sym<English> { :i 'relevant' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'relevant', 2) }> }
 
-    proto token row-noun {*}
-    token row-noun:sym<English> { :i 'row' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'row', 1) }> }
-
     proto token rownames-noun {*}
     token rownames-noun:sym<English> { :i 'rownames' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'rownames', 2) }> }
-
-    proto token rows-noun {*}
-    token rows-noun:sym<English> { :i 'rows' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'rows', 2) }> }
 
     proto token tag-adjective {*}
     token tag-adjective:sym<English> { :i  <tag-noun>  }
@@ -144,12 +111,6 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
 
     proto token threshold-noun {*}
     token threshold-noun:sym<English> { :i 'threshold' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'threshold', 2) }> }
-
-    proto token type-noun {*}
-    token type-noun:sym<English> { :i 'type' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'type', 2) }> }
-
-    proto token types-noun {*}
-    token types-noun:sym<English> { :i 'types' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'types', 2) }> }
 
     proto token sub-matrix-noun {*}
     token sub-matrix-noun:sym<English> { :i  'sub' \h+ '-' \h+ <matrix-noun>  }
@@ -221,17 +182,11 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     proto token analysis-noun {*}
     token analysis-noun:sym<English> { :i 'analysis' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'analysis', 2) }> }
 
-    proto token document-noun {*}
-    token document-noun:sym<English> { :i 'document' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'document', 2) }> }
-
     proto token entries-noun {*}
     token entries-noun:sym<English> { :i 'entries' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'entries', 2) }> }
 
     proto token indexing-noun {*}
     token indexing-noun:sym<English> { :i 'indexing' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'indexing', 2) }> }
-
-    proto token ingest-verb {*}
-    token ingest-verb:sym<English> { :i 'ingest' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'ingest', 2) }> | 'load' | 'use' | 'get' }
 
     proto token latent-adjective {*}
     token latent-adjective:sym<English> { :i 'latent' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'latent', 2) }> }
@@ -242,15 +197,12 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     proto token term-noun {*}
     token term-noun:sym<English> { :i 'term' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'term', 2) }> }
 
-    proto token weight-noun {*}
-    token weight-noun:sym<English> { :i 'weight' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'weight', 2) }> }
-
-    proto token word-noun {*}
-    token word-noun:sym<English> { :i 'word' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'word', 2) }> }
-
 
     proto rule doc-term-mat {*}
     rule doc-term-mat:sym<English> {  [ <document-noun> | <item-noun> ] [ <term-noun> | <word-noun> ] <matrix-noun>  }
+
+    proto rule ingest-directive {*}
+    rule ingest-directive:sym<English> {  <ingest-verb> | <load-verb> | <use-verb> | <get-verb>  }
 
     proto rule lsa-object {*}
     rule lsa-object:sym<English> {  <lsa-phrase>? <object-noun>  }
@@ -271,9 +223,6 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
 
     proto token frequency-noun {*}
     token frequency-noun:sym<English> { :i 'frequency' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'frequency', 2) }> }
-
-    proto token functions-noun {*}
-    token functions-noun:sym<English> { :i 'function' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'function', 2) }> | 'functions' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'functions', 2) }> }
 
     proto token global-adjective {*}
     token global-adjective:sym<English> { :i 'global' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'global', 2) }> }

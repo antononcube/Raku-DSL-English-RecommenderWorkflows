@@ -15,24 +15,15 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token anomalies-noun { 'anomalies' }
     token anomaly-noun { 'anomaly' }
     token colnames-noun { 'colnames' }
-    token column-noun { 'column' }
-    token columns-noun { 'columns' }
     token consumption-noun { 'consumption' }
     token density-noun { 'density' }
-    token dimensions-noun { 'dimensions' }
     token explain-verb { 'explain' }
     token explanations-noun { 'explanation' | 'explanations' }
-    token function-noun { 'function' }
     token history-noun { 'history' }
     token item-noun { 'item' }
     token items-noun { 'items' }
-    token matrices-noun { 'matrices' }
-    token matrix-noun { 'matrix' }
-    token matrixes-noun { 'matrixes' }
     token metadata-noun {'metadata' }
     token most-determiner { 'most' }
-    token nearest-adjective { 'nearest' }
-    token neighbors-noun { 'neighbors' }
     token outlier-noun { 'outlier' }
     token outliers-noun { 'outliers' | 'outlier' }
     token profile-noun { 'profile' }
@@ -48,14 +39,10 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token recommended-adjective { 'recommended' }
     token recommender-noun { 'recommender' }
     token relevant-adjective { 'relevant' }
-    token row-noun { 'row' }
     token rownames-noun { 'rownames' }
-    token rows-noun { 'rows' }
     token tag-adjective { <tag-noun> }
     token tag-noun { 'tag' }
     token threshold-noun { 'threshold' }
-    token type-noun { 'type' }
-    token types-noun { 'types' }
     token sub-matrix-noun { 'sub' \h+ '-' \h+ <matrix-noun> }
     token sub-matrices-noun { 'sub' \h+ '-' \h+ <matrices-noun> }
 
@@ -82,17 +69,14 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
 
     # LSA specific
     token analysis-noun { 'analysis' }
-    token document-noun { 'document' }
     token entries-noun { 'entries' }
     token indexing-noun { 'indexing' }
-    token ingest-verb { 'ingest' | 'load' | 'use' | 'get' }
     token latent-adjective { 'latent' }
     token semantic-adjective { 'semantic' }
     token term-noun { 'term' }
-    token weight-noun { 'weight' }
-    token word-noun { 'word' }
 
     rule doc-term-mat { [ <document-noun> | <item-noun> ] [ <term-noun> | <word-noun> ] <matrix-noun> }
+    rule ingest-directive { <ingest-verb> | <load-verb> | <use-verb> | <get-verb> }
     rule lsa-object { <lsa-phrase>? <object-noun> }
     rule lsa-phrase { <latent-adjective> <semantic-adjective> <analysis-noun> | 'lsa' | 'LSA' }
     rule lsi-phrase { <latent-adjective> <semantic-adjective> <indexing-noun> | 'lsi' | 'LSI' }
@@ -101,7 +85,6 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
 
     # LSI specific
     token frequency-noun { 'frequency' }
-    token functions-noun { 'function' | 'functions' }
     token global-adjective { 'global' }
     token inverse-adjective { 'inverse' }
     token local-adjective { 'local' }
