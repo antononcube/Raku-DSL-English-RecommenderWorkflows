@@ -18,6 +18,7 @@ unit module DSL::English::RecommenderWorkflows;
 use DSL::Shared::Utilities::CommandProcessing;
 
 use DSL::English::RecommenderWorkflows::Grammar;
+use DSL::English::RecommenderWorkflows::Actions::Bulgarian::Standard;
 use DSL::English::RecommenderWorkflows::Actions::Python::SMRMon;
 use DSL::English::RecommenderWorkflows::Actions::R::SMRMon;
 use DSL::English::RecommenderWorkflows::Actions::R::tidyverse;
@@ -25,6 +26,7 @@ use DSL::English::RecommenderWorkflows::Actions::Raku::SBR;
 use DSL::English::RecommenderWorkflows::Actions::WL::SMRMon;
 
 my %targetToAction{Str} =
+    "Bulgarian"        => DSL::English::RecommenderWorkflows::Actions::Bulgarian::Standard,
     "Python"           => DSL::English::RecommenderWorkflows::Actions::Python::SMRMon,
     "Python-SMRMon"    => DSL::English::RecommenderWorkflows::Actions::Python::SMRMon,
     "R"                => DSL::English::RecommenderWorkflows::Actions::R::SMRMon,
@@ -40,6 +42,7 @@ my %targetToAction2{Str} = %targetToAction.grep({ $_.key.contains('-') }).map({ 
 %targetToAction = |%targetToAction , |%targetToAction2;
 
 my Str %targetToSeparator{Str} =
+    "Bulgarian"        => "\n",
     "R"                => " %>%\n",
     "R-SMRMon"         => " %>%\n",
     "R-tidyverse"      => " %>%\n",
