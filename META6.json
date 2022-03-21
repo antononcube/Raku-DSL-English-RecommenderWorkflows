@@ -22,7 +22,8 @@
     "DSL::English::RecommenderWorkflows::Actions::WL::SMRMon": "lib/DSL/English/RecommenderWorkflows/Actions/WL/SMRMon.rakumod",
     "DSL::English::RecommenderWorkflows::Grammar": "lib/DSL/English/RecommenderWorkflows/Grammar.rakumod",
     "DSL::English::RecommenderWorkflows::Grammar::LSIApplyCommand": "lib/DSL/English/RecommenderWorkflows/Grammar/LSIApplyCommand.rakumod",
-    "DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases": "lib/DSL/English/RecommenderWorkflows/Grammar/RecommenderPhrases.rakumod"
+    "DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases": "lib/DSL/English/RecommenderWorkflows/Grammar/RecommenderPhrases.rakumod",
+    "DSL::English::RecommenderWorkflows::Grammarish": "lib/DSL/English/RecommenderWorkflows/Grammarish.rakumod"
   },
   "resources": [],
   "license": "GPL-3.0-or-later",
