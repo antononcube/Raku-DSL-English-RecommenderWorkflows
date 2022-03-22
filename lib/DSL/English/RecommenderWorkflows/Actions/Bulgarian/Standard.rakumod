@@ -71,7 +71,7 @@ class DSL::English::RecommenderWorkflows::Actions::Bulgarian::Standard
   method lsi-local-func-binary($/) { make '"Binary"'; }
   method lsi-local-func-log($/) { make '"Log"'; }
 
-  method lsi-normalizer-func($/) { make 'нормализараща функция: ' ~  $/.values[0].made; }
+  method lsi-normalizer-func($/) { make 'нормализираща функция: ' ~  $/.values[0].made; }
   method lsi-normalizer-func-sum($/) { make '"Sum"'; }
   method lsi-normalizer-func-max($/) { make '"Max"'; }
   method lsi-normalizer-func-cosine($/) { make '"Cosine"'; }
@@ -108,14 +108,14 @@ class DSL::English::RecommenderWorkflows::Actions::Bulgarian::Standard
   method classify-command($/) { make $/.values[0].made; }
   method classify-by-profile($/) {
     if $<ntop-nns> {
-      make 'класифицирай към типа: ' ~ $<tag-type-id>.made ~ ', с профила: ' ~ $<profile-spec>.made ~ ', използвайки ' ~ $<ntop-nns>.made ~ ' най-близки съсседи';
+      make 'класифицирай към типа: ' ~ $<tag-type-id>.made ~ ', с профила: ' ~ $<profile-spec>.made ~ ', използвайки ' ~ $<ntop-nns>.made ~ ' най-близки съседи';
     } else {
       make 'класифицирай към типа: ' ~ $<tag-type-id>.made ~ ', с профила: ' ~ $<profile-spec>.made;
     }
   }
   method classify-by-profile-rev($/) {
     if $<ntop-nns> {
-      make 'класифицирай към типа: ' ~ $<tag-type-id>.made ~ ', с профила: ' ~ $<profile-spec>.made ~ ', използвайки ' ~ $<ntop-nns>.made ~ ' най-близки съсседи';
+      make 'класифицирай към типа: ' ~ $<tag-type-id>.made ~ ', с профила: ' ~ $<profile-spec>.made ~ ', използвайки ' ~ $<ntop-nns>.made ~ ' най-близки съседи';
     } else {
       make 'класифицирай към типа: ' ~ $<tag-type-id>.made ~ ', с профила: ' ~ $<profile-spec>.made;
     }
@@ -178,7 +178,7 @@ class DSL::English::RecommenderWorkflows::Actions::Bulgarian::Standard
   ## Value
   method take-pipeline-value($/) { make 'вземи текущата лентова стойност'; }
   method echo-pipeline-value($/) { make 'покажи текущата лентова стойност'; }
-  method echo-pipeline-funciton-value($/) { make 'покажи текущата лентова стойност преобразуван с: ' ~ $<pipeline-function-spec>.made; }
+  method echo-pipeline-funciton-value($/) { make 'покажи текущата лентова стойност преобразувана с: ' ~ $<pipeline-function-spec>.made; }
 
   ## Context
   method take-pipeline-context($/) { make 'вземи контекста'; }
