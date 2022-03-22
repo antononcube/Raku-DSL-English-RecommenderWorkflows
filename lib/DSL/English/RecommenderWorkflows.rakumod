@@ -66,7 +66,7 @@ my Str %targetToSeparator2{Str} = %targetToSeparator.grep({ $_.key.contains('-')
 #-----------------------------------------------------------
 proto ToRecommenderWorkflowCode(Str $command, Str $target = 'R-SMRMon', | ) is export {*}
 
-multi ToRecommenderWorkflowCode ( Str $command, Str $target = 'R-SMRMon', *%args ) {
+multi ToRecommenderWorkflowCode( Str $command, Str $target = 'R-SMRMon', *%args ) {
 
     my $lang = %args<language>:exists ?? %args<language> !! 'English';
     $lang = $lang.wordcase;
