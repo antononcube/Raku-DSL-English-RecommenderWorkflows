@@ -16,6 +16,7 @@
   "provides": {
     "DSL::English::RecommenderWorkflows": "lib/DSL/English/RecommenderWorkflows.rakumod",
     "DSL::English::RecommenderWorkflows::Actions::Bulgarian::Standard": "lib/DSL/English/RecommenderWorkflows/Actions/Bulgarian/Standard.rakumod",
+    "DSL::English::RecommenderWorkflows::Actions::English::Standard": "lib/DSL/English/RecommenderWorkflows/Actions/English/Standard.rakumod",
     "DSL::English::RecommenderWorkflows::Actions::Python::SMRMon": "lib/DSL/English/RecommenderWorkflows/Actions/Python/SMRMon.rakumod",
     "DSL::English::RecommenderWorkflows::Actions::R::SMRMon": "lib/DSL/English/RecommenderWorkflows/Actions/R/SMRMon.rakumod",
     "DSL::English::RecommenderWorkflows::Actions::R::tidyverse": "lib/DSL/English/RecommenderWorkflows/Actions/R/tidyverse.rakumod",
