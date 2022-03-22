@@ -36,7 +36,7 @@ class DSL::English::RecommenderWorkflows::Actions::Bulgarian::Standard
 
   # Data load commands
   method data-load-command($/) { make $/.values[0].made; }
-  method load-data($/) { make 'set_data(data = ' ~ $<data-location-spec>.made ~ ')'; }
+  method load-data($/) { make 'присвои таблицата: ' ~ $<data-location-spec>.made ~ ')'; }
   method data-location-spec($/) { make $<dataset-name>.made; }
   method use-recommender($/) { make $<variable-name>.made; }
   method dataset-name($/) { make $/.Str; }
@@ -50,7 +50,7 @@ class DSL::English::RecommenderWorkflows::Actions::Bulgarian::Standard
   # Data statistics command
   method statistics-command($/) { make $/.values[0].made; }
   method show-data-summary($/) { make 'покажи обобщение на данните'; }
-  method summarize-data($/) { make '.покажи обобщение на данните'; }
+  method summarize-data($/) { make 'покажи обобщение на данните'; }
   method items-per-tag($/) { make 'дистрибуция по етикетите'; }
   method tags-per-items($/) { make 'дистрибуция на нещата'; }
 
@@ -78,16 +78,16 @@ class DSL::English::RecommenderWorkflows::Actions::Bulgarian::Standard
 
   # Recommend by history command
   method recommend-by-history-command($/) { make $/.values[0].made; }
-  method recommend-by-history($/) { make 'препоръчай с историата: ' ~ $<history-spec>.made ~ ')'; }
+  method recommend-by-history($/) { make 'препоръчай с историята: ' ~ $<history-spec>.made ~ ')'; }
   method top-recommendations($/) { make 'дай най-горните ' ~ $<integer-value>.made ~ ' препоръки'; }
-  method top-recommendations-by-history($/) { make 'препоръчай ' ~ $<top-recommendations><integer-value>.made ~ ' нещя с историата ' ~ $<history-spec>.made ; }
+  method top-recommendations-by-history($/) { make 'намери ' ~ $<top-recommendations><integer-value>.made ~ ' препоръки с историята: ' ~ $<history-spec>.made; }
   method history-spec($/) { make $/.values[0].made; }
 
   # Recommend by profile command
   method recommend-by-profile-command($/) { make $/.values[0].made; }
   method recommend-by-profile($/) { make 'препоръчай с профила: ' ~ $<profile-spec>.made  }
   method top-profile-recommendations($/) { make 'дай най-горните ' ~ $<integer-value>.made ~ ' препоръки'; }
-  method top-recommendations-by-profile($/) { make 'препоръчай ' ~ $<top-recommendations><integer-value>.made ~ ' с профила ' ~ $<profile-spec>.made; }
+  method top-recommendations-by-profile($/) { make 'намери ' ~ $<top-recommendations><integer-value>.made ~ ' препоръки с профила: ' ~ $<profile-spec>.made; }
   method profile-spec($/) { make $/.values[0].made; }
 
   # Make profile
@@ -138,7 +138,7 @@ class DSL::English::RecommenderWorkflows::Actions::Bulgarian::Standard
   method smr-item-column-name($/) { make '"itemColumnName"'; }
   method smr-sub-matrices($/) { make '"subMatrices"'; }
   method smr-matrix-property-spec($/) { make 'дай матричното свойство: ' ~ $<smr-matrix-property>.made; }
-  method smr-sub-matrix-property-spec($/) { make 'дай матричното свойство: ' ~ $<smr-matrix-property>.made ~ ' за типа = ' ~ $<tag-type-id>.made; }
+  method smr-sub-matrix-property-spec($/) { make 'дай матричното свойство: ' ~ $<smr-matrix-property>.made ~ ' за типа: ' ~ $<tag-type-id>.made; }
   method smr-matrix-property($/) { make $/.values[0].made(); }
   method smr-property-id($/) { make '"' ~ $/.Str ~ '"'; }
   method number-of-columns($/) { make '"number_of_columns"'; }
@@ -149,18 +149,18 @@ class DSL::English::RecommenderWorkflows::Actions::Bulgarian::Standard
   method density($/) { make '"density"'; }
   method properties($/) { make '"properties"';}
 
-  method smr-filter-matrix($/) { make 'филтрирай матрицата с профила: ' ~ $<profile-spec>.made;  }
+  method smr-filter-matrix($/) { make 'филтрирай препоръчителната матрицата с профила: ' ~ $<profile-spec>.made;  }
 
   # Make metadata recommender command
   method make-metadata-recommender-command($/) { make $/.values[0].made; }
-  method make-metadata-recommender-simple($/) { make 'направи метаданни препоръчителен обект за типа: ' ~ $<tag-type-id>.made ~ ' )'; }
-  method make-metadata-recommender-full($/) { make 'направи метаданни препоръчителен обект за типа: ' ~ $<tag-type-id>.made ~ ', ползвайки типовете: ' ~ $<tag-type-ids-list>.made; }
+  method make-metadata-recommender-simple($/) { make 'направи мета-даннов препоръчителен обект за типа: ' ~ $<tag-type-id>.made ~ ' )'; }
+  method make-metadata-recommender-full($/) { make 'направи мета-даннов препоръчителен обект за типа: ' ~ $<tag-type-id>.made ~ ', ползвайки типовете: ' ~ $<tag-type-ids-list>.made; }
 
   # Recommender algebra command
   method recommender-algebra-command($/) { make $/.values[0].made; }
   method annex-matrix-command($/) {
     if $<tagtype> {
-      make 'разшири с под-матрицата: ' ~ $<mat>.made ~ ', съответваща на типа ' ~ $<tagtype>.made;
+      make 'разшири с под-матрицата: ' ~ $<mat>.made ~ ', съответваща на типа: ' ~ $<tagtype>.made;
     } else {
       make 'разшири с под-матрицата: ' ~ $<mat>.made ~ ', съответваща на типа "NewType"';
     }
