@@ -175,6 +175,9 @@ class DSL::English::RecommenderWorkflows::Actions::English::Standard
   method remove-tag-types-commands($/) { make 'remove the tag type: ' ~ $/.values[0].made}
 
   # Pipeline command overwrites
+  ## Object
+  method assign-pipeline-object-to($/) { make 'assign the pipeline object to: ' ~ $/.values[0].made; }
+
   ## Value
   method take-pipeline-value($/) { make 'take the pipeline value'; }
   method echo-pipeline-value($/) { make 'echo the pipeline value'; }
@@ -186,7 +189,7 @@ class DSL::English::RecommenderWorkflows::Actions::English::Standard
   method echo-pipeline-function-context($/) { make 'echo the context tranformed with: ' ~ $<pipeline-function-spec>.made; }
 
   ## Echo messages
-  method echo-command($/) { make 'echo: ' ~ $<echo-message-spec>.made; }
+  method echo-command($/) { make 'echo the message: ' ~ $<echo-message-spec>.made; }
 
   ## Setup code
   method setup-code-command($/) {
