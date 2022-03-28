@@ -119,7 +119,7 @@ role DSL::English::RecommenderWorkflows::Grammarish {
     rule top-recommendations-by-history { <top-recommendations>
                                         [ <.using-preposition> | <.by-preposition> | <.for-preposition> ] <.the-determiner>? <.history-phrase>?
                                         <history-spec> }
-    rule most-relevant-phrase { <most-relevant> | <top-noun> <most-relevant>? }
+    rule most-relevant-phrase { <most-relevant> | <top-adjective> <most-relevant>? }
     rule simple-recommend { <recommend-directive> | <compute-directive> <recommendations-noun> }
 
     # Recommend by profile
