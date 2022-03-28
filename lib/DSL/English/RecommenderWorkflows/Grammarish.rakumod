@@ -115,12 +115,12 @@ role DSL::English::RecommenderWorkflows::Grammarish {
     rule recommend-by-history { <.recommend-directive>
                               [ <.using-preposition> | <.by-preposition> | <.for-preposition> ] <.the-determiner>? <.history-phrase>?
                               <history-spec> }
-    rule top-recommendations { [ <compute-directive> | <what-are-phrase> | <get-directive> ]? <.the-determiner>? <.most-relevant-phrase>? <integer-value>? <.most-relevant-phrase>? <.recommendation-noun> }
+    rule top-recommendations { [ <compute-directive> | <what-are-phrase> | <get-directive> ]? <.the-determiner>? <.most-relevant-phrase>? <integer-value>? <.most-relevant-phrase>? [ <.recommendations-noun> | <.recommendation-noun> ] }
     rule top-recommendations-by-history { <top-recommendations>
                                         [ <.using-preposition> | <.by-preposition> | <.for-preposition> ] <.the-determiner>? <.history-phrase>?
                                         <history-spec> }
     rule most-relevant-phrase { <most-relevant> | <top-noun> <most-relevant>? }
-    rule simple-recommend { <.recommend-directive> | <compute-directive> <recommendations> }
+    rule simple-recommend { <recommend-directive> | <compute-directive> <recommendations-noun> }
 
     # Recommend by profile
     rule recommend-by-profile-command { <recommend-by-profile> | <top-profile-recommendations> | <top-recommendations-by-profile> }

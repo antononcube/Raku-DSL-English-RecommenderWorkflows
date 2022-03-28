@@ -10,6 +10,8 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token word-spec { \w+ }
 
     # Regular tokens / rules
+    token across-adverb { <across-preposition> }
+    token across-preposition { 'across' }
     token aggregate-verb { 'aggregate' }
     token aggregation-noun { 'aggregation' }
     token anomalies-noun { 'anomalies' }
@@ -48,7 +50,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     rule consumption-history { <consumption-slot>? <history-noun> }
     rule consumption-profile { <consumption-slot>? <profile-noun> }
     rule cross-tabulate-phrase { 'cross' [ 'tabulate' | 'tabulation' ] }
-    rule extend-recommendations-phrase { [ <extend-verb> | <join-verb> 'across'? ] <recommendations-noun>? }
+    rule extend-recommendations-phrase { [ <extend-verb> | <join-verb> [ <across-preposition> | <across-adverb> ]? ] <recommendations-noun>? }
     rule history-phrase { [ <item-noun> ]? <history-noun> }
     rule most-relevant { <most-determiner> <relevant-adjective> }
     rule nearest-neighbors { <nearest-adjective> <neighbors-noun> | 'nns' }
@@ -79,7 +81,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     rule lsa-phrase { <latent-adjective> <semantic-adjective> <analysis-noun> | 'lsa' | 'LSA' }
     rule lsi-phrase { <latent-adjective> <semantic-adjective> <indexing-noun> | 'lsi' | 'LSI' }
     rule matrix-entries { [ <doc-term-mat> | <matrix-noun> ]? <entries-noun> }
-    rule the-outliers { <the-determiner> <outliers> }
+    rule the-outliers { <the-determiner> <outliers-noun> }
 
     # LSI specific
     token frequency-noun { 'frequency' }

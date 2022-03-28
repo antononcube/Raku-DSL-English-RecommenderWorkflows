@@ -13,6 +13,12 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
 
     # Regular tokens / rules
 
+    proto token across-adverb {*}
+    token across-adverb:sym<English> { :i  <across-preposition>  }
+
+    proto token across-preposition {*}
+    token across-preposition:sym<English> { :i 'across' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'across', 2) }> }
+
     proto token aggregate-verb {*}
     token aggregate-verb:sym<English> { :i 'aggregate' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'aggregate', 2) }> }
 
@@ -26,7 +32,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token anomaly-noun:sym<English> { :i 'anomaly' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'anomaly', 2) }> }
 
     proto token colnames-noun {*}
-    token colnames-noun:sym<English> { :i 'colnames' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'colnames', 2) }> }
+    token colnames-noun:sym<English> { :i 'colnames' | ([\w]+) <?{ $0.Str ne 'rownames' and is-fuzzy-match($0.Str, 'colnames', 2) }> }
 
     proto token consumption-noun {*}
     token consumption-noun:sym<English> { :i 'consumption' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'consumption', 2) }> }
@@ -38,16 +44,16 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token explain-verb:sym<English> { :i 'explain' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'explain', 2) }> }
 
     proto token explanations-noun {*}
-    token explanations-noun:sym<English> { :i 'explanation' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'explanation', 2) }> | 'explanations' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'explanations', 2) }> }
+    token explanations-noun:sym<English> { :i 'explanation' | ([\w]+) <?{ $0.Str ne 'explanations' and is-fuzzy-match($0.Str, 'explanation', 2) }> | 'explanations' | ([\w]+) <?{ $0.Str ne 'explanation' and is-fuzzy-match($0.Str, 'explanations', 2) }> }
 
     proto token history-noun {*}
     token history-noun:sym<English> { :i 'history' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'history', 2) }> }
 
     proto token item-noun {*}
-    token item-noun:sym<English> { :i 'item' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'item', 2) }> }
+    token item-noun:sym<English> { :i 'item' | ([\w]+) <?{ $0.Str !(elem) <items term> and is-fuzzy-match($0.Str, 'item', 2) }> }
 
     proto token items-noun {*}
-    token items-noun:sym<English> { :i 'items' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'items', 2) }> }
+    token items-noun:sym<English> { :i 'items' | ([\w]+) <?{ $0.Str ne 'item' and is-fuzzy-match($0.Str, 'items', 2) }> }
 
     proto token metadata-noun {*}
     token metadata-noun:sym<English> { :i 'metadata' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'metadata', 2) }> }
@@ -59,7 +65,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token profile-noun:sym<English> { :i 'profile' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'profile', 2) }> }
 
     proto token proofs-noun {*}
-    token proofs-noun:sym<English> { :i 'proof' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'proof', 2) }> | 'proofs' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'proofs', 2) }> }
+    token proofs-noun:sym<English> { :i 'proof' | ([\w]+) <?{ $0.Str !(elem) <proofs prove> and is-fuzzy-match($0.Str, 'proof', 2) }> | 'proofs' | ([\w]+) <?{ $0.Str ne 'proof' and is-fuzzy-match($0.Str, 'proofs', 2) }> }
 
     proto token properties-noun {*}
     token properties-noun:sym<English> { :i 'properties' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'properties', 2) }> }
@@ -68,7 +74,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token property-noun:sym<English> { :i 'property' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'property', 2) }> }
 
     proto token prove-verb {*}
-    token prove-verb:sym<English> { :i 'prove' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'prove', 2) }> }
+    token prove-verb:sym<English> { :i 'prove' | ([\w]+) <?{ $0.Str ne 'proof' and is-fuzzy-match($0.Str, 'prove', 2) }> }
 
     proto token proximity-noun {*}
     token proximity-noun:sym<English> { :i 'proximity' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'proximity', 2) }> }
@@ -77,25 +83,25 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token recommend-directive:sym<English> { :i  <recommend-verb>  }
 
     proto token recommend-verb {*}
-    token recommend-verb:sym<English> { :i 'recommend' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'recommend', 2) }> | 'suggest' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'suggest', 2) }> }
+    token recommend-verb:sym<English> { :i 'recommend' | ([\w]+) <?{ $0.Str !(elem) <recommended recommender> and is-fuzzy-match($0.Str, 'recommend', 2) }> | 'suggest' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'suggest', 2) }> }
 
     proto token recommendation-noun {*}
-    token recommendation-noun:sym<English> { :i 'recommendation' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'recommendation', 2) }> }
+    token recommendation-noun:sym<English> { :i 'recommendation' | ([\w]+) <?{ $0.Str ne 'recommendations' and is-fuzzy-match($0.Str, 'recommendation', 2) }> }
 
     proto token recommendations-noun {*}
-    token recommendations-noun:sym<English> { :i 'recommendations' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'recommendations', 2) }> }
+    token recommendations-noun:sym<English> { :i 'recommendations' | ([\w]+) <?{ $0.Str ne 'recommendation' and is-fuzzy-match($0.Str, 'recommendations', 2) }> }
 
     proto token recommended-adjective {*}
-    token recommended-adjective:sym<English> { :i 'recommended' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'recommended', 2) }> }
+    token recommended-adjective:sym<English> { :i 'recommended' | ([\w]+) <?{ $0.Str !(elem) <recommend recommender> and is-fuzzy-match($0.Str, 'recommended', 2) }> }
 
     proto token recommender-noun {*}
-    token recommender-noun:sym<English> { :i 'recommender' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'recommender', 2) }> }
+    token recommender-noun:sym<English> { :i 'recommender' | ([\w]+) <?{ $0.Str !(elem) <recommend recommended> and is-fuzzy-match($0.Str, 'recommender', 2) }> }
 
     proto token relevant-adjective {*}
     token relevant-adjective:sym<English> { :i 'relevant' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'relevant', 2) }> }
 
     proto token rownames-noun {*}
-    token rownames-noun:sym<English> { :i 'rownames' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'rownames', 2) }> }
+    token rownames-noun:sym<English> { :i 'rownames' | ([\w]+) <?{ $0.Str ne 'colnames' and is-fuzzy-match($0.Str, 'rownames', 2) }> }
 
     proto token tag-adjective {*}
     token tag-adjective:sym<English> { :i  <tag-noun>  }
@@ -126,7 +132,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     rule cross-tabulate-phrase:sym<English> {  'cross' [ 'tabulate' | 'tabulation' ]  }
 
     proto rule extend-recommendations-phrase {*}
-    rule extend-recommendations-phrase:sym<English> {  [ <extend-verb> | <join-verb> 'across'? ] <recommendations-noun>?  }
+    rule extend-recommendations-phrase:sym<English> {  [ <extend-verb> | <join-verb> [ <across-preposition> | <across-adverb> ]? ] <recommendations-noun>?  }
 
     proto rule history-phrase {*}
     rule history-phrase:sym<English> {  [ <item-noun> ]? <history-noun>  }
@@ -189,7 +195,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token semantic-adjective:sym<English> { :i 'semantic' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'semantic', 2) }> }
 
     proto token term-noun {*}
-    token term-noun:sym<English> { :i 'term' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'term', 2) }> }
+    token term-noun:sym<English> { :i 'term' | ([\w]+) <?{ $0.Str ne 'item' and is-fuzzy-match($0.Str, 'term', 2) }> }
 
 
     proto rule doc-term-mat {*}
@@ -211,7 +217,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     rule matrix-entries:sym<English> {  [ <doc-term-mat> | <matrix-noun> ]? <entries-noun>  }
 
     proto rule the-outliers {*}
-    rule the-outliers:sym<English> {  <the-determiner> <outliers>  }
+    rule the-outliers:sym<English> {  <the-determiner> <outliers-noun>  }
 
     # LSI specific
 
@@ -219,13 +225,13 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token frequency-noun:sym<English> { :i 'frequency' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'frequency', 2) }> }
 
     proto token global-adjective {*}
-    token global-adjective:sym<English> { :i 'global' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'global', 2) }> }
+    token global-adjective:sym<English> { :i 'global' | ([\w]+) <?{ $0.Str ne 'local' and is-fuzzy-match($0.Str, 'global', 2) }> }
 
     proto token inverse-adjective {*}
     token inverse-adjective:sym<English> { :i 'inverse' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'inverse', 2) }> }
 
     proto token local-adjective {*}
-    token local-adjective:sym<English> { :i 'local' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'local', 2) }> }
+    token local-adjective:sym<English> { :i 'local' | ([\w]+) <?{ $0.Str ne 'global' and is-fuzzy-match($0.Str, 'local', 2) }> }
 
     proto token normalization-noun {*}
     token normalization-noun:sym<English> { :i 'normalization' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'normalization', 2) }> }
