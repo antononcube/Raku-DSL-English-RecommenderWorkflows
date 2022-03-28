@@ -24,8 +24,6 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token items-noun { 'items' }
     token metadata-noun {'metadata' }
     token most-determiner { 'most' }
-    token outlier-noun { 'outlier' }
-    token outliers-noun { 'outliers' | 'outlier' }
     token profile-noun { 'profile' }
     token proofs-noun { 'proof' | 'proofs' }
     token properties-noun { 'properties' }

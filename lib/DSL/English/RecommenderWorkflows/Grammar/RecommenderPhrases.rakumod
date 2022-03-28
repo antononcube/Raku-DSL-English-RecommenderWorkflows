@@ -55,12 +55,6 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     proto token most-determiner {*}
     token most-determiner:sym<English> { :i 'most' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'most', 2) }> }
 
-    proto token outlier-noun {*}
-    token outlier-noun:sym<English> { :i 'outlier' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'outlier', 2) }> }
-
-    proto token outliers-noun {*}
-    token outliers-noun:sym<English> { :i 'outliers' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'outliers', 2) }> | 'outlier' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'outlier', 2) }> }
-
     proto token profile-noun {*}
     token profile-noun:sym<English> { :i 'profile' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'profile', 2) }> }
 
