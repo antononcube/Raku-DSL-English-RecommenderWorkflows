@@ -1,8 +1,10 @@
 use v6;
 
-use  DSL::Shared::Actions::English::PipelineCommand;
+use DSL::Shared::Actions::English::PipelineCommand;
+use DSL::Shared::Actions::Russian::Standard::PipelineCommand;
 
 class DSL::English::RecommenderWorkflows::Actions::Russian::Standard
+        does DSL::Shared::Actions::Russian::Standard::PipelineCommand
         is DSL::Shared::Actions::English::PipelineCommand {
 
   # Separator
@@ -173,20 +175,6 @@ class DSL::English::RecommenderWorkflows::Actions::Russian::Standard
     }
   }
   method remove-tag-types-commands($/) { make 'удалить типы: ' ~ $/.values[0].made}
-
-  # Pipeline command overwrites
-  ## Value
-  method take-pipeline-value($/) { make 'взять текущее значение ленту'; }
-  method echo-pipeline-value($/) { make 'показать текущее значение ленту'; }
-  method echo-pipeline-funciton-value($/) { make 'показать текущее значение ленту преобразованное через: ' ~ $<pipeline-function-spec>.made; }
-
-  ## Context
-  method take-pipeline-context($/) { make 'взять контекст'; }
-  method echo-pipeline-context($/) { make 'показать контекст'; }
-  method echo-pipeline-function-context($/) { make 'показать контекст преобразованной через: ' ~ $<pipeline-function-spec>.made; }
-
-  ## Echo messages
-  method echo-command($/) { make 'показать: ' ~ $<echo-message-spec>.made; }
 
   ## Setup code
   method setup-code-command($/) {

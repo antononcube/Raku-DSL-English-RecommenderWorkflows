@@ -1,8 +1,10 @@
 use v6;
 
 use  DSL::Shared::Actions::Bulgarian::PipelineCommand;
+use DSL::Shared::Actions::Bulgarian::Standard::PipelineCommand;
 
 class DSL::English::RecommenderWorkflows::Actions::Bulgarian::Standard
+        does DSL::Shared::Actions::Bulgarian::Standard::PipelineCommand
         is DSL::Shared::Actions::Bulgarian::PipelineCommand {
 
   # Separator
@@ -173,23 +175,6 @@ class DSL::English::RecommenderWorkflows::Actions::Bulgarian::Standard
     }
   }
   method remove-tag-types-commands($/) { make 'премахни типовете: ' ~ $/.values[0].made}
-
-  # Pipeline command overwrites
-  ## Object
-  method assign-pipeline-object-to($/) { make 'присвои лентовия обект на: ' ~ $/.values[0].made; }
-
-  ## Value
-  method take-pipeline-value($/) { make 'вземи текущата лентова стойност'; }
-  method echo-pipeline-value($/) { make 'покажи текущата лентова стойност'; }
-  method echo-pipeline-funciton-value($/) { make 'покажи текущата лентова стойност преобразувана с: ' ~ $<pipeline-function-spec>.made; }
-
-  ## Context
-  method take-pipeline-context($/) { make 'вземи контекста'; }
-  method echo-pipeline-context($/) { make 'покажи контекста'; }
-  method echo-pipeline-function-context($/) { make 'покажи контекста преобразуван с: ' ~ $<pipeline-function-spec>.made; }
-
-  ## Echo messages
-  method echo-command($/) { make 'покажи съобщението: ' ~ $<echo-message-spec>.made; }
 
   ## Setup code
   method setup-code-command($/) {

@@ -1,8 +1,10 @@
 use v6;
 
 use  DSL::Shared::Actions::English::PipelineCommand;
+use DSL::Shared::Actions::English::Standard::PipelineCommand;
 
 class DSL::English::RecommenderWorkflows::Actions::English::Standard
+        does DSL::Shared::Actions::English::Standard::PipelineCommand
         is DSL::Shared::Actions::English::PipelineCommand {
 
   # Separator
@@ -173,23 +175,6 @@ class DSL::English::RecommenderWorkflows::Actions::English::Standard
     }
   }
   method remove-tag-types-commands($/) { make 'remove the tag type: ' ~ $/.values[0].made}
-
-  # Pipeline command overwrites
-  ## Object
-  method assign-pipeline-object-to($/) { make 'assign the pipeline object to: ' ~ $/.values[0].made; }
-
-  ## Value
-  method take-pipeline-value($/) { make 'take the pipeline value'; }
-  method echo-pipeline-value($/) { make 'echo the pipeline value'; }
-  method echo-pipeline-funciton-value($/) { make 'echo the pipeline value transformed with: ' ~ $<pipeline-function-spec>.made; }
-
-  ## Context
-  method take-pipeline-context($/) { make 'take the context'; }
-  method echo-pipeline-context($/) { make 'echo the context'; }
-  method echo-pipeline-function-context($/) { make 'echo the context tranformed with: ' ~ $<pipeline-function-spec>.made; }
-
-  ## Echo messages
-  method echo-command($/) { make 'echo the message: ' ~ $<echo-message-spec>.made; }
 
   ## Setup code
   method setup-code-command($/) {
