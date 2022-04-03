@@ -6,7 +6,7 @@ use v6;
 # it is expected to be included in the "large" LSAMon or SMRMon grammars.
 # The primary motivation is to reuse the LSA grammars, but also have SMR
 # grammars to be self-sufficient.
-# See LatentSemanticAnalysisWorkflows::Grammar::CommonParts;
+# See DSL::English::LatentSemanticAnalysisWorkflows::Grammar::LSIApplyCommand.
 
 # LSI functions application commands.
 role DSL::English::RecommenderWorkflows::Grammar::LSIApplyCommand {
@@ -21,7 +21,7 @@ role DSL::English::RecommenderWorkflows::Grammar::LSIApplyCommand {
     rule lsi-funcs-simple-list { <lsi-global-func> <lsi-local-func> <lsi-normalizer-func> }
 
     rule lsi-apply-verb { <apply-verb> <to-preposition>? | <transform-verb> | <use-verb> }
-    rule lsi-apply-phrase { <lsi-apply-verb> <the-determiner>? [ <matrix-noun> | <matrix-entries> ]? <the-determiner>? <lsi-phrase>? <functions-noun>? }
+    rule lsi-apply-phrase { <lsi-apply-verb> <the-determiner>? [ <matrix-noun> | <matrix-entries> ]? <the-determiner>? <lsi-phrase>? <functions>? }
 
     rule lsi-funcs-list { <lsi-func>+ % <list-separator> }
 
