@@ -64,7 +64,11 @@ my Str %targetToSeparator2{Str} = %targetToSeparator.grep({ $_.key.contains('-')
 %targetToSeparator = |%targetToSeparator , |%targetToSeparator2;
 
 #-----------------------------------------------------------
-proto ToRecommenderWorkflowCode(Str $command, Str $target = 'R-SMRMon', | ) is export {*}
+proto ToRecommenderWorkflowCode(Str $command, | ) is export {*}
+
+multi ToRecommenderWorkflowCode( Str $command, :$target = 'R-SMRMon', *%args ) {
+    return ToRecommenderWorkflowCode($command, $target, |%args);
+}
 
 multi ToRecommenderWorkflowCode( Str $command, Str $target = 'R-SMRMon', *%args ) {
 
