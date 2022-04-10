@@ -14,7 +14,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     # Regular tokens / rules
 
     proto token across-adverb {*}
-    token across-adverb:sym<English> { :i  <across-preposition>  }
+    token across-adverb:sym<English> { :i <across-preposition> }
 
     proto token across-preposition {*}
     token across-preposition:sym<English> { :i 'across' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'across', 2) }> }
@@ -80,7 +80,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token proximity-noun:sym<English> { :i 'proximity' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'proximity', 2) }> }
 
     proto token recommend-directive {*}
-    token recommend-directive:sym<English> { :i  <recommend-verb>  }
+    token recommend-directive:sym<English> { :i <recommend-verb> }
 
     proto token recommend-verb {*}
     token recommend-verb:sym<English> { :i 'recommend' | ([\w]+) <?{ $0.Str !(elem) <recommended recommender> and is-fuzzy-match($0.Str, 'recommend', 2) }> | 'suggest' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'suggest', 2) }> }
@@ -104,7 +104,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token rownames-noun:sym<English> { :i 'rownames' | ([\w]+) <?{ $0.Str ne 'colnames' and is-fuzzy-match($0.Str, 'rownames', 2) }> }
 
     proto token tag-adjective {*}
-    token tag-adjective:sym<English> { :i  <tag-noun>  }
+    token tag-adjective:sym<English> { :i <tag-noun> }
 
     proto token tag-noun {*}
     token tag-noun:sym<English> { :i 'tag' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'tag', 1) }> }
@@ -120,7 +120,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
 
 
     proto rule prove-directive {*}
-    rule prove-directive:sym<English> {  <prove-verb> | <explain-verb>  }
+    rule prove-directive:sym<English> { <prove-verb> | <explain-verb> }
 
     proto rule consumption-history {*}
     rule consumption-history:sym<English> {  <consumption-slot>? <history-noun>  }
@@ -148,12 +148,8 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
 
     proto rule recommendation-matrix {*}
     rule recommendation-matrix:sym<English> {  [ <recommendation-noun> | <recommender-noun> ]? <matrix-noun>  }
-
-    proto rule recommendation-results {*}
-    rule recommendation-results:sym<English> {  [ <recommendation-noun> | <recommendations-noun> | 'recommendation\'s' ] <results>  }
-
-    proto rule recommended-items {*}
-    rule recommended-items:sym<English> {  <recommended-adjective> <items-slot> | [ <recommendations-noun> | <recommendation-noun> ]    <.results>?     }
+    rule recommendation-results { [ <recommendation-noun> | <recommendations-noun> | <recommended-adjective> | 'recommendation\'s' ] <results> }
+    rule recommended-items { <recommended-adjective> <items-slot> | [ <recommendations-noun> | <recommendation-noun> | <recommended-adjective> ] <.results>? }
 
     proto rule recommender-object-phrase {*}
     rule recommender-object-phrase:sym<English> {  <recommender-noun> [ <object-noun> | <system-noun> ]? | 'smr'  }
@@ -202,7 +198,11 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     rule doc-term-mat:sym<English> {  [ <document-noun> | <item-noun> ] [ <term-noun> | <word-noun> ] <matrix-noun>  }
 
     proto rule ingest-directive {*}
-    rule ingest-directive:sym<English> {  <ingest-verb> | <load-verb> | <use-verb> | <get-verb>  }
+    rule ingest-directive:sym<English> { 
+        <ingest-verb> |
+        <load-verb> |
+        <use-verb> |
+        <get-verb> }
 
     proto rule lsa-object {*}
     rule lsa-object:sym<English> {  <lsa-phrase>? <object-noun>  }
