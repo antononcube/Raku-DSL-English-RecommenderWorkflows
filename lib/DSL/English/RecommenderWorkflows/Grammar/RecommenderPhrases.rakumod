@@ -123,10 +123,10 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     rule prove-directive:sym<English> { <prove-verb> | <explain-verb> }
 
     proto rule consumption-history {*}
-    rule consumption-history:sym<English> {  <consumption-slot>? <history-noun>  }
+    rule consumption-history:sym<English> {  <consumption-noun>? <history-noun>  }
 
     proto rule consumption-profile {*}
-    rule consumption-profile:sym<English> {  <consumption-slot>? <profile-noun>  }
+    rule consumption-profile:sym<English> {  <consumption-noun>? <profile-noun>  }
 
     proto rule cross-tabulate-phrase {*}
     rule cross-tabulate-phrase:sym<English> {  'cross' [ 'tabulate' | 'tabulation' ]  }
