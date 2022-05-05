@@ -85,7 +85,7 @@ role DSL::English::RecommenderWorkflows::Grammarish {
     rule data-statistics-command { <show-data-summary> | <summarize-data> | <items-per-tag> | <tags-per-item> }
     rule show-data-summary { <display-directive> <data>? <summary> }
     rule summarize-data { <summarize-directive> <.the-determiner>? <data> | <display-directive> <data>? ( <summary>| <summaries> ) }
-    rule items-per-tag { <number-of> <items-slot> <per-preposition> <tag> }
+    rule items-per-tag { <number-of> <items-noun> <per-preposition> <tag> }
     rule tags-per-item { <number-of> <tags> <per-preposition> <item-noun> }
 
     # (Scored) items lists
@@ -145,7 +145,7 @@ role DSL::English::RecommenderWorkflows::Grammarish {
     # Prove command
     rule prove-recommendations-command { <prove-by-metadata> | <prove-by-history> }
     rule proof-item-spec { <item-id> | <item-ids-list> }
-    rule recommendation-items-phrase { [ <recommendation-noun> | <recommended-adjective> ] [ <item-noun> | <items-slot> ]? }
+    rule recommendation-items-phrase { [ <recommendation-noun> | <recommended-adjective> ] [ <item-noun> | <items-noun> ]? }
     rule prove-by-metadata {
         <prove-directive> <.the-determiner>? <recommendation-items-phrase> <proof-item-spec>? <.by-preposition> [ <metadata-noun> | <.the-determiner>? <profile-noun> ] <profile-spec>? |
         <prove-directive> <.by-preposition> [ <metadata-noun> | <profile-noun> ] <.the-determiner>? <recommendation-items-phrase> <proof-item-spec>

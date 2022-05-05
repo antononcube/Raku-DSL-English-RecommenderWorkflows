@@ -149,7 +149,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     proto rule recommendation-matrix {*}
     rule recommendation-matrix:sym<English> {  [ <recommendation-noun> | <recommender-noun> ]? <matrix-noun>  }
     rule recommendation-results { [ <recommendation-noun> | <recommendations-noun> | <recommended-adjective> | 'recommendation\'s' ] <results> }
-    rule recommended-items { <recommended-adjective> <items-slot> | [ <recommendations-noun> | <recommendation-noun> | <recommended-adjective> ] <.results>? }
+    rule recommended-items { <recommended-adjective> <items-noun> | [ <recommendations-noun> | <recommendation-noun> | <recommended-adjective> ] <.results>? }
 
     proto rule recommender-object-phrase {*}
     rule recommender-object-phrase:sym<English> {  <recommender-noun> [ <object-noun> | <system-noun> ]? | 'smr'  }
