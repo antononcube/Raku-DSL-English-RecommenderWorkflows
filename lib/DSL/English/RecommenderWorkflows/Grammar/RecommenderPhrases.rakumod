@@ -109,15 +109,11 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     proto token tag-noun {*}
     token tag-noun:sym<English> { :i 'tag' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'tag', 1) }> }
 
-    proto token threshold-noun {*}
-    token threshold-noun:sym<English> { :i 'threshold' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'threshold', 2) }> }
-
     proto token sub-matrix-noun {*}
     token sub-matrix-noun:sym<English> { :i  'sub' \h+ '-' \h+ <matrix-noun>  }
 
     proto token sub-matrices-noun {*}
     token sub-matrices-noun:sym<English> { :i  'sub' \h+ '-' \h+ <matrices-noun>  }
-
 
     proto rule prove-directive {*}
     rule prove-directive:sym<English> { <prove-verb> | <explain-verb> }
