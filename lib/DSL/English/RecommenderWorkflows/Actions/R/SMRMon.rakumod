@@ -156,6 +156,19 @@ class DSL::English::RecommenderWorkflows::Actions::R::SMRMon
   }
   method profile-spec($/) { make $/.values[0].made; }
 
+  # Retrieve by query elements
+  method retrieve-by-query-elements-command($/) { make $/.values[0].made; }
+  method retrieval-query-element-list($/) {
+    make 'SMRMonRetrieveByQueryElements(' ~  $/.values>>.made.join(', ') ~ ')';
+  }
+  method retrieval-query-element($/) {
+    make $<retrieval-query-element-phrase>.made ~ '=' ~ $<profile-spec>.made;
+  }
+  method retrieval-query-element-phrase($/) { make $/.values[0].made; }
+  method should-have-phrase($/) { make 'should'; }
+  method must-have-phrase($/) { make 'must'; }
+  method must-not-have-phrase($/) { make 'mustNot'; }
+
   # Make profile
   method make-profile-command($/) { make 'SMRMonProfile( history = ' ~ $<history-spec>.made ~ ')'; }
 

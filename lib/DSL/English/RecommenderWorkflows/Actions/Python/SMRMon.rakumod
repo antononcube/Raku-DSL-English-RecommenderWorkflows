@@ -117,6 +117,19 @@ class DSL::English::RecommenderWorkflows::Actions::Python::SMRMon
   method top-recommendations-by-profile($/) { make '.recommend_by_profile( profile = ' ~ $<profile-spec>.made ~ ', nrecs = ' ~ $<top-recommendations><integer-value>.made ~ ')'; }
   method profile-spec($/) { make $/.values[0].made; }
 
+  # Retrieve by query elements
+  method retrieve-by-query-elements-command($/) { make $/.values[0].made; }
+  method retrieval-query-element-list($/) {
+    make '.retrieve_by_query_elements(' ~  $/.values>>.made.join(', ') ~ ')';
+  }
+  method retrieval-query-element($/) {
+    make $<retrieval-query-element-phrase>.made ~ '=' ~ $<profile-spec>.made;
+  }
+  method retrieval-query-element-phrase($/) { make $/.values[0].made; }
+  method should-have-phrase($/) { make 'should'; }
+  method must-have-phrase($/) { make 'must'; }
+  method must-not-have-phrase($/) { make 'must_not'; }
+
   # Make profile
   method make-profile-command($/) { make '.profile( history = ' ~ $<history-spec>.made ~ ')'; }
 
