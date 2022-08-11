@@ -46,6 +46,9 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     proto token explanations-noun {*}
     token explanations-noun:sym<English> { :i 'explanation' | ([\w]+) <?{ $0.Str ne 'explanations' and is-fuzzy-match($0.Str, 'explanation', 2) }> | 'explanations' | ([\w]+) <?{ $0.Str ne 'explanation' and is-fuzzy-match($0.Str, 'explanations', 2) }> }
 
+    proto token have-verb {*}
+    token have-verb:sym<English> { :i 'have' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'have', 2) }> }
+
     proto token history-noun {*}
     token history-noun:sym<English> { :i 'history' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'history', 2) }> }
 
@@ -59,7 +62,13 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token metadata-noun:sym<English> { :i 'metadata' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'metadata', 2) }> }
 
     proto token most-determiner {*}
-    token most-determiner:sym<English> { :i 'most' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'most', 2) }> }
+    token most-determiner:sym<English> { :i 'most' | ([\w]+) <?{ $0.Str ne 'must' and is-fuzzy-match($0.Str, 'most', 2) }> }
+
+    proto token must-verb {*}
+    token must-verb:sym<English> { :i 'must' | ([\w]+) <?{ $0.Str ne 'most' and is-fuzzy-match($0.Str, 'must', 2) }> }
+
+    proto token must-not-verb {*}
+    token must-not-verb:sym<English> { :i  'must' \h+ 'not' | 'must-not'  }
 
     proto token profile-noun {*}
     token profile-noun:sym<English> { :i 'profile' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'profile', 2) }> }
@@ -100,6 +109,9 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     proto token relevant-adjective {*}
     token relevant-adjective:sym<English> { :i 'relevant' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'relevant', 2) }> }
 
+    proto token retrieve-verb {*}
+    token retrieve-verb:sym<English> { :i 'retrieve' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'retrieve', 2) }> }
+
     proto token rownames-noun {*}
     token rownames-noun:sym<English> { :i 'rownames' | ([\w]+) <?{ $0.Str ne 'colnames' and is-fuzzy-match($0.Str, 'rownames', 2) }> }
 
@@ -109,11 +121,15 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     proto token tag-noun {*}
     token tag-noun:sym<English> { :i 'tag' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'tag', 1) }> }
 
+    proto token should-verb {*}
+    token should-verb:sym<English> { :i 'should' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'should', 2) }> }
+
     proto token sub-matrix-noun {*}
     token sub-matrix-noun:sym<English> { :i  'sub' \h+ '-' \h+ <matrix-noun>  }
 
     proto token sub-matrices-noun {*}
     token sub-matrices-noun:sym<English> { :i  'sub' \h+ '-' \h+ <matrices-noun>  }
+
 
     proto rule prove-directive {*}
     rule prove-directive:sym<English> { <prove-verb> | <explain-verb> }
@@ -145,7 +161,9 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     proto rule recommendation-matrix {*}
     rule recommendation-matrix:sym<English> {  [ <recommendation-noun> | <recommender-noun> ]? <matrix-noun>  }
     rule recommendation-results { [ <recommendation-noun> | <recommendations-noun> | <recommended-adjective> | 'recommendation\'s' ] <results> }
-    rule recommended-items { <recommended-adjective> <items-noun> | [ <recommendations-noun> | <recommendation-noun> | <recommended-adjective> ] <.results>? }
+
+    proto rule recommended-items {*}
+    rule recommended-items:sym<English> {  <recommended-adjective> <items-noun> | [ <recommendations-noun> | <recommendation-noun> | <recommended-adjective> ] <.results>?  }
 
     proto rule recommender-object-phrase {*}
     rule recommender-object-phrase:sym<English> {  <recommender-noun> [ <object-noun> | <system-noun> ]? | 'smr'  }

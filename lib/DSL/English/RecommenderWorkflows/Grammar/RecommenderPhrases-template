@@ -21,11 +21,14 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token density-noun { 'density' }
     token explain-verb { 'explain' }
     token explanations-noun { 'explanation' | 'explanations' }
+    token have-verb { 'have' }
     token history-noun { 'history' }
     token item-noun { 'item' }
     token items-noun { 'items' }
     token metadata-noun {'metadata' }
     token most-determiner { 'most' }
+    token must-verb { 'must' }
+    token must-not-verb { 'must' \h+ 'not' | 'must-not' }
     token profile-noun { 'profile' }
     token proofs-noun { 'proof' | 'proofs' }
     token properties-noun { 'properties' }
@@ -39,9 +42,11 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token recommended-adjective { 'recommended' }
     token recommender-noun { 'recommender' }
     token relevant-adjective { 'relevant' }
+    token retrieve-verb { 'retrieve' }
     token rownames-noun { 'rownames' }
     token tag-adjective { <tag-noun> }
     token tag-noun { 'tag' }
+    token should-verb { 'should' }
     token sub-matrix-noun { 'sub' \h+ '-' \h+ <matrix-noun> }
     token sub-matrices-noun { 'sub' \h+ '-' \h+ <matrices-noun> }
 

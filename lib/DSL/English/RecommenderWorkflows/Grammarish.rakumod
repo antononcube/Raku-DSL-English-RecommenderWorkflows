@@ -55,6 +55,7 @@ role DSL::English::RecommenderWorkflows::Grammarish {
         <data-statistics-command> |
         <recommend-by-profile-command> |
         <recommend-by-history-command> |
+        <retrieve-by-query-elements-command> |
         <make-profile-command> |
         <extend-recommendations-command> |
         <prove-recommendations-command> |
@@ -131,6 +132,18 @@ role DSL::English::RecommenderWorkflows::Grammarish {
     rule top-recommendations-by-profile { <top-recommendations>
                                         [ <.using-preposition> | <.by-preposition> | <.for-preposition> ] <.the-determiner>? <.profile-noun>
                                         <profile-spec> }
+
+    # Retrieve by query elements
+    rule retrieve-by-query-elements-command { <.retrieve-by-query-elements-phrase> <.with-preposition> [ <retrieval-query-element-list> ] }
+    rule retrieval-query-element-list { <retrieval-query-element>+ % [ \h+ | <.list-separator> ] }
+    rule retrieval-query-element { <retrieval-query-element-phrase> '(' <profile-spec> ')' }
+    rule retrieval-query-element-phrase { <should-have-phrase> | <must-have-phrase> | <must-not-have-phrase> }
+
+    ## Retrieval by query elements
+    rule should-have-phrase { <should-verb> <have-verb>? }
+    rule must-have-phrase { <must-verb> <have-verb>? }
+    rule must-not-have-phrase { <must-not-verb> <have-verb>? }
+    rule retrieve-by-query-elements-phrase { <retrieve-verb> }
 
     # Make profile
     rule make-profile-command {  <.make-profile-command-opening> <.the-determiner>? [ <.history-phrase> <.list-noun>? | <.items-noun> ] <history-spec> }
