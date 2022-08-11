@@ -92,6 +92,19 @@ class DSL::English::RecommenderWorkflows::Actions::Bulgarian::Standard
   method top-recommendations-by-profile($/) { make 'намери ' ~ $<top-recommendations><integer-value>.made ~ ' препоръки с профила: ' ~ $<profile-spec>.made; }
   method profile-spec($/) { make $/.values[0].made; }
 
+  # Retrieve by query elements
+  method retrieve-by-query-elements-command($/) { make $/.values[0].made; }
+  method retrieval-query-element-list($/) {
+    make 'намери с търсещи елементи: ' ~  $/.values>>.made.join(', ');
+  }
+  method retrieval-query-element($/) {
+    make $<retrieval-query-element-phrase>.made ~ ' ' ~ $<profile-spec>.made;
+  }
+  method retrieval-query-element-phrase($/) { make $/.values[0].made; }
+  method should-have-phrase($/) { make 'трябва да има'; }
+  method must-have-phrase($/) { make 'обезателно да има'; }
+  method must-not-have-phrase($/) { make 'обезателно да няма'; }
+
   # Make profile
   method make-profile-command($/) { make 'намери профила на историята: ' ~ $<history-spec>.made }
 

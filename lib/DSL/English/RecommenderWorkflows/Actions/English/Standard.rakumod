@@ -92,6 +92,19 @@ class DSL::English::RecommenderWorkflows::Actions::English::Standard
   method top-recommendations-by-profile($/) { make 'give top ' ~ $<top-recommendations><integer-value>.made ~ ' recommendations with the profile: ' ~ $<profile-spec>.made; }
   method profile-spec($/) { make $/.values[0].made; }
 
+  # Retrieve by query elements
+  method retrieve-by-query-elements-command($/) { make $/.values[0].made; }
+  method retrieval-query-element-list($/) {
+    make 'retrieve by query elememnts ' ~  $/.values>>.made.join(', ');
+  }
+  method retrieval-query-element($/) {
+    make $<retrieval-query-element-phrase>.made ~ ' ' ~ $<profile-spec>.made;
+  }
+  method retrieval-query-element-phrase($/) { make $/.values[0].made; }
+  method should-have-phrase($/) { make 'should'; }
+  method must-have-phrase($/) { make 'must'; }
+  method must-not-have-phrase($/) { make 'must not'; }
+
   # Make profile
   method make-profile-command($/) { make 'find profile of the history: ' ~ $<history-spec>.made }
 
