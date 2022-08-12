@@ -92,6 +92,19 @@ class DSL::English::RecommenderWorkflows::Actions::Russian::Standard
   method top-recommendations-by-profile($/) { make 'найти ' ~ $<top-recommendations><integer-value>.made ~ ' рекомендации с профиля: ' ~ $<profile-spec>.made; }
   method profile-spec($/) { make $/.values[0].made; }
 
+  # Retrieve by query elements
+  method retrieve-by-query-elements-command($/) { make $/.values[0].made; }
+  method retrieval-query-element-list($/) {
+    make 'найти по элементам запроса: ' ~  $/.values>>.made.join(', ');
+  }
+  method retrieval-query-element($/) {
+    make $<retrieval-query-element-phrase>.made ~ ' ' ~ $<profile-spec>.made;
+  }
+  method retrieval-query-element-phrase($/) { make $/.values[0].made; }
+  method should-have-phrase($/) { make 'желательно иметь'; }
+  method must-have-phrase($/) { make 'должно иметь'; }
+  method must-not-have-phrase($/) { make 'должно не иметь'; }
+
   # Make profile
   method make-profile-command($/) { make 'найти профиль истории: ' ~ $<history-spec>.made }
 

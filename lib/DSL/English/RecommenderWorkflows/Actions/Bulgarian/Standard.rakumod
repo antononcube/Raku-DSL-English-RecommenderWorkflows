@@ -101,9 +101,9 @@ class DSL::English::RecommenderWorkflows::Actions::Bulgarian::Standard
     make $<retrieval-query-element-phrase>.made ~ ' ' ~ $<profile-spec>.made;
   }
   method retrieval-query-element-phrase($/) { make $/.values[0].made; }
-  method should-have-phrase($/) { make 'трябва да има'; }
-  method must-have-phrase($/) { make 'обезателно да има'; }
-  method must-not-have-phrase($/) { make 'обезателно да няма'; }
+  method should-have-phrase($/) { make 'желателно да има'; }
+  method must-have-phrase($/) { make 'трябва да има'; }
+  method must-not-have-phrase($/) { make 'трябва да няма'; }
 
   # Make profile
   method make-profile-command($/) { make 'намери профила на историята: ' ~ $<history-spec>.made }
