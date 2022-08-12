@@ -135,7 +135,7 @@ role DSL::English::RecommenderWorkflows::Grammarish {
 
     # Retrieve by query elements
     rule retrieve-by-query-elements-command { <.retrieve-by-query-elements-phrase> <.with-preposition> [ <retrieval-query-element-list> ] }
-    rule retrieval-query-element-list { <retrieval-query-element>+ % [ \h+ | <.list-separator> ] }
+    rule retrieval-query-element-list { <retrieval-query-element>+ % [ \h* | <.list-separator> ] }
     rule retrieval-query-element { <retrieval-query-element-phrase> '(' <profile-spec> ')' }
     rule retrieval-query-element-phrase { <should-have-phrase> | <must-have-phrase> | <must-not-have-phrase> }
 
