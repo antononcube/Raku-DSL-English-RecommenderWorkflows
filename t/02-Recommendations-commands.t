@@ -1,9 +1,9 @@
-use v6;
+use v6.d;
 
 use DSL::English::RecommenderWorkflows::Grammar;
 use Test;
 
-plan 16;
+plan 15;
 
 # Shortcut
 my $pSMRMONCOMMAND = DSL::English::RecommenderWorkflows::Grammar;
@@ -68,22 +68,18 @@ ok $pSMRMONCOMMAND.parse('find the top 5 recommendations'),
         'find the top 5 recommendations';
 
 # 12
-ok $pSMRMONCOMMAND.parse('find the top 15 profile recommendations'),
-        'find the top 15 profile recommendations';
-
-# 13
 ok $pSMRMONCOMMAND.parse('find the top 15 recommendations for the profile hr=2, jj=2'),
         'find the top 15 recommendations for the profile hr=2, jj=2';
 
-# 14
+# 13
 ok $pSMRMONCOMMAND.parse('what are the top 7 recommendations'),
         'what are the top 7 recommendations';
 
-# 15
+# 14
 ok $pSMRMONCOMMAND.parse('what are the most relevant recommendations'),
         'what are the most relevant recommendations';
 
-# 16
+# 15
 ok $pSMRMONCOMMAND.parse('compute the 12 most relevant recommendations'),
         'compute the 12 most relevant recommendations';
 
