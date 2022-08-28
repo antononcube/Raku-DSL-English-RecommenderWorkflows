@@ -156,16 +156,16 @@ role DSL::English::RecommenderWorkflows::Grammarish {
     rule extension-data-id-column-spec { <.the-determiner>? [ <.identifier-noun> | <.id-noun> ]? <.column-noun>? <mixed-quoted-variable-name-or-wl-expr> }
 
     # Prove command
-    rule prove-recommendations-command { <prove-by-metadata> | <prove-by-history> }
+    rule prove-recommendations-command { <prove-by-history> | <prove-by-metadata> }
     rule proof-item-spec { <item-id> | <item-ids-list> }
-    rule recommendation-items-phrase { [ <recommendation-noun> | <recommended-adjective> ] [ <item-noun> | <items-noun> ]? }
+    rule recommendation-items-phrase { [ <recommendations-noun>  | <recommendation-noun> | <recommended-adjective> ] [ <item-noun> | <items-noun> ]? }
     rule prove-by-metadata {
-        <prove-directive> <.the-determiner>? <recommendation-items-phrase> <proof-item-spec>? <.by-preposition> [ <metadata-noun> | <.the-determiner>? <profile-noun> ] <profile-spec>? |
+        <prove-directive> <.the-determiner>? <recommendation-items-phrase> [ <proof-item-spec>? <.by-preposition> [ <metadata-noun> | <.the-determiner>? <profile-noun> ] <profile-spec>? ]? |
         <prove-directive> <.by-preposition> [ <metadata-noun> | <profile-noun> ] <.the-determiner>? <recommendation-items-phrase> <proof-item-spec>
   }
     rule prove-by-history {
-        <prove-directive> <.the-determiner>? <recommendation-items-phrase> <proof-item-spec>? [ <.by-preposition> | <.for-preposition> ] <.the-determiner>? <consumption-history> <history-spec>? |
-        <prove-directive> <.by-preposition> <consumption-history> <.the-determiner>? <recommendation-items-phrase> <proof-item-spec>
+        <prove-directive> <.the-determiner>? <recommendation-items-phrase> <proof-item-spec>? [ <.by-preposition> | <.for-preposition> ] <.the-determiner>? <.consumption-history-phrase> <history-spec>? |
+        <prove-directive> <.by-preposition> <.consumption-history-phrase> <.the-determiner>? <recommendation-items-phrase> <proof-item-spec>
   }
 
     # Classifications command
