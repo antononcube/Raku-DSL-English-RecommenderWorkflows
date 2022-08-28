@@ -134,11 +134,11 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     proto rule prove-directive {*}
     rule prove-directive:sym<English> { <prove-verb> | <explain-verb> }
 
-    proto rule consumption-history {*}
-    rule consumption-history:sym<English> {  <consumption-noun>? <history-noun>  }
+    proto rule consumption-history-phrase {*}
+    rule consumption-history-phrase:sym<English> {  <consumption-noun>? <history-noun>  }
 
-    proto rule consumption-profile {*}
-    rule consumption-profile:sym<English> {  <consumption-noun>? <profile-noun>  }
+    proto rule consumption-profile-phrase {*}
+    rule consumption-profile-phrase:sym<English> {  <consumption-noun>? <profile-noun>  }
 
     proto rule cross-tabulate-phrase {*}
     rule cross-tabulate-phrase:sym<English> {  'cross' [ 'tabulate' | 'tabulation' ]  }
