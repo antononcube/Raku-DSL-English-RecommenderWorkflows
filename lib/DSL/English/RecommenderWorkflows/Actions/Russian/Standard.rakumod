@@ -46,7 +46,13 @@ class DSL::English::RecommenderWorkflows::Actions::Russian::Standard
   # Create commands
   method create-command($/) { make $/.values[0].made; }
   method create-simple($/) { make 'создать с ' ~  $<dataset-name>.made; }
-  method create-by-dataset($/) { make 'создать с таблицу: ' ~ $<dataset-name>.made; }
+  method create-by-dataset($/) {
+    with $<colid> {
+      make 'создать с таблицу: ' ~ $<dataset-name>.made ~ ' и колонку: ' ~ $<colid>.made;
+    } else {
+      make 'создать с таблицу: ' ~ $<dataset-name>.made;
+    }
+  }
   method create-by-matrices($/) { make 'создать с матрицами: ' ~ $<variable-names-list>.made; }
 
   # Data statistics command

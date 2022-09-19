@@ -85,7 +85,13 @@ class DSL::English::RecommenderWorkflows::Actions::R::SMRMon
   # Create commands
   method create-command($/) { make $/.values[0].made; }
   method create-simple($/) { make 'SMRMonCreate()'; }
-  method create-by-dataset($/) { make 'SMRMonCreate( data = ' ~ $<dataset-name>.made ~ ')'; }
+  method create-by-dataset($/) {
+    with $<colid> {
+      make 'SMRMonCreate(data = ' ~ $<dataset-name>.made ~ ', itemColumnName = ' ~ $<colid>.made ~')';
+    } else {
+      make 'SMRMonCreate(data = ' ~ $<dataset-name>.made ~ ')';
+    }
+  }
   method create-by-matrices($/) { make 'SMRMonCreateFromMatrices( matrices = ' ~ $<creation-matrices-spec>.made ~ ')'; }
   method creation-matrices-spec($/) { make $/.values[0].made; }
 

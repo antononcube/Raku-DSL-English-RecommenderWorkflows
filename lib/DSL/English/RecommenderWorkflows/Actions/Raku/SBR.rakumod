@@ -18,7 +18,7 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #   Written by Anton Antonov,
-#   antononcube <at> posteo <dot> net
+#   ʇǝu˙oǝʇsod@ǝqnɔuouoʇuɐ
 #   Windermere, Florida, USA.
 #
 #==============================================================================
@@ -38,7 +38,7 @@
 #==============================================================================
 =end comment
 
-use v6;
+use v6.d;
 
 use DSL::English::RecommenderWorkflows::Grammar;
 use DSL::Shared::Actions::English::Python::PipelineCommand;
@@ -85,7 +85,13 @@ class DSL::English::RecommenderWorkflows::Actions::Raku::SBR
   # Create commands
   method create-command($/) { make $/.values[0].made; }
   method create-simple($/) { make 'my $sbrObj = ML::StreamsBlendingRecommender::CoreSBR.new'; }
-  method create-by-dataset($/) { make self.create-simple($/) ~ ";\n" ~ '$sbrObj.makeTagInverseIndexesFromWideForm( ' ~ $<dataset-name>.made ~ ')'; }
+  method create-by-dataset($/) {
+    with $<colid> {
+      make self.create-simple($/) ~ ";\n" ~ '$sbrObj.makeTagInverseIndexesFromWideForm( ' ~ $<dataset-name>.made ~ ', itemColumnName => ' ~ $<colid>.made ~ ')';
+    } else {
+      make self.create-simple($/) ~ ";\n" ~ '$sbrObj.makeTagInverseIndexesFromWideForm( ' ~ $<dataset-name>.made ~ ')';
+    }
+  }
   method create-by-matrices($/) { make '$sbrObj.ingestMatrices( ' ~ $<creation-matrices-spec>.made ~ ')'; }
   method creation-matrices-spec($/) { make $/.values[0].made; }
 
