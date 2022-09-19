@@ -166,7 +166,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     rule recommended-items:sym<English> {  <recommended-adjective> <items-noun> | [ <recommendations-noun> | <recommendation-noun> | <recommended-adjective> ] <.results>?  }
 
     proto rule recommender-object-phrase {*}
-    rule recommender-object-phrase:sym<English> {  <recommender-noun> [ <object-noun> | <system-noun> ]? | 'smr'  }
+    rule recommender-object-phrase:sym<English> { [ <recommender-noun> | 'smr' ] [ <object-noun> | <system-noun> ]? }
 
     proto rule sparse-matrix {*}
     rule sparse-matrix:sym<English> {  <sparse-adjective> <matrix-noun>  }
