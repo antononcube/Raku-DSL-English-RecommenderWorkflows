@@ -1,4 +1,7 @@
-use v6;
+use v6.d;
+
+use lib '.';
+use lib './lib';
 
 use DSL::English::RecommenderWorkflows::Grammar;
 use Test;
