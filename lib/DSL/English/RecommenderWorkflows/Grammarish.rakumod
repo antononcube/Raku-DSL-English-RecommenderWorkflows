@@ -74,9 +74,9 @@ role DSL::English::RecommenderWorkflows::Grammarish {
     rule create-command { <create-by-matrices> | <create-by-dataset> | <create-simple> }
     rule create-preamble-phrase { <generate-directive> [ <.a-determiner> | <.the-determiner> ]? <recommender-object-phrase> }
     rule create-simple { <create-preamble-phrase> <simple-way-phrase>? | <simple> <recommender-object-phrase> [ <creation-noun> | <making-noun> ] }
-    rule create-by-dataset { [ <create-preamble-phrase> | <generate-directive> ] [ <.with-preposition> | <.from-preposition> ] <.the-determiner>? <dataset-noun>? <dataset-name> }
+    rule create-by-dataset { [ <create-preamble-phrase> | <generate-directive> ] [ <.with-preposition> | <.from-preposition> ] <.the-determiner>? <dataset-noun>? <dataset-name> [ <.using-dataset-column-phrase>? <colid=.mixed-quoted-variable-name>]? }
     rule create-by-matrices { [ <create-preamble-phrase> | <generate-directive> ] [ <.with-preposition> | <.from-preposition> ] <.the-determiner>? <matrices-noun> <creation-matrices-spec> }
-    rule creation-matrices-spec { <variable-name> | <variable-names-list> | <wl-expr> }
+    rule creation-matrices-spec { <key-pairs-list> | <mixed-quoted-variable-names-list> | <wl-expr> }
 
     # Data transformation command
     rule data-transformation-command { <cross-tabulate-command> }
