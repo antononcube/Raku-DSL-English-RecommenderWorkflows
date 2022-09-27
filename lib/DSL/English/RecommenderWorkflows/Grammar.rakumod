@@ -34,7 +34,7 @@
 #==============================================================================
 =end comment
 
-use v6;
+use v6.d;
 
 use DSL::Shared::Roles::ErrorHandling;
 use DSL::Shared::Roles::PredicateSpecification;

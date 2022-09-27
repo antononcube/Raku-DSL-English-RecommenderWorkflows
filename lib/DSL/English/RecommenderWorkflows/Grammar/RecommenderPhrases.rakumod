@@ -1,4 +1,4 @@
-use v6;
+use v6.d;
 
 use DSL::Shared::Utilities::FuzzyMatching;
 use DSL::Shared::Roles::English::PipelineCommand;

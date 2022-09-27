@@ -34,7 +34,7 @@
 #==============================================================================
 =end comment
 
-use v6;
+use v6.d;
 
 role DSL::English::RecommenderWorkflows::Grammarish {
 
