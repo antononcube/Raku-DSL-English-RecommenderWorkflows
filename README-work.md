@@ -45,9 +45,6 @@ Here is a simple invocation:
 use DSL::English::RecommenderWorkflows;
 
 ToRecommenderWorkflowCode('recommend by profile action->10, drama->7', 'R::SMRMon');
-```
-```
-# SMRMonRecommendByProfile( profile = c("action"=10, "drama"=7))
 ``` 
 
 Here is a more complicated pipeline specification used to generate the code
@@ -64,32 +61,6 @@ END
 
 say $_.key, "\n", $_.value, "\n"  for ($_ => ToRecommenderWorkflowCode($command, $_ ) for <R::SMRMon WL::SMRMon Python::SMRMon Raku>);
 ```
-```
-# R::SMRMon
-# SMRMonCreate(data = dfTitanic) %>%
-# SMRMonApplyTermWeightFunctions(globalWeightFunction = "IDF", localWeightFunction = "TermFrequency", normalizerFunction = "Cosine") %>%
-# SMRMonRecommendByProfile( profile = c("female"=3, "30"=0.1)) %>%
-# SMRMonJoinAcross( data = dfTitanic ) %>%
-# SMRMonEchoValue()
-# 
-# WL::SMRMon
-# SMRMonUnit[] \[DoubleLongRightArrow] SMRMonCreate[dfTitanic] \[DoubleLongRightArrow]
-# SMRMonApplyTermWeightFunctions["GlobalWeightFunction" -> "IDF", "LocalWeightFunction" -> "TermFrequency", "NormalizerFunction" -> "Cosine"] \[DoubleLongRightArrow]
-# SMRMonRecommendByProfile[<|"female"->3, "30"->0.1|>] \[DoubleLongRightArrow]
-# SMRMonJoinAcross[dfTitanic] \[DoubleLongRightArrow]
-# SMRMonEchoValue[]
-# 
-# Python::SMRMon
-# obj = SparseMatrixRecommender().create_from_wide_form(data = dfTitanic).apply_term_weight_functions(global_weight_func = "IDF", local_weight_func = "TermFrequency", normalizer_func = "Cosine").recommend_by_profile( profile = {"female":3, "30":0.1}).join_across( data = dfTitanic ).echo_value()
-# 
-# Raku
-# my $sbrObj = ML::StreamsBlendingRecommender::CoreSBR.new;
-# $sbrObj.makeTagInverseIndexesFromWideForm( dfTitanic);
-# $sbrObj.applyTermWeightFunctions(globalWeightFunction => "IDF", localWeightFunction = "TermFrequency", normalizerFunction => "Cosine");
-# $sbrObj.recommendByProfile( profile => %("female"=>3, "30"=>0.1));
-# $sbrObj.joinAcross( dfTitanic );
-# say $sbrObj.takeValue
-```
 
 The command above should print out R code for the R package `SMRMon-R`, [AAp1].
 
@@ -97,28 +68,6 @@ The command above should print out R code for the R package `SMRMon-R`, [AAp1].
 
 ```perl6
 say $_.key, "\n", $_.value, "\n"  for ($_ => ToRecommenderWorkflowCode($command, $_ ) for <Bulgarian English Russian>);
-```
-```
-# Bulgarian
-# създай с таблицата: dfTitanic
-# приложи тегловите функции: глобално-теглова функция: "IDF", локално-теглова функция: "TermFrequency", нормализираща функция: "Cosine"
-# препоръчай с профила: {"female":3, "30":0.1}
-# напречно съединение с таблицата: dfTitanic
-# покажи лентовата стойност
-# 
-# English
-# create with data table: dfTitanic
-# apply the term weight functions: global weight function: "IDF", local weight function: "TermFrequency", normalizing function: "Cosine"
-# recommend with the profile: {"female":3, "30":0.1}
-# join across with the data table: dfTitanic
-# show the pipeline value
-# 
-# Russian
-# создать с таблицу: dfTitanic
-# применять весовые функции: глобальная весовая функция: "IDF", локальная весовая функция: "TermFrequency", нормализующая функция: "Cosine"
-# рекомендуй с профилю: {"female":3, "30":0.1}
-# перекрестное соединение с таблицу: dfTitanic
-# показать текущее значение конвейера
 ```
 
 ------------
