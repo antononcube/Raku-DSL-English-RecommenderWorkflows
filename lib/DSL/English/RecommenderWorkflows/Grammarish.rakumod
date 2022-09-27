@@ -85,7 +85,7 @@ role DSL::English::RecommenderWorkflows::Grammarish {
     # Data statistics command
     rule data-statistics-command { <show-data-summary> | <summarize-data> | <items-per-tag> | <tags-per-item> }
     rule show-data-summary { <display-directive> <data>? <summary> }
-    rule summarize-data { <summarize-directive> <.the-determiner>? <data> | <display-directive> <data>? ( <summary>| <summaries> ) }
+    rule summarize-data { <summarize-directive> <.the-determiner>? <data> | <display-directive> <data>? [ <summary> | <summaries> ] }
     rule items-per-tag { <number-of> <items-noun> <per-preposition> <tag> }
     rule tags-per-item { <number-of> <tags> <per-preposition> <item-noun> }
 
