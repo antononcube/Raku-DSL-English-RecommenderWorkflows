@@ -3,7 +3,7 @@ use lib 'lib';
 use DSL::English::RecommenderWorkflows::Grammar;
 use Test;
 
-plan 10;
+plan 8;
 
 # Shortcut
 my $pSMRMONCOMMAND = DSL::English::RecommenderWorkflows::Grammar.new;
@@ -23,12 +23,6 @@ ok $pSMRMONCOMMAND.parse('crate recomender obect with ds2'),
 
 ok $pSMRMONCOMMAND.parse('generate the recommender'),
         'generate the recommender';
-
-ok $pSMRMONCOMMAND.parse('create the recommender wit dataseta ds1'),
-        'create the recommender wit dataseta ds1';
-
-ok $pSMRMONCOMMAND.parse('create using the matrixes <||>'),
-        'create using the matrixes <||>';
 
 
 #-----------------------------------------------------------
