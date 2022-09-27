@@ -3,7 +3,7 @@ use v6;
 use DSL::English::RecommenderWorkflows::Grammar;
 use Test;
 
-plan 20;
+plan 19;
 
 # Shortcut
 my $pSMRMONCOMMAND = DSL::English::RecommenderWorkflows::Grammar;
@@ -13,9 +13,6 @@ my $pSMRMONCOMMAND = DSL::English::RecommenderWorkflows::Grammar;
 #-----------------------------------------------------------
 # SMR queries commands
 #-----------------------------------------------------------
-
-ok $pSMRMONCOMMAND.parse('display the column names'),
-        'display the column names';
 
 ok $pSMRMONCOMMAND.parse('show the recommendation matrix dimensions'),
         'show the recommendation matrix dimensions';
