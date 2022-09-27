@@ -1,12 +1,12 @@
 {
   "name": "DSL::English::RecommenderWorkflows",
-  "description": "Recommender workflows building by natural language commands.",
-  "version": "0.8.0",
+  "description": "Recommender workflows building with natural language commands.",
+  "version": "0.6.0",
   "perl": "6.d",
   "authors": [
     "Anton Antonov"
   ],
-  "auth": "github:antononcube",
+  "auth": "zef:antononcube",
   "depends": [
     "Text::Levenshtein::Damerau",
     "DSL::Shared"
@@ -31,13 +31,15 @@
   "resources": [],
   "license": "GPL-3.0-or-later",
   "tags": [
-    "Recommender",
-    "LSI",
-    "Parser",
     "Interpreter",
+    "LSI",
     "Monad",
-    "Workflow",
-    "Pipeline"
+    "Multi-language",
+    "Parser",
+    "Pipeline",
+    "Recommender",
+    "SMRMon",
+    "Workflow"
   ],
   "api": "1",
   "source-url": "https://github.com/antononcube/DSL-English-RecommenderWorkflows.git"
