@@ -8,8 +8,7 @@
   ],
   "auth": "zef:antononcube",
   "depends": [
-    "Text::Levenshtein::Damerau",
-    "DSL::Shared"
+    "DSL::Shared:ver<0.1.2>"
   ],
   "build-depends": [],
   "test-depends": [],
