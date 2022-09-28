@@ -91,8 +91,6 @@ say $_.key, "\n", $_.value, "\n"  for ($_ => ToRecommenderWorkflowCode($command,
 # say $sbrObj.takeValue
 ```
 
-The command above should print out R code for the R package `SMRMon-R`, [AAp1].
-
 ### Natural languages
 
 ```perl6

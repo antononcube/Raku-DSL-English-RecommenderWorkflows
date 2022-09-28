@@ -62,8 +62,6 @@ END
 say $_.key, "\n", $_.value, "\n"  for ($_ => ToRecommenderWorkflowCode($command, $_ ) for <R::SMRMon WL::SMRMon Python::SMRMon Raku>);
 ```
 
-The command above should print out R code for the R package `SMRMon-R`, [AAp1].
-
 ### Natural languages
 
 ```perl6
