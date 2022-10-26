@@ -1,23 +1,57 @@
 #!/usr/bin/env perl6
 
 use DSL::English::RecommenderWorkflows;
+use DSL::Shared::Utilities::CopyToClipboard;
 
-#| Translates natural language commands into recommender workflow programming code.
-multi sub MAIN(Str $command,                   #= A string with one or many commands (separated by ';').
-               Str :$target = 'R-SMRMon',      #= Target (programming language with optional library spec.)
-               Str :$language = 'English',     #= The natural language to translate from.
-               Str :$format = 'automatic'      #= The format of the output, one of 'automatic', 'code', 'hash', or 'raku'.
+my %*SUB-MAIN-OPTS = :named-anywhere;
+
+#| Translates natural language commands into (machine learning) recommender workflow programming code.
+multi sub MAIN(Str $command,                                       #= A string with one or many commands (separated by ';').
+               Str :$target = 'WL::SMRMon',                        #= Target (programming language with optional library spec.)
+               Str :$language = 'English',                         #= The natural language to translate from.
+               Str :$format = 'automatic',                         #= The format of the output, one of 'automatic', 'code', 'hash', or 'raku'.
+               Str :c(:$clipboard-command) is copy = 'Whatever'    #= Clipboard command to use.
                ) {
 
     my Str $formatSpec = $format.lc (elem) <auto automatic whatever> ?? 'code' !! $format.lc;
 
-    say ToRecommenderWorkflowCode($command, $target, :$language, format => $formatSpec);
+    my $res = ToRecommenderWorkflowCode($command, $target, :$language, format => $formatSpec);
+
+    say $res;
+
+    copy-to-clipboard($res, :$clipboard-command);
 }
 
-multi sub MAIN(Str $target,                    #= Programming language.
-               Str $command,                   #= A string with one or many commands (separated by ';').
-               Str :$language = 'English',     #= The natural language to translate from.
-               Str :$format = 'automatic',     #= The format of the output, one of 'automatic', 'code', 'hash', or 'raku'.
+#| Both target and command as arguments.
+multi sub MAIN(Str $target,                                        #= Programming language.
+               Str $command,                                       #= A string with one or many commands (separated by ';').
+               Str :$language = 'English',                         #= The natural language to translate from.
+               Str :$format = 'automatic',                         #= The format of the output, one of 'automatic', 'code', 'hash', or 'raku'.
+               Str :c(:$clipboard-command) is copy = 'Whatever'    #= Clipboard command to use.
                ) {
-    MAIN($command, :$target, :$language, :$format);
+    MAIN($command, :$target, :$language, :$format, :$clipboard-command);
+}
+
+#| Command given as a sequence of words.
+multi sub MAIN(*@words,                                            #= Words of a data query.
+               Str :t(:$target) = 'WL::SMRMon',                    #= Target (programming language with optional library spec.)
+               Str :l(:$language) = 'English',                     #= The natural language to translate from.
+               Str :f(:$format) = 'automatic',                     #= The format of the output, one of 'automatic', 'code', 'hash', or 'raku'.
+               Str :c(:$clipboard-command) is copy = 'Whatever'    #= Clipboard command to use.
+               ) {
+    if @words.elems == 0 {
+        USAGE()
+    } else {
+        MAIN(@words.join(' '), :$target, :$language, :$format, :$clipboard-command);
+    }
+}
+
+sub USAGE() {
+    say "Translates natural language commands into recommender workflow programming code.";
+    say $*USAGE;
+    my $usage = Q:c:to/EOH/;
+    Details:
+    EOH
+
+    say $usage ~ copy-to-clipboard(:usage-message);
 }
