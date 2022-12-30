@@ -87,7 +87,7 @@ role DSL::English::RecommenderWorkflows::Grammarish {
     rule show-data-summary { <display-directive> <data>? <summary> }
     rule summarize-data { <summarize-directive> <.the-determiner>? <data> | <display-directive> <data>? [ <summary> | <summaries> ] }
     rule items-per-tag { <number-of> <items-noun> <per-preposition> <tag-noun> }
-    rule tags-per-item { <number-of> <tags> <per-preposition> <item-noun> }
+    rule tags-per-item { <number-of> <tags-noun> <per-preposition> <item-noun> }
 
     # (Scored) items lists
     token score-association-symbol { '=' | '->' | '→' | ':' }

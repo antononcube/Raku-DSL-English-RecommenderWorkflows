@@ -119,7 +119,10 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token tag-adjective:sym<English> { :i <tag-noun> }
 
     proto token tag-noun {*}
-    token tag-noun:sym<English> { :i 'tag' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'tag', 1) }> }
+    token tag-noun:sym<English> { :i 'tag' | ([\w]+) <?{ $0.Str ne 'tags' and is-fuzzy-match($0.Str, 'tag', 1) }> }
+
+    proto token tags-noun {*}
+    token tags-noun:sym<English> { :i 'tags' | ([\w]+) <?{ $0.Str ne 'tag' and is-fuzzy-match($0.Str, 'tags', 1) }> }
 
     proto token should-verb {*}
     token should-verb:sym<English> { :i 'should' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'should', 2) }> }
