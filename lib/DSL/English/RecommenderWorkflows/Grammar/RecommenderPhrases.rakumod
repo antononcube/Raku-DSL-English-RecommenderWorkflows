@@ -46,9 +46,6 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     proto token explanations-noun {*}
     token explanations-noun:sym<English> { :i 'explanation' | ([\w]+) <?{ $0.Str ne 'explanations' and is-fuzzy-match($0.Str, 'explanation', 2) }> | 'explanations' | ([\w]+) <?{ $0.Str ne 'explanation' and is-fuzzy-match($0.Str, 'explanations', 2) }> }
 
-    proto token have-verb {*}
-    token have-verb:sym<English> { :i 'have' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'have', 2) }> }
-
     proto token history-noun {*}
     token history-noun:sym<English> { :i 'history' | ([\w]+) <?{ is-fuzzy-match($0.Str, 'history', 2) }> }
 

@@ -21,7 +21,6 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
     token density-noun { 'density' }
     token explain-verb { 'explain' }
     token explanations-noun { 'explanation' | 'explanations' }
-    token have-verb { 'have' }
     token history-noun { 'history' }
     token item-noun { 'item' }
     token items-noun { 'items' }
