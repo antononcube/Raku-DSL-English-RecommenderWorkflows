@@ -23,13 +23,13 @@ implemented in R and WL respectively, [AAp2, AAp3], and the object oriented Pyth
 
 Zef ecosystem:
 
-```shell
+```
 zef install DSL::English::RecommenderWorkflows
 ```
 
 GitHub:
 
-```shell
+```
 zef install https://github.com/antononcube/Raku-DSL-English-RecommenderWorkflows.git
 ```
 
@@ -117,6 +117,43 @@ say $_.key, "\n", $_.value, "\n"  for ($_ => ToRecommenderWorkflowCode($command,
 # рекомендуй с профилю: {"female":3, "30":0.1}
 # перекрестное соединение с таблицу: dfTitanic
 # показать текущее значение конвейера
+```
+
+------------
+
+## CLI
+
+The package provides a Command Line Interface (CLI) script. Here is its usage message:
+
+```shell
+ToRecommenderWorkflowCode --help
+```
+```
+# Translates natural language commands into recommender workflow programming code.
+# Usage:
+#   ToRecommenderWorkflowCode <command> [--target=<Str>] [--language=<Str>] [--format=<Str>] [-c|--clipboard-command=<Str>] -- Translates natural language commands into (machine learning) recommender workflow programming code.
+#   ToRecommenderWorkflowCode <target> <command> [--language=<Str>] [--format=<Str>] [-c|--clipboard-command=<Str>] -- Both target and command as arguments.
+#   ToRecommenderWorkflowCode [<words> ...] [-t|--target=<Str>] [-l|--language=<Str>] [-f|--format=<Str>] [-c|--clipboard-command=<Str>] -- Command given as a sequence of words.
+#   
+#     <command>                       A string with one or many commands (separated by ';').
+#     --target=<Str>                  Target (programming language with optional library spec.) [default: 'WL::SMRMon']
+#     --language=<Str>                The natural language to translate from. [default: 'English']
+#     --format=<Str>                  The format of the output, one of 'automatic', 'code', 'hash', or 'raku'. [default: 'automatic']
+#     -c|--clipboard-command=<Str>    Clipboard command to use. [default: 'Whatever']
+#     <target>                        Programming language.
+#     [<words> ...]                   Words of a data query.
+#     -t|--target=<Str>               Target (programming language with optional library spec.) [default: 'WL::SMRMon']
+#     -l|--language=<Str>             The natural language to translate from. [default: 'English']
+#     -f|--format=<Str>               The format of the output, one of 'automatic', 'code', 'hash', or 'raku'. [default: 'automatic']
+# Details:
+#     If --clipboard-command is the empty string then no copying to the clipboard is done.
+#     If --clipboard-command is 'Whatever' then:
+#         1. It is attempted to use the environment variable CLIPBOARD_COPY_COMMAND.
+#             If CLIPBOARD_COPY_COMMAND is defined and it is the empty string then no copying to the clipboard is done.
+#         2. If the variable CLIPBOARD_COPY_COMMAND is not defined then:
+#             - 'pbcopy' is used on macOS
+#             - 'clip.exe' on Windows
+#             - 'xclip -sel clip' on Linux.
 ```
 
 ------------

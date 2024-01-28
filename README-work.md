@@ -23,13 +23,13 @@ implemented in R and WL respectively, [AAp2, AAp3], and the object oriented Pyth
 
 Zef ecosystem:
 
-```shell
+```
 zef install DSL::English::RecommenderWorkflows
 ```
 
 GitHub:
 
-```shell
+```
 zef install https://github.com/antononcube/Raku-DSL-English-RecommenderWorkflows.git
 ```
 
@@ -66,6 +66,16 @@ say $_.key, "\n", $_.value, "\n"  for ($_ => ToRecommenderWorkflowCode($command,
 
 ```perl6
 say $_.key, "\n", $_.value, "\n"  for ($_ => ToRecommenderWorkflowCode($command, $_ ) for <Bulgarian English Russian>);
+```
+
+------------
+
+## CLI
+
+The package provides a Command Line Interface (CLI) script. Here is its usage message:
+
+```shell
+ToRecommenderWorkflowCode --help
 ```
 
 ------------
