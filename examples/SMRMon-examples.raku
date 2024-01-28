@@ -46,14 +46,16 @@ sub smr-interpret(Str:D $command,
 #');
 
 my @commands = (
-'create from dfTitanic;
-recommend by profile hr.12=3 and rr.12->4;
-recommend by history item.1=1 and item.2=0.3;
-classify to TagType1 the profile hr:12, hr:7;
-classify by profile hr:12, hr:7 to tag type TagType2;
-extend recommendations with dfData by "IDVAR";
-echo value;
-assign pipeline value to XXDF1;
+'include setup code
+create from dfTitanic
+recommend by profile hr.12=3 and rr.12->4
+recommend by history item.1=1 and item.2=0.3
+classify to TagType1 the profile hr:12, hr:7
+classify by profile hr:12, hr:7 to tag type TagType2
+extend recommendations with dfTitanicData by "IDVAR"
+explain the recommendations
+echo value
+assign pipeline value to XXDF1
 ');
 
 #my @commands = ('
@@ -63,7 +65,9 @@ assign pipeline value to XXDF1;
 #echo pipeline value;
 #');
 
-my @targets = <WL-SMRMon R-SMRMon Python-SMRMon Raku-SBR>;
+#my @targets = <WL-SMRMon R-SMRMon Python-SMRMon Raku-SBR>;
+#my @targets = <Bulgarian English Russian>;
+my @targets = <WL::SMRMon>;
 
 for @commands -> $c {
     say "\n", '=' x 20;
@@ -72,7 +76,7 @@ for @commands -> $c {
         say '-' x 20;
         say $t.trim;
         say '-' x 20;
-        say ToRecommenderWorkflowCode($c, $t);
+        say ToRecommenderWorkflowCode($c, $t, format => 'hash');
     }
 }
 
