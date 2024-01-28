@@ -1,11 +1,7 @@
-use v6.d;
-
 use DSL::Shared::Utilities::FuzzyMatching;
-use DSL::Shared::Roles::English::PipelineCommand;
 
 # Recommender specific phrases
-role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases
-                does DSL::Shared::Roles::English::PipelineCommand {
+role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases {
 
 
     proto token word-spec {*}

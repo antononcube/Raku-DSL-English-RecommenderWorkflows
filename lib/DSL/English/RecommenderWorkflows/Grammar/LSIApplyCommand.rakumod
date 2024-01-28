@@ -1,5 +1,3 @@
-use v6.d;
-
 # Taken from LatentSemanticAnalysisWorkflows::Grammar .
 
 # This grammar role does rely on the role CommonParts --
