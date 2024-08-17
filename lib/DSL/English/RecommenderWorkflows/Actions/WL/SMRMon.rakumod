@@ -321,7 +321,8 @@ class DSL::English::RecommenderWorkflows::Actions::WL::SMRMon
   ## Setup code
   method setup-code-command($/) {
     make 'SETUPCODE' => q:to/SETUPEND/
-    Import["https://raw.githubusercontent.com/antononcube/MathematicaForPrediction/master/MonadicProgramming/MonadicSparseMatrixRecommender.m"];
+    PacletInstall["AntonAntonov/MonadicSparseMatrixRecommender"];
+    Needs["AntonAntonov`MonadicSparseMatrixRecommender`"];
     SETUPEND
   }
 }
