@@ -65,9 +65,9 @@ assign pipeline value to XXDF1
 #echo pipeline value;
 #');
 
-#my @targets = <WL-SMRMon R-SMRMon Python-SMRMon Raku-SBR>;
+my @targets = <WL-SMRMon R-SMRMon Python-SMRMon Raku-SMRMon>;
 #my @targets = <Bulgarian English Russian>;
-my @targets = <WL::SMRMon>;
+#my @targets = <WL::SMRMon>;
 
 for @commands -> $c {
     say "\n", '=' x 20;
