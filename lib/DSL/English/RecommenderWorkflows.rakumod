@@ -24,6 +24,7 @@ use DSL::English::RecommenderWorkflows::Actions::Python::SMRMon;
 use DSL::English::RecommenderWorkflows::Actions::R::SMRMon;
 use DSL::English::RecommenderWorkflows::Actions::R::tidyverse;
 use DSL::English::RecommenderWorkflows::Actions::Raku::SBR;
+use DSL::English::RecommenderWorkflows::Actions::Raku::SMRMon;
 use DSL::English::RecommenderWorkflows::Actions::Russian::Standard;
 use DSL::English::RecommenderWorkflows::Actions::WL::SMRMon;
 
@@ -35,8 +36,9 @@ my %targetToAction{Str} =
     "R"                => DSL::English::RecommenderWorkflows::Actions::R::SMRMon,
     "R-SMRMon"         => DSL::English::RecommenderWorkflows::Actions::R::SMRMon,
     "R-tidyverse"      => DSL::English::RecommenderWorkflows::Actions::R::tidyverse,
-    "Raku"             => DSL::English::RecommenderWorkflows::Actions::Raku::SBR,
+    "Raku"             => DSL::English::RecommenderWorkflows::Actions::Raku::SMRMon,
     "Raku-SBR"         => DSL::English::RecommenderWorkflows::Actions::Raku::SBR,
+    "Raku-SMRMon"      => DSL::English::RecommenderWorkflows::Actions::Raku::SMRMon,
     "Russian"          => DSL::English::RecommenderWorkflows::Actions::Russian::Standard,
     "Mathematica"      => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon,
     "WL"               => DSL::English::RecommenderWorkflows::Actions::WL::SMRMon,
@@ -56,6 +58,7 @@ my Str %targetToSeparator{Str} =
     "Python-SMRMon"    => "",
     "Raku"             => ";\n",
     "Raku-SBR"         => ";\n",
+    "Raku-SMRMon"      => ";\n",
     "Russian"          => "\n",
     "WL"               => " \\[DoubleLongRightArrow]\n",
     "WL-SMRMon"        => " \\[DoubleLongRightArrow]\n";
