@@ -254,7 +254,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases {
 
 
     proto rule global-function-phrase {*}
-    rule global-function-phrase:sym<English> {  <global-adjective> <term-noun> ?<weight-noun>? <function-noun>  }
+    rule global-function-phrase:sym<English> {  <global-adjective> <term-noun>? <weight-noun>? <function-noun>  }
 
     proto rule join-type-phrase {*}
     rule join-type-phrase:sym<English> {  <join-verb>? <type-noun>  }

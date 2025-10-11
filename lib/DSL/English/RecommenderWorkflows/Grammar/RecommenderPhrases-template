@@ -92,7 +92,7 @@ role DSL::English::RecommenderWorkflows::Grammar::RecommenderPhrases {
     token normalizer-noun { 'normalizer' }
     token normalizing-noun { 'normalizing' }
 
-    rule global-function-phrase { <global-adjective> <term-noun> ?<weight-noun>? <function-noun> }
+    rule global-function-phrase { <global-adjective> <term-noun>? <weight-noun>? <function-noun> }
     rule join-type-phrase { <join-verb>? <type-noun> }
     rule local-function-phrase { <local-adjective> <term-noun>? <weight-noun>? <function-noun> }
     rule normalizer-function-phrase { [ <normalizer-noun> | <normalizing-noun> | <normalization-noun> ] <term-noun>? <weight-noun>? <function-noun>? }
