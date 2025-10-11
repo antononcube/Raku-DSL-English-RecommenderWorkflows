@@ -178,7 +178,7 @@ class DSL::English::RecommenderWorkflows::Actions::Python::SMRMon
 
   method smr-recommender-query($/) { make $<smr-property-spec>.made; }
   method smr-property-spec($/) { make $/.values[0].made; }
-  method smr-context-property-spec($/) { make 'obj = get_oroperty( ' ~ $/.values[0].made ~ '); print( SMRMonEchoValue( smrObj = obj ) )'; }
+  method smr-context-property-spec($/) { make 'obj = get_property( ' ~ $/.values[0].made ~ '); print( SMRMonEchoValue( smrObj = obj ) )'; }
   method smr-recommendation-matrix($/) { make '"sparseMatrix"'; }
   method smr-tag-types($/) { make '"tagTypes"'; }
   method smr-item-column-name($/) { make '"itemColumnName"'; }
