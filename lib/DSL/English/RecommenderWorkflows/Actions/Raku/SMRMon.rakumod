@@ -50,13 +50,13 @@ class DSL::English::RecommenderWorkflows::Actions::Raku::SMRMon
   # (Scored) item lists
   method item-id($/) { make '"' ~ $/.values[0].made.subst(:g, '"', '') ~ '"'; }
   method item-ids-list($/) { make '[' ~ $<item-id>>>.made.join(', ') ~ ']'; }
-  method scored-item-id($/) { make $<item-id>.made ~ ':' ~ $<number-value>.made ; }
+  method scored-item-id($/) { make $<item-id>.made ~ ' => ' ~ $<number-value>.made ; }
   method scored-item-ids-list($/) { make '{' ~ $<scored-item-id>>>.made.join(', ') ~ '}'; }
 
   # (Scored) tag lists
   method tag-id($/) { make '"' ~ $/.values[0].made.subst(:g, '"', '') ~ '"'; }
   method tag-ids-list($/) { make '[' ~ $<tag-id>>>.made.join(', ') ~ ']'; }
-  method scored-tag-id($/) { make $<tag-id>.made ~ ':' ~ $<number-value>.made ; }
+  method scored-tag-id($/) { make $<tag-id>.made ~ ' => ' ~ $<number-value>.made ; }
   method scored-tag-ids-list($/) { make '{' ~ $<scored-tag-id>>>.made.join(', ') ~ '}'; }
   method tag-type-id($/) { make '"' ~ $/.values[0].made.subst(:g, '"', '') ~ '"'; }
   method tag-type-ids-list($/) { make '[' ~ $<tag-type-id>>>.made.join(', ') ~ ']'; }
