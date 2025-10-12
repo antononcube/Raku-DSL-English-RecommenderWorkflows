@@ -114,7 +114,7 @@ role DSL::English::RecommenderWorkflows::Grammarish {
     # Recommend by history
     rule recommend-by-history-command { <recommend-by-history> | <top-recommendations-by-history> | <top-recommendations> | <simple-recommend> }
     rule recommend-by-history { <.recommend-directive>
-                              [ <.using-preposition> | <.by-preposition> | <.for-preposition> ] <.the-determiner>? <.history-phrase>?
+                              [ <.using-preposition> | <.by-preposition> | <.for-preposition> ] <.the-determiner>? <.history-phrase>? [<.for-preposition> | <.with-preposition>]?
                               <history-spec> }
     rule top-recommendations { [ <compute-directive> | <what-are-phrase> | <get-directive> ]? <.the-determiner>? <.most-relevant-phrase>? <integer-value>? <.most-relevant-phrase>? [ <.recommendations-noun> | <.recommendation-noun> ] }
     rule top-recommendations-by-history { <top-recommendations>
