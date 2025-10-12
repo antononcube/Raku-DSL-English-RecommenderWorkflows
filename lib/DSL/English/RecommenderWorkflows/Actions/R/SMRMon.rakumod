@@ -183,8 +183,10 @@ class DSL::English::RecommenderWorkflows::Actions::R::SMRMon
   method extend-recommendations-simple-command($/) {
     if $<extension-data-id-column-spec> {
       make 'SMRMonJoinAcross( data = ' ~ $<dataset-name>.made ~ ', by = ' ~ $<extension-data-id-column-spec>.made ~ ' )';
-    } else {
+    } elsif $<dataset-name> {
       make 'SMRMonJoinAcross( data = ' ~ $<dataset-name>.made ~ ' )';
+    } else {
+      make 'SMRMonJoinAcross()';
     }
   }
   method extension-data-id-column-spec($/) { make $/.values[0].made; }

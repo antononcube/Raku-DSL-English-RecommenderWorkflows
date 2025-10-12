@@ -119,8 +119,10 @@ class DSL::English::RecommenderWorkflows::Actions::Bulgarian::Standard
   method extend-recommendations-simple-command($/) {
     if $<extension-data-id-column-spec> {
       make 'напречно съединение с таблицата: ' ~ $<dataset-name>.made ~ ', по колоната: ' ~ $<extension-data-id-column-spec>.made;
-    } else {
+    } elsif $<dataset-name> {
       make 'напречно съединение с таблицата: ' ~ $<dataset-name>.made;
+    } else {
+      make 'напречно съединение с монадичната таблица';
     }
   }
   method extension-data-id-column-spec($/) { make $/.values[0].made; }

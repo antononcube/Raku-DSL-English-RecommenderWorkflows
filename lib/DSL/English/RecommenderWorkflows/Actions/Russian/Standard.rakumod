@@ -119,8 +119,10 @@ class DSL::English::RecommenderWorkflows::Actions::Russian::Standard
   method extend-recommendations-simple-command($/) {
     if $<extension-data-id-column-spec> {
       make 'перекрестное соединение с таблицу: ' ~ $<dataset-name>.made ~ ', по колонке: ' ~ $<extension-data-id-column-spec>.made;
-    } else {
+    } elsif $<dataset-name> {
       make 'перекрестное соединение с таблицу: ' ~ $<dataset-name>.made;
+    } else {
+      make 'перекрестное соединение с монодическую таблицу';
     }
   }
   method extension-data-id-column-spec($/) { make $/.values[0].made; }

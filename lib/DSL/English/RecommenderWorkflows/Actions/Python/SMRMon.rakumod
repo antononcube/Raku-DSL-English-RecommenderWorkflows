@@ -144,8 +144,10 @@ class DSL::English::RecommenderWorkflows::Actions::Python::SMRMon
   method extend-recommendations-simple-command($/) {
     if $<extension-data-id-column-spec> {
       make '.join_across( data = ' ~ $<dataset-name>.made ~ ', by = ' ~ $<extension-data-id-column-spec>.made ~ ' )';
-    } else {
+    } elsif $<dataset-name> {
       make '.join_across( data = ' ~ $<dataset-name>.made ~ ' )';
+    } else {
+      make '.join-across()';
     }
   }
   method extension-data-id-column-spec($/) { make $/.values[0].made; }

@@ -119,8 +119,10 @@ class DSL::English::RecommenderWorkflows::Actions::English::Standard
   method extend-recommendations-simple-command($/) {
     if $<extension-data-id-column-spec> {
       make 'join across with the data table: ' ~ $<dataset-name>.made ~ ', using the column: ' ~ $<extension-data-id-column-spec>.made;
-    } else {
+    } elsif $<dataset-name> {
       make 'join across with the data table: ' ~ $<dataset-name>.made;
+    } else {
+      make 'join across with monad\'s data table';
     }
   }
   method extension-data-id-column-spec($/) { make $/.values[0].made; }
