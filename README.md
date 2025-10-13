@@ -11,11 +11,21 @@ Also, different natural languages.
 The generated pipelines are for the software monads
 ["SMRMon-R"](https://github.com/antononcube/R-packages/tree/master/SMRMon-R) and
 ["SMRMon-WL"](https://github.com/antononcube/MathematicaForPrediction/blob/master/MonadicProgramming/MonadicLatentSemanticAnalysis.m)
-implemented in R and WL respectively, [AAp2, AAp3], and the object oriented Python and Raku implementations [AAp4, AAp5].
+implemented in R and WL respectively, [AAp2, AAp3], and the object-oriented 
+[Python](https://pypi.org/project/SparseMatrixRecommender/) 
+and 
+[Raku](https://raku.land/zef:antononcube/ML::SparseMatrixRecommender) 
+implementations [AAp4, AAp5, AAp6].
 
 **Remark:** "SMR" stands for "Sparse Matrix Recommender". "SBR" stands for "Streams Blending Recommender".
 
 **Remark:** "WL" stands for "Wolfram Language". "Mathematica" and "WL" are used as synonyms.
+
+Alternatives of this package are the Raku packages 
+["ML::NLPTemplateEngine"](https://raku.land/zef:antononcube/ML::NLPTemplateEngine), [AAp7], and
+["DSL::Examples"](https://raku.land/zef:antononcube/DSL::Examples), [AAp8].
+Both use LLMs. The former fills-in static code templates. The latter can be used to translate to code 
+individual natural language commands. (Like this package.)
 
 ------------
 
@@ -83,12 +93,7 @@ say $_.key, "\n", $_.value, "\n"  for ($_ => ToRecommenderWorkflowCode($command,
 # obj = SparseMatrixRecommender().create_from_wide_form(data = dfTitanic).apply_term_weight_functions(global_weight_func = "IDF", local_weight_func = "TermFrequency", normalizer_func = "Cosine").recommend_by_profile( profile = {"female":3, "30":0.1}).join_across( data = dfTitanic ).echo_value()
 # 
 # Raku
-# my $sbrObj = ML::StreamsBlendingRecommender::CoreSBR.new;
-# $sbrObj.makeTagInverseIndexesFromWideForm( dfTitanic);
-# $sbrObj.applyTermWeightFunctions(globalWeightFunction => "IDF", localWeightFunction = "TermFrequency", normalizerFunction => "Cosine");
-# $sbrObj.recommendByProfile( profile => %("female"=>3, "30"=>0.1));
-# $sbrObj.joinAcross( dfTitanic );
-# say $sbrObj.takeValue
+# my $obj = ML::SparseMatrixRecommender.new.create-from-wide-form(dfTitanic).apply-term-weight-functions(global-weight-func => "IDF", local-weight-func => "TermFrequency", normalizer-func => "Cosine").recommend-by-profile({"female" => 3, "30" => 0.1}).join-across(dfTitanic ).echo-value()
 ```
 
 ### Natural languages
@@ -156,6 +161,19 @@ ToRecommenderWorkflowCode --help
 #             - 'xclip -sel clip' on Linux.
 ```
 
+Here a Raku pipeline is generated:
+
+```shell
+ToRecommenderWorkflowCode Raku 'create with dfTitanic; apply the LSI functions IDF, None, Cosine; recommend by profile 1st and male; join across' 
+```
+```
+# my $obj = ML::SparseMatrixRecommender.new
+# .create-from-wide-form(dfTitanic)
+# .apply-term-weight-functions(global-weight-func => "IDF", local-weight-func => "None", normalizer-func => "Cosine")
+# .recommend-by-profile(["1st", "male"])
+# .join-across()
+```
+
 ------------
 
 ## Versions
@@ -176,22 +194,38 @@ A dedicated GitHub repository was made in order to make the installation with Ra
 [ConversationalAgents at GitHub](https://github.com/antononcube/ConversationalAgents).
 
 [AAp2] Anton Antonov,
-[Sparse Matrix Recommender Monad in R](https://github.com/antononcube/R-packages/tree/master/SMRMon-R),
+[SMRMon-R (Sparse Matrix Recommender Monad in R)](https://github.com/antononcube/R-packages/tree/master/SMRMon-R),
 (2019),
 [R-packages at GitHub](https://github.com/antononcube/R-packages).
 
 [AAp3] Anton Antonov,
-[Monadic Sparse Matrix Recommender Mathematica package](https://github.com/antononcube/MathematicaForPrediction/blob/master/MonadicProgramming/MonadicSparseMatrixRecommender.m),
-(2018),
-[MathematicaForPrediction at GitHub](https://github.com/antononcube/MathematicaForPrediction).
+[MonadicSparseMatrixRecommender, WL paclet](https://resources.wolframcloud.com/PacletRepository/resources/AntonAntonov/MonadicSparseMatrixRecommender/),
+(2018-2024),
+[Wolfram Language Paclet Repository](https://resources.wolframcloud.com/PacletRepository/).
 
 [AAp4] Anton Antonov,
-[SparseMatrixRecommender Python package](https://github.com/antononcube/Python-packages/tree/main/SparseMatrixRecommender),
+[SparseMatrixRecommender, Python package](https://github.com/antononcube/Python-packages/tree/main/SparseMatrixRecommender),
 (2021),
 [Python-packages at GitHub](https://github.com/antononcube/Python-packages).
 
 [AAp5] Anton Antonov,
-[ML::StreamsBlendingRecommender Raku package](https://github.com/antononcube/Raku-ML-StreamsBlendingRecommender)
+[ML::StreamsBlendingRecommender, Raku package](https://github.com/antononcube/Raku-ML-StreamsBlendingRecommender)
 (2021),
 [GitHub/antononcube](https://github.com/antononcube).
 
+[AAp6] Anton Antonov,
+[ML::SparseMatrixRecommender, Raku package](https://github.com/antononcube/Raku-ML-SparseMatrixRecommender)
+(2025),
+[GitHub/antononcube](https://github.com/antononcube).
+
+[AAp7] Anton Antonov,
+[ML::NLPTemplateEngine, Raku package](https://github.com/antononcube/Raku-ML-NLPTemplateEngine),
+(2023-2025),
+[GitHub/antononcube](https://github.com/antononcube).
+([At raku.land](https://raku.land/zef:antononcube/ML::NLPTemplateEngine)).
+
+[AAp8] Anton Antonov,
+[DSL::Examples, Raku package](https://github.com/antononcube/Raku-DSL-Examples),
+(2024-2025),
+[GitHub/antononcube](https://github.com/antononcube).
+([At raku.land](https://raku.land/zef:antononcube/DSL::Examples)).
