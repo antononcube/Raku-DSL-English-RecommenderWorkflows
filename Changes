@@ -1,0 +1,10 @@
+Revision history for "DSL::English::RecommenderWorkflows"
+
+0.6.6 2025-10-13
+    - Minor bug fix (wrong default Raku separator.)
+    - Added/changed references in the README.
+
+0.6.5 2025-10-12
+    - Added actions for Raku's "ML::SparseMatrixRecommender".
+        - That package is the default Raku recommender now.
+    - Various small grammar extensions and corresponding actions.
