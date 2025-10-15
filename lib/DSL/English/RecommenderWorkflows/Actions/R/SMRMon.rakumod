@@ -84,7 +84,7 @@ class DSL::English::RecommenderWorkflows::Actions::R::SMRMon
 
   # Create commands
   method create-command($/) { make $/.values[0].made; }
-  method create-simple($/) { make 'SMRMonCreate()'; }
+  method create-simple($/) { make 'SMRMonUnit()'; }
   method create-by-dataset($/) {
     with $<colid> {
       make 'SMRMonCreate(data = ' ~ $<dataset-name>.made ~ ', itemColumnName = ' ~ $<colid>.made ~')';
