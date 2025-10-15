@@ -1,14 +1,14 @@
 {
     "name": "DSL::English::RecommenderWorkflows",
     "description": "Recommender workflows building with natural language commands.",
-    "version": "0.6.6",
+    "version": "0.6.7",
     "authors": [
         "Anton Antonov"
     ],
     "auth": "zef:antononcube",
     "depends": [
         "Clipboard:ver<0.1.1>",
-        "DSL::Shared:ver<0.2.10+>"
+        "DSL::Shared:ver<0.2.11+>"
     ],
     "build-depends": [],
     "provides": {
