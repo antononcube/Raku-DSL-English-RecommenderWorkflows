@@ -45,7 +45,7 @@ class DSL::English::RecommenderWorkflows::Actions::English::Standard
 
   # Create commands
   method create-command($/) { make $/.values[0].made; }
-  method create-simple($/) { make 'create with data table: ' ~  $<dataset-name>.made; }
+  method create-simple($/) { make 'create recommender object'; }
   method create-by-dataset($/) {
     with $<colid> {
       make 'create with data table: ' ~ $<dataset-name>.made ~ ' using the column: ' ~ $<colid>.made ;

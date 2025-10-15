@@ -45,7 +45,7 @@ class DSL::English::RecommenderWorkflows::Actions::Bulgarian::Standard
 
   # Create commands
   method create-command($/) { make $/.values[0].made; }
-  method create-simple($/) { make 'създай с ' ~  $<dataset-name>.made; }
+  method create-simple($/) { make 'създай препоръчителна система'; }
   method create-by-dataset($/) {
     with $<colid> {
       make 'създай с таблицата: ' ~ $<dataset-name>.made ~ ' и колоната: ' ~ $<colid>.made ;
