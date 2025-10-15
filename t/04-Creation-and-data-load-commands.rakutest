@@ -1,12 +1,11 @@
 use v6.d;
 
-use lib '.';
-use lib './lib';
+# use lib <. lib>;
 
 use DSL::English::RecommenderWorkflows::Grammar;
 use Test;
 
-plan 16;
+plan 17;
 
 # Shortcut
 my $pSMRMONCOMMAND = DSL::English::RecommenderWorkflows::Grammar;
@@ -82,5 +81,9 @@ ok $pSMRMONCOMMAND.parse('use recommender object smr'),
 # 16
 ok $pSMRMONCOMMAND.parse('use the smr object smr2'),
         'use the smr object smr2';
+
+# 17
+ok $pSMRMONCOMMAND.parse('new recommender'),
+        'new recommender';
 
 done-testing;
