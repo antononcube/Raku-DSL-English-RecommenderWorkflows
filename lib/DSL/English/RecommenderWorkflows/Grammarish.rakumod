@@ -73,7 +73,7 @@ role DSL::English::RecommenderWorkflows::Grammarish {
     # Create command
     rule create-command { <create-by-matrices> | <create-by-dataset> | <create-simple> }
     rule create-preamble-phrase { <generate-directive> [ <.a-determiner> | <.the-determiner> ]? <recommender-object-phrase> }
-    rule create-simple { <create-preamble-phrase> <simple-way-phrase>? | <simple> <recommender-object-phrase> [ <creation-noun> | <making-noun> ] }
+    rule create-simple { <create-preamble-phrase> <simple-way-phrase>? | <simple> <recommender-object-phrase> [ <creation-noun> | <making-noun> ] | <new-adjective> <recommender-object-phrase>}
     rule create-by-dataset { [ <create-preamble-phrase> | <generate-directive> ] [ <.with-preposition> | <.from-preposition> ] <.the-determiner>? <dataset-noun>? <dataset-name> [ <.using-dataset-column-phrase>? <colid=.mixed-quoted-variable-name>]? }
     rule create-by-matrices { [ <create-preamble-phrase> | <generate-directive> ] [ <.with-preposition> | <.from-preposition> ] <.the-determiner>? <matrices-noun> <creation-matrices-spec> }
     rule creation-matrices-spec { <key-pairs-list> | <mixed-quoted-variable-names-list> | <wl-expr> }
