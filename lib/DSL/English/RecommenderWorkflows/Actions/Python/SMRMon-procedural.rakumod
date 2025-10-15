@@ -87,7 +87,7 @@ class DSL::English::RecommenderWorkflows::Actions::Python::SMRMon
 
   # Create commands
   method create-command($/) { make $/.values[0].made; }
-  method create-simple($/) { make 'obj = SMRMonCreate( smrObj = obj )'; }
+  method create-simple($/) { make 'obj = SMRMonCreate()'; }
   method create-by-dataset($/) { make 'obj = SMRMonCreate( smrObj = obj, data = ' ~ $<dataset-name>.made ~ ')'; }
   method create-by-matrices($/) { make 'obj = SMRMonCreateFromMatrices( smrObj = obj, matrices = ' ~ $<variable-names-list>.made ~ ')'; }
 
