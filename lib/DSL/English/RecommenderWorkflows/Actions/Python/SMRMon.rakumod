@@ -70,7 +70,7 @@ class DSL::English::RecommenderWorkflows::Actions::Python::SMRMon
 
   # Create commands
   method create-command($/) { make $/.values[0].made; }
-  method create-simple($/) { make 'obj = SparseMatrixRecommender().create_from_wide_form( data = ' ~ $<dataset-name>.made ~ ')'; }
+  method create-simple($/) { make 'obj = SparseMatrixRecommender()'; }
   method create-by-dataset($/) {
     with $<colid> {
       make 'obj = SparseMatrixRecommender().create_from_wide_form(data = ' ~ $<dataset-name>.made ~ ', item_column_name = ' ~ $<colid>.made ~ ')';

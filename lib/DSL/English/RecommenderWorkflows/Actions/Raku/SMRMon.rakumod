@@ -70,7 +70,7 @@ class DSL::English::RecommenderWorkflows::Actions::Raku::SMRMon
 
   # Create commands
   method create-command($/) { make $/.values[0].made; }
-  method create-simple($/) { make 'my $obj = ML::SparseMatrixRecommender.new.create-from-wide-form(' ~ $<dataset-name>.made ~ ')'; }
+  method create-simple($/) { make 'my $obj = ML::SparseMatrixRecommender.new'; }
   method create-by-dataset($/) {
     with $<colid> {
       make 'my $obj = ML::SparseMatrixRecommender.new.create-from-wide-form(' ~ $<dataset-name>.made ~ ', item-column-name = ' ~ $<colid>.made ~ ')';
