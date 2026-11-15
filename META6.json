@@ -7,7 +7,7 @@
     ],
     "auth": "zef:antononcube",
     "depends": [
-        "Clipboard:ver<0.1.1>",
+        "Clipboard:ver<0.1.2+>",
         "DSL::Shared:ver<0.2.11+>"
     ],
     "build-depends": [],
